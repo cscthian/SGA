@@ -1,0 +1,108 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <ul class="nav nav-pills">
+        <li class="active"><a href="{% url 'home' %}">Inicio</a></li>
+        <li><a href="{% url 'agregarAsignatura' %}">Asignatura</a></li>
+        <li><a href="{% url 'agregarAsignatura' %}">Alumnos</a></li>
+        <li><a href="{% url 'agregarCarrera' %}">Carreras profesionales</a></li>
+        <li><a href="{% url 'agregarModulo' %}">Modulo</a></li>
+        <li><a href="{% url 'agregarDocente' %}">Docente</a></li>
+        <li><a href="agregarModulo">Aulas</a></li>
+    </ul>
+    <meta charset="UTF-8">
+    <title>modifcar Alumnos</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">CRUD de Alummnos</a>
+            </div>            
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="page-header">
+            <h4>
+                <a href="{% url 'home' %}" class="btn btn-success">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
+                </a>
+                <strong> Modifar datos de {{ alumno }}</strong>
+            </h4>
+        </div><!-- page-header -->
+        
+        <div class="row">
+            <div class="col-md-12">
+                <form role="form" action="{% url 'modificar' alumno.pk %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <p class="lead"><span class="glyphicon glyphicon-info-sign"></span> Ingresa los datos del alumno.</p>
+                    
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ form.errors }}
+                        </div>                        
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label>{{ form.dni.label_tag }}</label>
+                        {{ form.dni }}
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form.nombres.label_tag }}</label>
+                        {{ form.nombres }}
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form.apellidos.label_tag }}</label>
+                        {{ form.apellidos }}
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form.fecha_nacimiento.label_tag }}</label>
+                        {{ form.fecha_nacimiento }}
+                        <p class="help-block">Ingresa la fecha de nacimiento. DD/MM/AA</p>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form.carreraTecnica.label_tag }}</label>
+                        {{ form.carreraTecnica }}
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form.telefono.label_tag }}</label>
+                        {{ form.telefono }}
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form.sexo.label_tag }}</label>
+                        {{ form.sexo }}
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form.direccion.label_tag }}</label>
+                        {{ form.direccion }}
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form.email.label_tag }}</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form.foto.label_tag }}</label>
+                        {{ form.foto }}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Guardar alumno</button>
+                    </div>
+                </form>
+        
+            </div><!-- col-md-12 -->        
+        </div><!-- /row -->
+    </div><!-- /container -->
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>

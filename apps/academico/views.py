@@ -1,3 +1,155 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, DetailView
+from django.core.urlresolvers import reverse_lazy
 
-# Create your views here.
+from .forms import *
+
+from .models import Alumno, Docente, Carrera, Modulo, Asignatura, Matricula, Nota, MatriculaDetalle
+
+# Creamos nustras vistas
+
+""" creamos la clase que mostrara el formulario de inicio """
+class Home(TemplateView):
+	template_name= 'home/index.html'
+
+	"""funcion que devolvera la lista de lumnos matriculados"""
+	def get_context_data(self, **kwargs):
+		context = super(Home, self).get_context_data(**kwargs)
+		context['alumnos'] = Alumno.objects.all().order_by('apellidos')
+		context['cantidad'] = context['alumnos'].count()
+		return context	
+
+
+#####################CRUD DE DOCENTES INSCRITOS ################################
+
+class InicioDocentes(TemplateView):
+	template_name = 'docente/index.html'
+
+	#creamos una funcion que devolvera la lista de alumnos
+	def get_context_data(self, **kwargs):
+		context = super(Inicio, self).get_context_data(**kwargs)
+		context['alumnos'] = Alumno.objects.all().order_by('apellido_paterno')
+		context['cantidad'] = context['alumnos'].count()
+		return context
+
+#### agregamos un docente ########
+class AgregarDocente(CreateView):
+	form_class = DocenteForm
+	template_name = 'docente/agregar.html'
+	success_url = reverse_lazy('home')
+
+class DetalleDocente(DetailView):
+	template_name = 'docente/detalle.html'
+	model = Docente
+
+class ModificarDocente(UpdateView):
+    model = Docente
+    template_name = 'docente/modificar.html'
+    success_url = reverse_lazy('home')
+    form_class = DocenteForm
+
+class EliminarDocente(DeleteView):
+    template_name = 'docente/eliminar.html'
+    model = Docente
+    success_url = reverse_lazy('home')
+
+#### fin crud docentes ######
+
+	
+################################## crud alumnos ################
+class AgregarAlumno(CreateView):
+	form_class = AlumnoForm
+	template_name = 'alumno/agregar.html'
+	success_url = reverse_lazy('home')
+
+class DetalleAlumno(DetailView):
+	template_name = 'alumno/detalle.html'
+	model = Alumno
+
+class ModificarAlumno(UpdateView):
+    model = Alumno
+    template_name = 'alumno/modificar.html'
+    success_url = reverse_lazy('home')
+    form_class = AlumnoForm
+
+class EliminarAlumno(DeleteView):
+    template_name = 'alumno/eliminar.html'
+    model = Alumno
+    success_url = reverse_lazy('home')
+
+ ################## fin de crud alumno
+
+################################# crud de asignaturas ##################
+
+class AgregarAsignatura(CreateView):
+	form_class = AsignaturaForm
+	template_name = 'asignatura/agregar.html'
+	success_url = reverse_lazy('home')
+
+
+class DetalleAsignatura(DetailView):
+	template_name = 'asignatura/detalle.html'
+	model = Asignatura
+
+class ModificarAsignatura(UpdateView):
+    model = Asignatura
+    template_name = 'asignatura/modificar.html'
+    success_url = reverse_lazy('home')
+    form_class = AsignaturaForm
+
+class EliminarAsignatura(DeleteView):
+    template_name = 'asignatura/eliminar.html'
+    model = Asignatura
+    success_url = reverse_lazy('home')
+
+ ########### fin crud asignatura ##########
+
+################################# crud de carreras ##################
+
+class AgregarCarrera(CreateView):
+	form_class = CarreraForm
+	template_name = 'carrera/agregar.html'
+	success_url = reverse_lazy('home')
+
+
+class DetalleCarrera(DetailView):
+	template_name = 'carrera/detalle.html'
+	model = Carrera
+
+class ModificarCarrera(UpdateView):
+    model = Carrera
+    template_name = 'carrera/modificar.html'
+    success_url = reverse_lazy('home')
+    form_class = CarreraForm
+
+class EliminarCarrera(DeleteView):
+    template_name = 'carrera/eliminar.html'
+    model = Carrera
+    success_url = reverse_lazy('home')
+
+ ################## fin crud asignaturas ###############################3333
+
+ ##################### crud modulo #######################################
+class AgregarModulo(CreateView):
+    form_class = ModuloForm
+    template_name = 'modulo/agregar.html'
+    success_url = reverse_lazy('home')
+
+
+class DetalleModulo(DetailView):
+    template_name = 'modulo/detalle.html'
+    model = Modulo
+
+class ModificarModulo(UpdateView):
+    model = Modulo
+    template_name = 'modulo/modificar.html'
+    success_url = reverse_lazy('home')
+    form_class = CarreraForm
+
+class EliminarModulo(DeleteView):
+    template_name = 'modulo/eliminar.html'
+    model = Modulo
+    success_url = reverse_lazy('home')
+
+######################33 fin crud modulo #####################################
+

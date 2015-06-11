@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eliminar Alumnos</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">CRUD de Alummnos</a>
+            </div>            
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="page-header">
+            <h4>
+                <strong>Eliminando: {{ alumno }}</strong>
+            </h4>
+        </div><!-- page-header -->
+
+        <div class="row">
+            
+            <div class="col-md-12">
+
+                <form role="form" action="{% url 'eliminar' alumno.pk %}" method="POST">{% csrf_token %}
+                    <p class="">¿Desea eliminar el alumno "nombre evento"?</p>
+
+                    <input type="submit" value="Sí" class="btn btn-danger"> 
+                    <a href="{% url 'inicio' %}" class="btn btn-default">No</a>
+                </form>
+
+            </div><!-- col-md-12 -->
+
+        </div><!-- /row -->
+
+    </div><!-- /container -->
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>

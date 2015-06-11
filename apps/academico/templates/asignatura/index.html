@@ -1,0 +1,81 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <ul class="nav nav-pills">
+        <li class="active"><a href="{% url 'home' %}">Inicio</a></li>
+        <li><a href="{% url 'agregarAsignatura' %}">Asignatura</a></li>
+        <li><a href="{% url 'agregarAsignatura' %}">Alumnos</a></li>
+        <li><a href="{% url 'agregarCarrera' %}">Carreras profesionales</a></li>
+        <li><a href="{% url 'agregarModulo' %}">Modulo</a></li>
+        <li><a href="{% url 'agregarDocente' %}">Docente</a></li>
+        <li><a href="agregarModulo">Aulas</a></li>
+    </ul>
+    <meta charset="UTF-8">
+    <title>Asignaturas</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home' %}">Asignaturas</a>
+            </div>            
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h4>
+                <strong>
+                    Hay <span class="label label-warning">{{ cantidad }}</span> Cursos Registrados
+                </strong>
+                <a class="btn btn-primary pull-right" href="{% url 'agregarAsignatura' %}">
+                    <span class="glyphicon glyphicon-plus"></span> Crear Asignatura
+                </a>
+            </h4>
+        </div><!-- page-header -->
+    
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nonmbre</th>
+                        <th>Siglas</th>
+                        <th>Carrera Profesional</th>
+                        <th>Tipo</th>
+                        <th>Modulo</th>
+                        <th>Creditos</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for asignatura in asignaturas %}
+                        <tr>                        
+                            <td>{{ asignatura.nombre_asignatura }}</td>
+                            <td>{{ asignatura.siglas }}</td>
+                            <td>{{ asignatura.carrera_profesional }}</td>
+                            <td>{{ asignatura.tipo }}</td>
+                            <td>{{ asignatura.modulo }}</td>
+                            <td>{{ asignatura.creditos }}</td>
+                            <td class="text-right">
+                                <a href="{% url 'asignaturas' %}" class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div><!-- col-md-12 -->
+        </div><!-- /row -->
+    </div><!-- /container -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>
