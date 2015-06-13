@@ -1,7 +1,6 @@
 recuerden hacer migrate si es la primera vez que cambiaron el proyecto
 (mi primer commit para verificar by fernando )
-<<<<<<< HEAD
+
 (editando el 3 archivo por fernando)
-=======
-kevo y nando se la comen
->>>>>>> 45e13773c04a80a837ae67bfa035e5147f38c9ce
+
+kevo  se la come
