@@ -1,0 +1,14 @@
+//activamos o iniciamos git:
+git init
+//para ver el estado del proyecto utilizaos ahi podemos cer las modificaciones:
+git status
+//preparamos todos los archivos que aremos commit
+git add -A
+//hacemos el comit que subira la modificaciones al repositorio
+git commit -m "mensaje con el que describiremos las modificaciones que hicimos"
+//para sincronizar el proyecto
+git fetch
+//mezcalmos los cambios
+git merge origin/master
+//enviar todos los cambios y comit realizados localmente al servidor del repositorio GitHub
+git push origin master
