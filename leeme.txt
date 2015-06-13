@@ -1,0 +1,1 @@
+recuerden hacer migrate si es la primera vez que cambiaron el proyecto
