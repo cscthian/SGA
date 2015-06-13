@@ -1,2 +1,2 @@
 recuerden hacer migrate si es la primera vez que cambiaron el proyecto
-(mi primer commit by fernando )
+(mi primer commit para verificar by fernando )
