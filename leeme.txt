@@ -1,2 +1,3 @@
 recuerden hacer migrate si es la primera vez que cambiaron el proyecto
 (mi primer commit para verificar by fernando )
+(editando el 3 archivo por fernando)
