@@ -22,15 +22,15 @@ class Home(TemplateView):
 
 #####################CRUD DE DOCENTES INSCRITOS ################################
 
-class InicioDocentes(TemplateView):
-	template_name = 'docente/index.html'
+class ListarDocente(TemplateView):
+    template_name = 'docente/index.html'
 
 	#creamos una funcion que devolvera la lista de alumnos
-	def get_context_data(self, **kwargs):
-		context = super(Inicio, self).get_context_data(**kwargs)
-		context['alumnos'] = Alumno.objects.all().order_by('apellido_paterno')
-		context['cantidad'] = context['alumnos'].count()
-		return context
+    def get_context_data(self, **kwargs):
+        context = super(ListarDocente, self).get_context_data(**kwargs)
+        context['docentes'] = Docente.objects.all().order_by('apellidos')
+        context['cantidad'] = context['docentes'].count()
+        return context
 
 #### agregamos un docente ########
 class AgregarDocente(CreateView):
@@ -56,7 +56,17 @@ class EliminarDocente(DeleteView):
 #### fin crud docentes ######
 
 	
-################################## crud alumnos ################
+################################## CRUD DE ALUMNOS ################
+class ListarAlumno(TemplateView):
+    template_name = 'alumno/index.html'
+
+    #creamos una funcion que devolvera la lista de alumnos
+    def get_context_data(self, **kwargs):
+        context = super(ListarAlumno, self).get_context_data(**kwargs)
+        context['alumnos'] = Alumno.objects.all().order_by('apellidos')
+        context['cantidad'] = context['alumnos'].count()
+        return context
+
 class AgregarAlumno(CreateView):
 	form_class = AlumnoForm
 	template_name = 'alumno/agregar.html'
@@ -80,6 +90,15 @@ class EliminarAlumno(DeleteView):
  ################## fin de crud alumno
 
 ################################# crud de asignaturas ##################
+class ListarAsignatura(TemplateView):
+    template_name = 'asignatura/index.html'
+
+    #creamos una funcion que devolvera la lista de alumnos
+    def get_context_data(self, **kwargs):
+        context = super(ListarAsignatura, self).get_context_data(**kwargs)
+        context['asignaturas'] = Asignatura.objects.all().order_by('nombre_asignatura')
+        context['cantidad'] = context['asignaturas'].count()
+        return context
 
 class AgregarAsignatura(CreateView):
 	form_class = AsignaturaForm
@@ -106,6 +125,16 @@ class EliminarAsignatura(DeleteView):
 
 ################################# crud de carreras ##################
 
+class ListarCarrera(TemplateView):
+    template_name = 'carrera/index.html'
+
+    #creamos una funcion que devolvera la lista de alumnos
+    def get_context_data(self, **kwargs):
+        context = super(ListarCarrera, self).get_context_data(**kwargs)
+        context['carreras'] = Carrera.objects.all().order_by('nombre_carrera')
+        context['cantidad'] = context['carreras'].count()
+        return context
+
 class AgregarCarrera(CreateView):
 	form_class = CarreraForm
 	template_name = 'carrera/agregar.html'
@@ -130,6 +159,16 @@ class EliminarCarrera(DeleteView):
  ################## fin crud asignaturas ###############################3333
 
  ##################### crud modulo #######################################
+class ListarModulo(TemplateView):
+    template_name = 'modulo/index.html'
+
+    #creamos una funcion que devolvera la lista de alumnos
+    def get_context_data(self, **kwargs):
+        context = super(ListarModulo, self).get_context_data(**kwargs)
+        context['modulos'] = Modulo.objects.all().order_by('modulo')
+        context['cantidad'] = context['modulos'].count()
+        return context
+
 class AgregarModulo(CreateView):
     form_class = ModuloForm
     template_name = 'modulo/agregar.html'

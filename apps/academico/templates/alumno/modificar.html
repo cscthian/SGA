@@ -4,12 +4,13 @@
 <head>
     <ul class="nav nav-pills">
         <li class="active"><a href="{% url 'home' %}">Inicio</a></li>
-        <li><a href="{% url 'agregarAsignatura' %}">Asignatura</a></li>
-        <li><a href="{% url 'agregarAlumnos' %}">Alumnos</a></li>
-        <li><a href="{% url 'agregarCarrera' %}">Carreras profesionales</a></li>
-        <li><a href="{% url 'agregarModulo' %}">Modulo</a></li>
-        <li><a href="{% url 'agregarDocente' %}">Docente</a></li>
-        <li><a href="agregarModulo">Aulas</a></li>
+        <li><a href="{% url 'listarAsignatura' %}">Asignatura</a></li>
+        <li><a href="{% url 'listarAlumno' %}">Alumnos</a></li>
+        <li><a href="{% url 'listarCarrera' %}">Carreras profesionales</a></li>
+        <li><a href="{% url 'listarModulo' %}">Modulo</a></li>
+        <li><a href="{% url 'listarDocente' %}">Docente</a></li>
+        <li><a href="{% url 'listarModulo' %}">Aulas</a></li>
+    </ul><li><a href="agregarModulo">Aulas</a></li>
     </ul>
     <meta charset="UTF-8">
     <title>modifcar Alumnos</title>
@@ -43,7 +44,7 @@
         
         <div class="row">
             <div class="col-md-12">
-                <form role="form" action="{% url 'modificar' alumno.pk %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                <form role="form" action="{% url 'modificarAlumno' alumno.pk %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
                     <p class="lead"><span class="glyphicon glyphicon-info-sign"></span> Ingresa los datos del alumno.</p>
                     
                     {% if form.errors %}

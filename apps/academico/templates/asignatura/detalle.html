@@ -4,12 +4,12 @@
 <head>
     <ul class="nav nav-pills">
         <li class="active"><a href="{% url 'home' %}">Inicio</a></li>
-        <li><a href="{% url 'agregarAsignatura' %}">Asignatura</a></li>
-        <li><a href="{% url 'agregarAlumnos' %}">Alumnos</a></li>
-        <li><a href="{% url 'agregarCarrera' %}">Carreras profesionales</a></li>
-        <li><a href="{% url 'agregarModulo' %}">Modulo</a></li>
-        <li><a href="{% url 'agregarDocente' %}">Docente</a></li>
-        <li><a href="agregarModulo">Aulas</a></li>
+        <li><a href="{% url 'listarAsignatura' %}">Asignatura</a></li>
+        <li><a href="{% url 'listarAlumno' %}">Alumnos</a></li>
+        <li><a href="{% url 'listarCarrera' %}">Carreras profesionales</a></li>
+        <li><a href="{% url 'listarModulo' %}">Modulo</a></li>
+        <li><a href="{% url 'listarDocente' %}">Docente</a></li>
+        <li><a href="{% url 'listarModulo' %}">Aulas</a></li>
     </ul>
     <meta charset="UTF-8">
     <title>Detalle Asignatura</title>
@@ -34,7 +34,7 @@
 
         <div class="page-header">
             <h4>
-                <a href="{% url 'home' %}" class="btn btn-success">
+                <a href="{% url 'listarAsignatura' %}" class="btn btn-success">
                     <span class="glyphicon glyphicon-chevron-left"></span> Regresar
                 </a>
                 <strong>Asignatura: {{ asignatura }}</strong>

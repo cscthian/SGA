@@ -1,18 +1,3 @@
-"""SGA URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.8/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Add an import:  from blog import urls as blog_urls
-    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
-"""
 from django.conf.urls import include, url
 from django.contrib import admin
 
@@ -21,6 +6,7 @@ from apps.academico.views import *
 urlpatterns = [
     url(r'^$', Home.as_view(), name = 'home'),
     ################## urls de alumno ##################################
+    url(r'^listarAlumno/$', ListarAlumno.as_view(), name = 'listarAlumno'),
     url(r'^agregarAlumno/$', AgregarAlumno.as_view(), name = 'agregarAlumno'),
     url(r'^detalleAlumno/(?P<pk>\d+)$', DetalleAlumno.as_view(), name = 'detalleAlumno'),
     url(r'^modificarAlumno/(?P<pk>\d+)$', ModificarAlumno.as_view(), name = 'modificarAlumno'),
@@ -28,6 +14,7 @@ urlpatterns = [
 
 
     ################# urls docente ###################################
+    url(r'^listarDocente/$', ListarDocente.as_view(), name = 'listarDocente'),
     url(r'^agregarDocente/$', AgregarDocente.as_view(), name = 'agregarDocente'),
     url(r'^detalleDocente/$', DetalleDocente.as_view(), name = 'detalleDocente'),
     url(r'^modificarDocente/$', ModificarDocente.as_view(), name = 'modificarDocente'),
@@ -35,6 +22,7 @@ urlpatterns = [
     
 
     ################# urls carreras profesionales ###################################
+    url(r'^listarCarrera/$', ListarCarrera.as_view(), name = 'listarCarrera'),
     url(r'^agregarCarrera/$', AgregarCarrera.as_view(), name = 'agregarCarrera'),
     url(r'^detalleCarrera/$', DetalleCarrera.as_view(), name = 'detalleCarrera'),
     url(r'^modificarCarrera/$', ModificarCarrera.as_view(), name = 'modificarCarrera'),
@@ -42,6 +30,7 @@ urlpatterns = [
     
 
     ################# urls asignaturas ##############################################
+    url(r'^listarAsignatura/$', ListarAsignatura.as_view(), name = 'listarAsignatura'),
     url(r'^agregarAsignatura/$', AgregarAsignatura.as_view(), name = 'agregarAsignatura'),
     url(r'^detalleAsignatura/$', DetalleAsignatura.as_view(), name = 'detalleAsignatura'),
     url(r'^modificarAsignatura/$', ModificarAsignatura.as_view(), name = 'modificarAsignatura'),
@@ -49,6 +38,7 @@ urlpatterns = [
     
 
     ################# urls modulos ##################################################
+    url(r'^listarModulo/$', ListarModulo.as_view(), name = 'listarModulo'),
     url(r'^agregarModulo/$', AgregarModulo.as_view(), name = 'agregarModulo'),
     url(r'^detalleModulo/$', DetalleAsignatura.as_view(), name = 'detalleModulo'),
     url(r'^modificarModulo/$', ModificarModulo.as_view(), name = 'modificarModulo'),

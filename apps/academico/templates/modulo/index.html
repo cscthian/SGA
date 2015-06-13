@@ -4,12 +4,12 @@
 <head>
     <ul class="nav nav-pills">
         <li class="active"><a href="{% url 'home' %}">Inicio</a></li>
-        <li><a href="{% url 'agregarAsignatura' %}">Asignatura</a></li>
-        <li><a href="{% url 'agregarAlumnos' %}">Alumnos</a></li>
-        <li><a href="{% url 'agregarCarrera' %}">Carreras profesionales</a></li>
-        <li><a href="{% url 'agregarModulo' %}">Modulo</a></li>
-        <li><a href="{% url 'agregarDocente' %}">Docente</a></li>
-        <li><a href="agregarModulo">Aulas</a></li>
+        <li><a href="{% url 'listarAsignatura' %}">Asignatura</a></li>
+        <li><a href="{% url 'listarAlumno' %}">Alumnos</a></li>
+        <li><a href="{% url 'listarCarrera' %}">Carreras profesionales</a></li>
+        <li><a href="{% url 'listarModulo' %}">Modulo</a></li>
+        <li><a href="{% url 'listarDocente' %}">Docente</a></li>
+        <li><a href="{% url 'listarModulo' %}">Aulas</a></li>
     </ul>
     <meta charset="UTF-8">
     <title>Document</title>
@@ -34,9 +34,9 @@
         <div class="page-header">
             <h4>
                 <strong>
-                    Hay <span class="label label-warning">{{ cantidad }}</span> lista de Modulos
+                    Hay <span class="label label-warning">{{ cantidad }}</span> de Modulos
                 </strong>
-                <a class="btn btn-primary pull-right" href="{% url 'agregar' %}">
+                <a class="btn btn-primary pull-right" href="{% url 'agregarModulo' %}">
                     <span class="glyphicon glyphicon-plus"></span> Crear un -Modulo nuevo
                 </a>
             </h4>

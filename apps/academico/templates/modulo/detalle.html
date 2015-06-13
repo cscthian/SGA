@@ -4,15 +4,15 @@
 <head>
     <ul class="nav nav-pills">
         <li class="active"><a href="{% url 'home' %}">Inicio</a></li>
-        <li><a href="{% url 'agregarAsignatura' %}">Asignatura</a></li>
-        <li><a href="{% url 'agregarAlumno' %}">Alumnos</a></li>
-        <li><a href="{% url 'agregarCarrera' %}">Carreras profesionales</a></li>
-        <li><a href="{% url 'agregarModulo' %}">Modulo</a></li>
-        <li><a href="{% url 'agregarDocente' %}">Docente</a></li>
-        <li><a href="agregarModulo">Aulas</a></li>
+        <li><a href="{% url 'listarAsignatura' %}">Asignatura</a></li>
+        <li><a href="{% url 'listarAlumno' %}">Alumnos</a></li>
+        <li><a href="{% url 'listarCarrera' %}">Carreras profesionales</a></li>
+        <li><a href="{% url 'listarModulo' %}">Modulo</a></li>
+        <li><a href="{% url 'listarDocente' %}">Docente</a></li>
+        <li><a href="{% url 'listarModulo' %}">Aulas</a></li>
     </ul>
     <meta charset="UTF-8">
-    <title>Crear Alumnos</title>
+    <title>Crear Modulo</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 </head>
 <body>
@@ -25,7 +25,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">CRUD de Alummnos</a>
+                <a class="navbar-brand" href="#">CRUD de Modulo</a>
             </div>            
         </div>
     </div>
@@ -37,7 +37,7 @@
                 <a href="{% url 'home' %}" class="btn btn-success">
                     <span class="glyphicon glyphicon-chevron-left"></span> Regresar
                 </a>
-                <strong>Alumno: {{ alumno }}</strong>
+                <strong>Modulo: {{ modulo }}</strong>
             </h4>
         </div><!-- page-header -->
         
@@ -47,28 +47,16 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <th>Nombre</th>
-                            <td>{{ alumno.nombre }}</td>
+                            <th>Pediodo</th>
+                            <td>{{ modulo.periodo_modulo }}</td>
                         </tr>
                         <tr>
-                            <th>Apellidos</th>
-                            <td>{{ alumno.apellidos }}</td>
+                            <th>Carrera</th>
+                            <td>{{ modulo.carrera }}</td>
                         </tr>
                         <tr>
-                            <th>Fecha Nacimiento</th>
-                            <td>{{ alumno.fecha_nacimineto }}</td>
-                        </tr>
-                        <tr>
-                            <th>Carrera Profesional</th>
-                            <td>{{ alumno.carrera }}</td>
-                        </tr>
-                        <tr>
-                            <th>Carrera Profesional</th>
-                            <td>{{ alumno.carrera }}</td>
-                        </tr>
-                        <tr>
-                            <th>Correo</th>
-                            <td>{{ alumno.correo }}</td>
+                            <th>Modulo</th>
+                            <td>{{ modulo.modulo }}</td>
                         </tr>
                     </tbody>
                 </table>
