@@ -68,8 +68,8 @@
                         <tr>                        
                             <td>{{ docente.dni }}</td>
                             <td>{{ docente.nombres}}</td>
-                            <td>{{ docente.apellido }}</td>
-                            <td>{{ docente.Tipo }}</td>
+                            <td>{{ docente.apellidos }}</td>
+                            <td>{{ docente.tipo_docente }}</td>
                             <td>{{ docente.fecha_nacimiento }}</td>
                             <td>{{ docente.especilidad }}</td>
                             <td>{{ docente.titulo }}</td>
@@ -77,7 +77,7 @@
                             <td>{{ docente.sexo }}</td>
                             <td>{{ docente.direccion }}</td>
                             <td>{{ docente.email }}</td>
-                            <td>{{ docente.foto }}</td>
+                            <td>{{ docente.foto.url }}</td>
                             <td class="text-right">
                                 <a href="{% url 'detalleDocente' docente.pk %}" class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span></a>
                                 <a href="{% url 'modificarDocente' docente.pk %}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
