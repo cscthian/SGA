@@ -191,4 +191,17 @@ class EliminarModulo(DeleteView):
     success_url = reverse_lazy('home')
 
 ######################33 fin crud modulo #####################################
+class Matricular(TemplateView):
+    template_name = 'matricula/index.html'
+
+class Asistencia(TemplateView):
+    template_name = 'asistencia/index.html'
+
+class Pagos(TemplateView):
+    template_name = 'pagos/index.html'
+
+        
+####################### proceso matriculas ########################################
+
+####################### fin proceso matriculas ####################################
 

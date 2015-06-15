@@ -25,7 +25,7 @@ class Alumno(models.Model):
     sexo=models.CharField(max_length = 1, choices = Opcion_Sexo)
     direccion=models.CharField(max_length = 50)
     email=models.EmailField(max_length=50)
-    foto=models.ImageField(upload_to = 'imagenes')
+    foto=models.ImageField(upload_to = 'media')
 
     def __unicode__(self):
         return "%s %s" % (self.apellidos, self.nombres)
@@ -58,7 +58,7 @@ class Docente(models.Model):
     sexo=models.CharField(max_length = 1, choices = Opcion_Sexo)
     direccion=models.CharField(max_length = 50)
     email=models.EmailField(max_length=50)
-    foto=models.ImageField(upload_to = 'imagenes')
+    foto=models.ImageField(upload_to = 'media')
 
     def __unicode__(self):
         return "%s %s" % (self.apellidos, self.nombres)
