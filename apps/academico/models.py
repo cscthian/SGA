@@ -25,10 +25,10 @@ class Alumno(models.Model):
     sexo=models.CharField(max_length = 1, choices = Opcion_Sexo)
     direccion=models.CharField(max_length = 50)
     email=models.EmailField(max_length=50)
-    foto=models.ImageField(upload_to = 'imagenes')
+    foto=models.ImageField(upload_to = 'media')
 
-def __unicode__(self):
-        return "%s %s" % (self.Dni, self.Nombres)
+    def __unicode__(self):
+        return "%s %s" % (self.apellidos, self.nombres)
 
 #creamos el modelo Docente
 class Docente(models.Model):
@@ -58,10 +58,10 @@ class Docente(models.Model):
     sexo=models.CharField(max_length = 1, choices = Opcion_Sexo)
     direccion=models.CharField(max_length = 50)
     email=models.EmailField(max_length=50)
-    foto=models.ImageField(upload_to = 'imagenes')
+    foto=models.ImageField(upload_to = 'media')
 
-def __unicode__(self):
-        return "%s %s" % (self.dni, self.nombres)
+    def __unicode__(self):
+        return "%s %s" % (self.apellidos, self.nombres)
 
 
 #reamos el modelo Modulo
@@ -75,12 +75,19 @@ class Modulo(models.Model):
 
 #creamos el modelo Asignatura
 class Asignatura(models.Model):
+    Tipo_Asignatura = (
+        ('obligatorio', 'OBLIGATORIO'),
+        ('opcional', 'OPCIONAL'),
+    )
     nombre_asignatura = models.CharField(max_length = 50)
     siglas = models.CharField(max_length = 4)
     carrera_profesional = models.ForeignKey(Carrera)
-    tipo = models.CharField(max_length = 15, unique=True)
+    tipo = models.CharField(max_length = 15, choices = Tipo_Asignatura)
     modulo = models.ForeignKey(Modulo)
     creditos = models.IntegerField()
+
+    def __unicode__(self):
+        return self.nombre_asignatura
 
 
 #creamos el modelo Matricula

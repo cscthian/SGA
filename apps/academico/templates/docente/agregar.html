@@ -65,6 +65,10 @@
                         {{ form.apellidos }}
                     </div>
                     <div class="form-group">
+                        <label>{{ form.fecha_nacimiento.label_tag }}</label>
+                        {{ form.fecha_nacimiento }}
+                    </div>
+                    <div class="form-group">
                         <label>{{ form.tipo_docente.label_tag }}</label>
                         {{ form.tipo_docente }}
                     </div>
@@ -83,10 +87,6 @@
                     <div class="form-group">
                         <label>{{ form.sexo.label_tag }}</label>
                         {{ form.sexo }}
-                    </div>
-                    <div class="form-group">
-                        <label>{{ form.email.label_tag }}</label>
-                        {{ form.email }}
                     </div>
                     <div class="form-group">
                         <label>{{ form.direccion.label_tag }}</label>

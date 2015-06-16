@@ -12,3 +12,7 @@ git fetch
 git merge origin/master
 //enviar todos los cambios y comit realizados localmente al servidor del repositorio GitHub
 git push origin master
+
+
+//recibir las actualizaciones :
+git pull https://github.com/dgafz/SGA.git
