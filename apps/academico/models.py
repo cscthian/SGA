@@ -75,21 +75,50 @@ class Modulo(models.Model):
 
 #creamos el modelo Asignatura
 class Asignatura(models.Model):
-    Tipo_Asignatura = (
+    Tipo_Categoria = (
         ('obligatorio', 'OBLIGATORIO'),
         ('opcional', 'OPCIONAL'),
     )
     nombre_asignatura = models.CharField(max_length = 50)
-    siglas = models.CharField(max_length = 4)
-    carrera_profesional = models.ForeignKey(Carrera)
-    tipo = models.CharField(max_length = 15, choices = Tipo_Asignatura)
+    codigo = models.CharField(max_length = 4)   
+    categoria = models.CharField(max_length = 15, choices=Tipo_Categoria)
+    creditos = models.PositiveIntegerField()
     modulo = models.ForeignKey(Modulo)
-    creditos = models.IntegerField()
-
+    prerequisitos = models.ForeignKey('self', null=True, blank=True )
+    horas_teoricas = models.PositiveIntegerField(default=0)
+    horas_practicas = models.PositiveIntegerField(default=0)
     def __unicode__(self):
         return self.nombre_asignatura
+# creamos horario
 
+class Horario(models.Model):
+    dia = models.DateField()
+    hora_inicio = models.TimeField()
+    hora_final = models.TimeField()
 
+# creamos aula
+class Aula(models.Model):  
+    AULA_CHOICES = (
+        ('L', 'Laboratorio'),
+        ('T','Teoria'),
+    ) 
+    nro_aula = models.CharField('Numero de Aula', max_length=50)
+    piso = models.CharField(max_length=50)
+    tipo_aula = models.CharField(max_length=1, choices=AULA_CHOICES)
+    capacidad = models.PositiveIntegerField(default=0)
+
+# creamos carga academica
+class CargaAcademica(models.Model):
+    docente = models.ForeignKey(Docente)
+    asignatura = models.ForeignKey(Asignatura)
+    aula = models.ForeignKey(Aula)
+    horario = models.ForeignKey(Horario)
+
+# creamos Asistencia de Docente
+class AsistenciaDocente(models.Model):
+    carga_academica = models.ForeignKey(CargaAcademica)
+    hora_Inicio = models.DateTimeField()
+    hora_Fin = models.DateTimeField()
 #creamos el modelo Matricula
 class Matricula(models.Model):
 	alumno = models.ForeignKey(Alumno)
