@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, DetailView
 from django.core.urlresolvers import reverse_lazy
 
+
 from .forms import *
 
 from .models import Alumno, Docente, Carrera, Modulo, Asignatura, Matricula, Nota, MatriculaDetalle
@@ -193,6 +194,20 @@ class EliminarModulo(DeleteView):
 ######################33 fin crud modulo #####################################
 class Matricular(TemplateView):
     template_name = 'matricula/index.html'
+
+    def post(self, request, *args, **kwargs):
+        dni = request.POST.get('dni')
+        try:
+            alumno = Alumno.objects.get(dni=dni)
+        except Alumno.DoesNotExist:
+            return render(request, 'home/index.html') 
+        print alumno
+        return render(request, 'matricula/agregar.html')
+
+    def get_context_data(self, **kwargs):
+        context = super(Matricular, self).get_context_data(**kwargs)
+        context['form'] = DniForm
+        return context
 
 class Asistencia(TemplateView):
     template_name = 'asistencia/index.html'

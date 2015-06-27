@@ -52,3 +52,7 @@ class MatriculaDetalleForm(forms.ModelForm):
 	class Meta:
 		model = MatriculaDetalle
 		fields = ("__all__") 
+
+
+class DniForm(forms.Form):
+	dni = forms.CharField(max_length=8)

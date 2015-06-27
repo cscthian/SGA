@@ -47,6 +47,9 @@ urlpatterns = [
 
     ################# urls aulas ####################################################
     url(r'^matricular/$', Matricular.as_view(), name = 'matricular'),
+    url(r'^matricular/alumno$', Matricular.as_view(), name = 'matricular'),
+    
+
     ################# fin urls Matricula ###############################
     ################ url pagos #########################################
     url(r'^pagos/$', Matricular.as_view(), name = 'pagos'),
