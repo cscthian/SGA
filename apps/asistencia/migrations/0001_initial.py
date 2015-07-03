@@ -2,12 +2,14 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('academico', '0005_auto_20150701_0736'),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('academico', '0001_initial'),
     ]
 
     operations = [
@@ -15,8 +17,8 @@ class Migration(migrations.Migration):
             name='AsistenciaDocente',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('hora_Inicio', models.DateTimeField()),
-                ('hora_Fin', models.DateTimeField()),
+                ('hora_Inicio', models.DateTimeField(null=True, blank=True)),
+                ('hora_Fin', models.DateTimeField(null=True, blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -35,17 +37,32 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('asignatura', models.ForeignKey(to='academico.Asignatura')),
                 ('aula', models.ForeignKey(to='asistencia.Aula')),
-                ('docente', models.ForeignKey(to='academico.Docente')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Docente',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('tipo_docente', models.CharField(max_length=12, choices=[(b'contratado', b'contratado'), (b'nombrado', b'nombrado')])),
+                ('especialidad', models.CharField(max_length=2, choices=[(b'1', b'administracion de bases de datos'), (b'2', b'analista de sistemas'), (b'3', b'administracion de centros de computo'), (b'4', b'cursos generales')])),
+                ('titulo', models.CharField(max_length=50)),
+                ('slug', models.SlugField(editable=False)),
+                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='Horario',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('dia', models.DateField()),
-                ('hora_inicio', models.TimeField()),
-                ('hora_final', models.TimeField()),
+                ('dia', models.DateField(null=True, blank=True)),
+                ('hora_inicio', models.TimeField(null=True, blank=True)),
+                ('hora_final', models.TimeField(null=True, blank=True)),
             ],
+        ),
+        migrations.AddField(
+            model_name='cargaacademica',
+            name='docente',
+            field=models.ForeignKey(to='asistencia.Docente'),
         ),
         migrations.AddField(
             model_name='cargaacademica',

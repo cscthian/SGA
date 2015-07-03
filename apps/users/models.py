@@ -23,19 +23,10 @@ class UserManager(BaseUserManager, models.Manager):
         return user
 
     def create_user(self, username, email, password=None, **extra_fields):
-        return self._create_user(
-            username,
-            email,
-            password,
-            False,
-            False,
-            **extra_fields
-        )
+        return self._create_user(username, email, password, False, False, **extra_fields)
 
     def create_superuser(self, username, email, password=None, **extra_fields):
-        return self._create_user(
-            username,
-            email, password, True, True, **extra_fields)
+        return self._create_user(username, email, password, True, True, **extra_fields)
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -52,6 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     address = models.CharField('direccion', max_length=50)
     phone = models.CharField('telefono', max_length=50)
     gender = models.CharField('sexo', max_length=1, choices=GENDER_CHOICES)
+    date_birth = models.DateField('fecha de nacimiento', blank=True, null=True)
 
     objects = UserManager()
 
