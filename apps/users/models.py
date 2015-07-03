@@ -43,6 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     address = models.CharField('direccion', max_length=50)
     phone = models.CharField('telefono', max_length=50)
     gender = models.CharField('sexo', max_length=1, choices=GENDER_CHOICES)
+    date_birth = models.DateField('fecha de nacimiento', blank=True, null=True)
 
     objects = UserManager()
 
@@ -54,3 +55,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.username
+
+    def get_full_name(self):
+        return "%s %s" % (self.last_name, self.first_name)

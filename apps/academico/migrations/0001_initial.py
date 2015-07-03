@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('sexo', models.CharField(max_length=1, choices=[(b'M', b'Masculino'), (b'F', b'Femenino')])),
                 ('direccion', models.CharField(max_length=50)),
                 ('email', models.EmailField(max_length=50)),
-                ('foto', models.ImageField(upload_to=b'imagenes')),
+                ('foto', models.ImageField(upload_to=b'media')),
             ],
         ),
         migrations.CreateModel(
@@ -30,9 +30,11 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('nombre_asignatura', models.CharField(max_length=50)),
-                ('siglas', models.CharField(max_length=4)),
-                ('tipo', models.CharField(unique=True, max_length=15)),
-                ('creditos', models.IntegerField()),
+                ('codigo', models.CharField(max_length=4)),
+                ('categoria', models.CharField(max_length=15, choices=[(b'obligatorio', b'OBLIGATORIO'), (b'opcional', b'OPCIONAL')])),
+                ('creditos', models.PositiveIntegerField()),
+                ('horas_teoricas', models.PositiveIntegerField(default=0)),
+                ('horas_practicas', models.PositiveIntegerField(default=0)),
             ],
         ),
         migrations.CreateModel(
@@ -59,7 +61,7 @@ class Migration(migrations.Migration):
                 ('sexo', models.CharField(max_length=1, choices=[(b'M', b'Masculino'), (b'F', b'Femenino')])),
                 ('direccion', models.CharField(max_length=50)),
                 ('email', models.EmailField(max_length=50)),
-                ('foto', models.ImageField(upload_to=b'imagenes')),
+                ('foto', models.ImageField(upload_to=b'media')),
             ],
         ),
         migrations.CreateModel(
@@ -104,13 +106,13 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='asignatura',
-            name='carrera_profesional',
-            field=models.ForeignKey(to='academico.Carrera'),
+            name='modulo',
+            field=models.ForeignKey(to='academico.Modulo'),
         ),
         migrations.AddField(
             model_name='asignatura',
-            name='modulo',
-            field=models.ForeignKey(to='academico.Modulo'),
+            name='prerequisitos',
+            field=models.ForeignKey(blank=True, to='academico.Asignatura', null=True),
         ),
         migrations.AddField(
             model_name='alumno',
