@@ -23,10 +23,19 @@ class UserManager(BaseUserManager, models.Manager):
         return user
 
     def create_user(self, username, email, password=None, **extra_fields):
-        return self._create_user(username, email, password, False, False, **extra_fields)
+        return self._create_user(
+            username,
+            email,
+            password,
+            False,
+            False,
+            **extra_fields
+        )
 
     def create_superuser(self, username, email, password=None, **extra_fields):
-        return self._create_user(username, email, password, True, True, **extra_fields)
+        return self._create_user(
+            username,
+            email, password, True, True, **extra_fields)
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -54,3 +63,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.username
+
+    def get_full_name(self):
+        return "%s %s" % (self.last_name, self.first_name)
