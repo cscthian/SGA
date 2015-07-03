@@ -31,7 +31,7 @@ class Docente(models.Model):
 
 
 class Horario(models.Model):
-    dia = models.DateField(blank=True, null=True)
+    dia = models.CharField(max_length=10)
     hora_inicio = models.TimeField(blank=True, null=True)
     hora_final = models.TimeField(blank=True, null=True)
 
