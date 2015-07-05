@@ -1,13 +1,3 @@
-
-/***************
-  login estilos
-***************/
-
-.text-errors{
-  color: #f44336;
-  font-size: 0.9rem;
-}
-
 /***************
   HTML Styles
 ***************/
@@ -61,8 +51,7 @@ footer.example {
   Index Page Styles
 ********************/
 ul.side-nav.fixed li.logo {
-  text-align: center;
-  margin-top: 32px;
+  padding-top: 32px;
   margin-bottom: 16px;
   border-bottom: 1px solid #ddd; }
   ul.side-nav.fixed li.logo:hover {
@@ -82,6 +71,27 @@ ul.side-nav.fixed {
     background-color: #FFF; }
   ul.side-nav.fixed:hover {
     overflow-y: auto; }
+  ul.side-nav.fixed .profile-btn {
+  margin-top: -0.6rem;
+  text-transform: capitalize;
+  padding: 0;
+  text-shadow: 1px 1px 1px #444;
+  font-size: 14px;}
+
+.user-roal {
+  color: #fff;
+  margin-top: -16px;
+  font-size: 13px;
+  text-shadow: 1px 1px 1px #444;
+}
+.row .col-profile{
+  padding: 0 0.35rem;
+}
+
+i.right-profile{
+  float: right;
+  margin-left: 0px;
+}
 
 .bold > a {
   font-weight: bold; }
@@ -95,7 +105,8 @@ nav.top-nav {
   box-shadow: none; }
   nav.top-nav a.page-title {
     line-height: 122px;
-    font-size: 48px; }
+    font-size: 42px;
+    text-shadow: 1px 1px 5px #444; }
 
 a.button-collapse.top-nav {
   position: absolute;
@@ -120,16 +131,13 @@ a.button-collapse.top-nav {
   nav .nav-wrapper {
     text-align: center; }
     nav .nav-wrapper a.page-title {
-      font-size: 36px; } }
+      font-size: 36px;
+    } 
+}
 
 @media only screen and (min-width : 993px) {
   .container {
     width: 85%; } }
-
-#front-page-logo {
-  display: inline-block;
-  height: 100%;
-  pointer-events: none; }
 
 @media only screen and (max-width: 992px) {
   #front-page-nav ul.side-nav li {
@@ -432,7 +440,7 @@ pre[class*="language-"] {
     background: #e8e6e3;
     top: 0;
     left: 0;
-    font-family: "Roboto", sans-serif;
+    font-family: "Ubuntu", sans-serif;
     -webkit-font-smoothing: antialiased;
     color: #555;
     content: attr(class);

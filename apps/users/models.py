@@ -35,6 +35,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('M', 'MASCULINO'),
         ('F', 'FEMENINO'),
     )
+    TYPE_CHOICES = (
+        ('1', 'alumno'),
+        ('2', 'docente'),
+        ('3', 'cajero'),
+        ('4', 'administrador'),
+    )
     username = models.CharField('dni', max_length=8, unique=True)
     email = models.EmailField('correo electronico')
     first_name = models.CharField('nombres', max_length=50)
@@ -44,6 +50,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone = models.CharField('telefono', max_length=50)
     gender = models.CharField('sexo', max_length=1, choices=GENDER_CHOICES)
     date_birth = models.DateField('fecha de nacimiento', blank=True, null=True)
+    type_user = models.CharField('tipo de usuario', max_length=2, choices=TYPE_CHOICES, null=True, blank=True)
 
     objects = UserManager()
 

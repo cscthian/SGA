@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% load  staticfiles%}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylepanel.css' %}">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+{% endblock css %}
+
+{% block sidenav %}
+    <header>
+        <nav class="top-nav cyan">
+            <div class="container">
+              <div class="nav-wrapper">
+                <a href=""></a>
+                <a class="page-title">{% block titulo_nav %}{% endblock titulo_nav %}</a>
+              </div>
+            </div>
+        </nav>
+        <div class="container">
+            <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full">
+              <i class="mdi-navigation-menu"></i>
+            </a>
+        </div>
+        <ul id="nav-mobile" class="side-nav fixed">
+            <li class="logo cyan">
+              <div id="logo-container">
+                <div class="row">
+                  <div class="col col-profile s4">
+                    <img src="{{ user.avatar.url }}" alt="{{ user.username }}" class="circle responsive-img valign">
+                  </div>
+                  <div class="col col-profile s8">
+                    <ul id="profile-dropdown" class="dropdown-content">
+                      <li><a href="#"><i class="mdi-action-face-unlock"></i> Perfil</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Salir</a>
+                      </li>
+                    </ul>
+                    <a class="waves-effect waves-light btn-flat white-text dropdown-button profile-btn" data-activates="profile-dropdown">Henrry Sairitupac<i class="mdi-navigation-arrow-drop-down right-profile"></i></a>
+                    <p class="user-roal">Administrator</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            {% block funciones %}{% endblock funciones %}           
+            
+        </ul>
+    </header>
+    <main>
+
+        {% block contenido_panel %}{% endblock contenido_panel %}
+
+    </main>
+
+{% endblock sidenav %}
+
+{% block js %}
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{% static 'js/materialize.js' %}"></script>
+    <script src="{% static 'js/init.js' %}"></script>
+{% endblock js %}

@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.contrib.auth import authenticate, login, logout
 
@@ -24,3 +25,7 @@ class LogIn(FormView):
 def LogOut(request):
     logout(request)
     return redirect('/')
+
+
+class AdminView(TemplateView):
+    template_name = 'users/panel/panel.html'

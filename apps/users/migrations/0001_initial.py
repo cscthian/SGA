@@ -26,6 +26,8 @@ class Migration(migrations.Migration):
                 ('address', models.CharField(max_length=50, verbose_name=b'direccion')),
                 ('phone', models.CharField(max_length=50, verbose_name=b'telefono')),
                 ('gender', models.CharField(max_length=1, verbose_name=b'sexo', choices=[(b'M', b'MASCULINO'), (b'F', b'FEMENINO')])),
+                ('date_birth', models.DateField(null=True, verbose_name=b'fecha de nacimiento', blank=True)),
+                ('type_user', models.CharField(blank=True, max_length=2, null=True, verbose_name=b'tipo de usuario', choices=[(b'1', b'alumno'), (b'2', b'docente'), (b'3', b'cajero'), (b'4', b'administrador')])),
                 ('is_active', models.BooleanField(default=True)),
                 ('is_staff', models.BooleanField(default=False)),
                 ('groups', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Group', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', verbose_name='groups')),

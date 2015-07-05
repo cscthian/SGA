@@ -12,4 +12,9 @@ urlpatterns = [
         'apps.users.views.LogOut',
         name='logout'
     ),
+    url(
+        r'^panel/admin/$',
+        views.AdminView.as_view(),
+        name='panel_admin'
+    ),
 ]
