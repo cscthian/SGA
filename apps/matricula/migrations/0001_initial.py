@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
             name='Alumno',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('tipo_alumno', models.CharField(max_length=10, choices=[(b'Natural', b'Natural'), (b'Becado', b'Becado'), (b'Especial', b'Especial'), (b'Hermanos', b'Hermanos')])),
+                ('slug', models.SlugField(null=True, editable=False, blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -30,10 +30,22 @@ class Migration(migrations.Migration):
             name='Matricula',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('turno', models.CharField(max_length=7, choices=[(b'Ma\xc3\xb1ana1', b'7:00 am - 11:30 am'), (b'Ma\xc3\xb1ana2', b'8:30 am - 1:00 pm'), (b'Tarde', b'1:00 pm - 5:30 pm'), (b'Noche', b'5:30 pm - 10:00 pm')])),
                 ('fecha_matricula', models.DateTimeField()),
                 ('periodo', models.CharField(max_length=50, verbose_name=b'tiempo duracion')),
                 ('estado_matricula', models.BooleanField()),
                 ('alumno', models.ForeignKey(to='matricula.Alumno')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Programacion',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('vacantes', models.PositiveIntegerField()),
+                ('inicio_labores', models.DateField()),
+                ('fin_labores', models.DateField()),
+                ('semestre', models.CharField(max_length=20)),
+                ('finalizado', models.BooleanField(default=False)),
             ],
         ),
     ]
