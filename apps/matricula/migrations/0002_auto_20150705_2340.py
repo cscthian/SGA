@@ -8,6 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('notas', '0001_initial'),
+        ('pagos', '0001_initial'),
         ('matricula', '0001_initial'),
     ]
 
@@ -16,6 +17,16 @@ class Migration(migrations.Migration):
             model_name='matricula',
             name='modulo',
             field=models.ForeignKey(to='notas.Modulo'),
+        ),
+        migrations.AddField(
+            model_name='matricula',
+            name='programacion',
+            field=models.ForeignKey(blank=True, to='matricula.Programacion', null=True),
+        ),
+        migrations.AddField(
+            model_name='matricula',
+            name='tipo_descuento',
+            field=models.ForeignKey(blank=True, to='pagos.Descuento', null=True),
         ),
         migrations.AddField(
             model_name='alumno',
