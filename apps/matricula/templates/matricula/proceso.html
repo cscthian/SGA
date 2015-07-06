@@ -35,38 +35,9 @@
         <div class="row">
             <div class="col-md-12">
                 <form role="form" method="POST" enctype="multipart/form-data">{% csrf_token %}
-                    <p class="lead"><span class="glyphicon glyphicon-info-sign"></span> Ingresa los datos del alumno.</p>
-                    
-                    {% if form.errors %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ form.errors }}
-                        </div>                        
-                    {% endif %}
-
-                    <div class="form-group">
-                        <label>{{ form.nombre.label_tag }}</label>
-                        {{ form.nombre }}
-                    </div>
-                    <div class="form-group">
-                        <label>{{ form.apellidos.label_tag }}</label>
-                        {{ form.apellidos }}
-                    </div>
-                    <div class="form-group">
-                        <label>{{ form.fecha_nacimineto.label_tag }}</label>
-                        {{ form.fecha_nacimineto }}
-                        <p class="help-block">Ingresa la fecha de nacimiento. DD/MM/AA</p>
-                    </div>
-                    <div class="form-group">
-                        <label>{{ form.carrera.label_tag }}</label>
-                        {{ form.carrera }}
-                    </div>
-                    <div class="form-group">
-                        <label>{{ form.correo.label_tag }}</label>
-                        {{ form.correo }}
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Guardar alumno</button>
-                    </div>
+                    {{ alumno_form }}
+                    {{ carrera_form }}
+                    <input type="submit" value="Guardar cambios">
                 </form>
         
             </div><!-- col-md-12 -->        

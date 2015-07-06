@@ -2,17 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <ul class="nav nav-pills">
-        <li class="active"><a href="{% url 'home' %}">Inicio</a></li>
-        <li><a href="{% url 'listarAsignatura' %}">Asignatura</a></li>
-        <li><a href="{% url 'listarAlumno' %}">Alumnos</a></li>
-        <li><a href="{% url 'listarCarrera' %}">Carreras profesionales</a></li>
-        <li><a href="{% url 'listarModulo' %}">Modulo</a></li>
-        <li><a href="{% url 'listarDocente' %}">Docente</a></li>
-        <li><a href="{% url 'listarModulo' %}">Aulas</a></li>
-    </ul>
     <meta charset="UTF-8">
-    <title>Detalle Asignatura</title>
+    <title>Crear Alumnos</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 </head>
 <body>
@@ -25,7 +16,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">CRUD de Asignatura</a>
+                <a class="navbar-brand" href="#">CRUD de Alummnos</a>
             </div>            
         </div>
     </div>
@@ -34,10 +25,10 @@
 
         <div class="page-header">
             <h4>
-                <a href="{% url 'listarAsignatura' %}" class="btn btn-success">
+                <a href="{% url 'listarCarrera' %}" class="btn btn-success">
                     <span class="glyphicon glyphicon-chevron-left"></span> Regresar
                 </a>
-                <strong>Asignatura: {{ asignatura }}</strong>
+                <strong>Alumno: {{ alumno }}</strong>
             </h4>
         </div><!-- page-header -->
         
@@ -47,28 +38,28 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <th>Nombre</th>
-                            <td>{{ asignatura.nombre_asignatura }}</td>
+                            <th>DNI</th>
+                            <td>{{ alumno.users.first_name }}</td>
                         </tr>
                         <tr>
-                            <th>Siglas</th>
-                            <td>{{ asignatura.siglas }}</td>
+                            <th>Apellidos</th>
+                            <td>{{ alumno.users.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Fecha Nacimiento</th>
+                            <td>{{ alumno.date_birth }}</td>
                         </tr>
                         <tr>
                             <th>Carrera Profesional</th>
-                            <td>{{ asignatura.carrera_profesional }}</td>
+                            <td>{{ alumno.tipo_alumno }}</td>
                         </tr>
                         <tr>
-                            <th>Tipo</th>
-                            <td>{{ asignatura.tipo }}</td>
+                            <th>Carrera Profesional</th>
+                            <td>{{ alumno.carrera_profesional }}</td>
                         </tr>
                         <tr>
-                            <th>Modulo</th>
-                            <td>{{ asignatura.modulo }}</td>
-                        </tr>
-                        <tr>
-                            <th>CReditos</th>
-                            <td>{{ asignatura.creditos }}</td>
+                            <th>email</th>
+                            <td>{{ alumno.email }}</td>
                         </tr>
                     </tbody>
                 </table>

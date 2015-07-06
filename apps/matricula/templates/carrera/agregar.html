@@ -2,17 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <ul class="nav nav-pills">
-        <li class="active"><a href="{% url 'home' %}">Inicio</a></li>
-        <li><a href="{% url 'listarAsignatura' %}">Asignatura</a></li>
-        <li><a href="{% url 'listarAlumno' %}">Alumnos</a></li>
-        <li><a href="{% url 'listarCarrera' %}">Carreras profesionales</a></li>
-        <li><a href="{% url 'listarModulo' %}">Modulo</a></li>
-        <li><a href="{% url 'listarDocente' %}">Docente</a></li>
-        <li><a href="{% url 'listarModulo' %}">Aulas</a></li>
-    </ul>
     <meta charset="UTF-8">
-    <title>Crear Modulo</title>
+    <title>Nueva Carrera</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 </head>
 <body>
@@ -25,7 +16,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">CRUD Modulo</a>
+                <a class="navbar-brand" href="#">Mantenimiento Carrera</a>
             </div>            
         </div>
     </div>
@@ -34,17 +25,17 @@
 
         <div class="page-header">
             <h4>
-                <a href="{% url 'home' %}" class="btn btn-success">
+                <a href="http://127.0.0.1:8000/" class="btn btn-success">
                     <span class="glyphicon glyphicon-chevron-left"></span> Regresar
                 </a>
-                <strong> Crear Modulo</strong>
+                <strong> Nueva Carrera</strong>
             </h4>
         </div><!-- page-header -->
         
         <div class="row">
             <div class="col-md-12">
                 <form role="form" method="POST" enctype="multipart/form-data">{% csrf_token %}
-                    <p class="lead"><span class="glyphicon glyphicon-info-sign"></span> Ingresa los datos del Modulo</p>
+                    <p class="lead"><span class="glyphicon glyphicon-info-sign"></span> Ingrese los datos de la Carrera</p>
                     
                     {% if form.errors %}
                         <div class="alert alert-danger" role="alert">
@@ -53,18 +44,19 @@
                     {% endif %}
 
                     <div class="form-group">
-                        <label>{{ form.periodo_modulo.label_tag }}</label>
-                        {{ form.periodo_modulo }}
+                        <label>{{ form.nombre_carrera.label_tag }}</label>
+                        {{ form.nombre_carrera }}
                     </div>
                     <div class="form-group">
-                        <label>{{ form.carrera.label_tag }}</label>
-                        {{ form.carrera }}
+                        <label>{{ form.siglas.label_tag }}</label>
+                        {{ form.siglas }}
                     </div>
                     <div class="form-group">
-                        <label>{{ form.modulo.label_tag }}</label>
-                        {{ form.modulo }}</div>
+                        <label>{{ form.titulo.label_tag }}</label>
+                        {{ form.titulo }}
+                    </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Guardar modulo</button>
+                        <button type="submit" class="btn btn-primary">Guardar Carrera</button>
                     </div>
                 </form>
         

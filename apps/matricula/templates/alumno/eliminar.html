@@ -2,17 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <ul class="nav nav-pills">
-        <li class="active"><a href="{% url 'home' %}">Inicio</a></li>
-        <li><a href="{% url 'listarAsignatura' %}">Asignatura</a></li>
-        <li><a href="{% url 'listarAlumno' %}">Alumnos</a></li>
-        <li><a href="{% url 'listarCarrera' %}">Carreras profesionales</a></li>
-        <li><a href="{% url 'listarModulo' %}">Modulo</a></li>
-        <li><a href="{% url 'listarDocente' %}">Docente</a></li>
-        <li><a href="{% url 'listarModulo' %}">Aulas</a></li>
-    </ul>
     <meta charset="UTF-8">
-    <title>Eliminar Docentes</title>
+    <title>eliminar Alumnos</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 </head>
 <body>
@@ -25,7 +16,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{% url 'listarDocente' %}">CRUD de Docentes</a>
+                <a class="navbar-brand" href="#">CRUD de Alumnos</a>
             </div>            
         </div>
     </div>
@@ -34,7 +25,7 @@
 
         <div class="page-header">
             <h4>
-                <strong>Eliminando: {{ docente }}</strong>
+                <strong>Eliminando: {{ alumno }}</strong>
             </h4>
         </div><!-- page-header -->
 
@@ -42,11 +33,11 @@
             
             <div class="col-md-12">
 
-                <form role="form" action="{% url 'eliminarDocente' docente.pk %}" method="POST">{% csrf_token %}
+                <form role="form" action="http://127.0.0.1:8000/eliminar_alumno/" method="POST">{% csrf_token %}
                     <p class="">¿Desea eliminar el alumno "nombre evento"?</p>
 
                     <input type="submit" value="Sí" class="btn btn-danger"> 
-                    <a href="{% url 'listarDocente' %}" class="btn btn-default">No</a>
+                    <a href="http://127.0.0.1:8000/eliminar_alumno/" class="btn btn-default">No</a>
                 </form>
 
             </div><!-- col-md-12 -->
