@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'^', include('apps.asistencia.urls', namespace="asistencia_app")),
     # urls para la aplicacion users
     url(r'^', include('apps.users.urls', namespace="users_app")),
-    # urls para la aplicacion asistencia
+    # urls para la aplicacion Matricula
     url(r'^', include('apps.matricula.urls', namespace="matricula_app")),
     # urls para la aplicacion de pagos
     url(r'^', include('apps.pagos.urls', namespace="pagos_app")),

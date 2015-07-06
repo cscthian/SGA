@@ -1,0 +1,46 @@
+{% extends "users/panel/base_panel.html" %}
+
+{% block title %}panel{% endblock title %}
+
+  {% block titulo_nav %} Panel de Administrador{% endblock titulo_nav %}
+
+    {% block funciones %}
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Mantenimientos</a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="#">Docentes</a></li>
+                        <li><a href="#">Admistrativos</a></li>
+                        <li><a href="#">Asignatura</a></li>
+                        <li><a href="#">Carreras Profesionales</a></li>
+                        <li><a href="#">Modulos</a></li>
+                        <li><a href="#">Aulas</a></li>
+                        <li><a href="#">Horarios</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Procesos</a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="badges.html">Matricula</a></li>
+                        <li><a href="buttons.html">Asistencia Docente</a></li>
+                        <li><a href="cards.html">Asistencia Admintrativo</a></li>
+                        <li><a href="footer.html">Pagos</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="bold"><a class="collapsible-header waves-effect waves-teal">Consultas</a>
+              <div class="collapsible-body">
+                    <ul>
+                        <li><a href="collapsible.html">Collapsible</a></li>
+                        <li><a href="dialogs.html">Dialogs</a></li>
+                        <li><a href="dropdown.html">Dropdown</a></li>
+                        <li><a href="media.html">Media</a></li>
+                        <li><a href="modals.html">Modals</a></li>
+                    </ul>
+              </div>
+            </li>
+        </ul>
+    </li>
+    {% endblock funciones %}

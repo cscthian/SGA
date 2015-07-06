@@ -33,8 +33,15 @@ class Alumno(models.Model):
         
 
 class Matricula(models.Model):
+    TURNO_CHOICES = (
+        ('Maniana1', '7:00 am - 11:30 am'),
+        ('Maniana2', '8:30 am - 1:00 pm'),
+        ('Tarde', '1:00 pm - 5:30 pm'),
+        ('Noche', '5:30 pm - 10:00 pm'),
+    )
     alumno = models.ForeignKey(Alumno)
     modulo = models.ForeignKey(Modulo)
+    turno = models.CharField(max_length=7, choices=TURNO_CHOICES)
     fecha_matricula = models.DateTimeField()
     periodo = models.CharField('tiempo duracion', max_length=50)
     estado_matricula = models.BooleanField(blank=False)
