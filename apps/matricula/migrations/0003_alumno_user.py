@@ -9,21 +9,10 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('notas', '0001_initial'),
-        ('matricula', '0001_initial'),
+        ('matricula', '0002_auto_20150705_2340'),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='matricula',
-            name='modulo',
-            field=models.ForeignKey(to='notas.Modulo'),
-        ),
-        migrations.AddField(
-            model_name='alumno',
-            name='carrera_profesional',
-            field=models.ForeignKey(to='matricula.Carrera'),
-        ),
         migrations.AddField(
             model_name='alumno',
             name='user',

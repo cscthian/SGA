@@ -2,14 +2,11 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('academico', '0001_initial'),
     ]
 
     operations = [
@@ -35,8 +32,6 @@ class Migration(migrations.Migration):
             name='CargaAcademica',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('asignatura', models.ForeignKey(to='academico.Asignatura')),
-                ('aula', models.ForeignKey(to='asistencia.Aula')),
             ],
         ),
         migrations.CreateModel(
@@ -47,31 +42,15 @@ class Migration(migrations.Migration):
                 ('especialidad', models.CharField(max_length=2, choices=[(b'1', b'administracion de bases de datos'), (b'2', b'analista de sistemas'), (b'3', b'administracion de centros de computo'), (b'4', b'cursos generales')])),
                 ('titulo', models.CharField(max_length=50)),
                 ('slug', models.SlugField(editable=False)),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='Horario',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('dia', models.DateField(null=True, blank=True)),
+                ('dia', models.CharField(max_length=10)),
                 ('hora_inicio', models.TimeField(null=True, blank=True)),
                 ('hora_final', models.TimeField(null=True, blank=True)),
             ],
-        ),
-        migrations.AddField(
-            model_name='cargaacademica',
-            name='docente',
-            field=models.ForeignKey(to='asistencia.Docente'),
-        ),
-        migrations.AddField(
-            model_name='cargaacademica',
-            name='horario',
-            field=models.ForeignKey(to='asistencia.Horario'),
-        ),
-        migrations.AddField(
-            model_name='asistenciadocente',
-            name='carga_academica',
-            field=models.ForeignKey(to='asistencia.CargaAcademica'),
         ),
     ]
