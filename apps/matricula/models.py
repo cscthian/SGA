@@ -45,13 +45,7 @@ class Alumno(models.Model):
 
 class Matricula(models.Model):
     TURNO_CHOICES = (
-<<<<<<< HEAD
         ('Maniana1', '7:00 am - 11:30 am'),
-        ('Maniana2', '8:30 am - 1:00 pm'),
-=======
-        ('Mañana1', '7:00 am - 11:30 am'),
-        ('Mañana2', '8:30 am - 1:00 pm'),
->>>>>>> origin/master
         ('Tarde', '1:00 pm - 5:30 pm'),
         ('Noche', '5:30 pm - 10:00 pm'),
     )
