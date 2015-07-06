@@ -17,4 +17,10 @@ urlpatterns = [
         views.AdminView.as_view(),
         name='panel_admin'
     ),
+    url(
+        r'^panel/admin/docente$',
+        views.DocenteView.as_view(),
+        name='panel_docente'
+    ),
+
 ]

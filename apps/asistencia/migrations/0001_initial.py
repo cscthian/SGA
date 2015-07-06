@@ -11,6 +11,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='AsistenciaAlumno',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('estado', models.BooleanField(default=False)),
+                ('fecha', models.DateTimeField(null=True, blank=True)),
+                ('hora_Fin', models.DateTimeField(null=True, blank=True)),
+            ],
+        ),
+        migrations.CreateModel(
             name='AsistenciaDocente',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),

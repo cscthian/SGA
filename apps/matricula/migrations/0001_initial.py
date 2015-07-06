@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
             name='Alumno',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('slug', models.SlugField(null=True, editable=False, blank=True)),
+                ('slug', models.SlugField(editable=False)),
             ],
         ),
         migrations.CreateModel(

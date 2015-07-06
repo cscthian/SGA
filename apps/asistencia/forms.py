@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django import forms
+from .models import Horario, Aula
 
 
 class DniForm(forms.Form):
@@ -17,3 +18,15 @@ class DniForm(forms.Form):
     #     if not authenticate(username=username, password=password):
     #         raise forms.ValidationError('usuario o contraseña incorrecta ..!!')
     #     return self.cleaned_data
+
+
+class HorarioForm(forms.ModelForm):
+    class meta:
+        model = Horario
+        fields = ('__all__')
+
+
+class AulaForm(forms.ModelForm):
+    class meta:
+        model = Aula
+        fields = ('__all__')

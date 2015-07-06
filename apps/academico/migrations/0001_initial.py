@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('nombre_asignatura', models.CharField(max_length=50)),
                 ('codigo', models.CharField(max_length=4)),
-                ('categoria', models.CharField(max_length=15, choices=[(b'obligatorio', b'OBLIGATORIO'), (b'opcional', b'OPCIONAL')])),
+                ('categoria', models.CharField(max_length=15, choices=[(b'obligatorio', b'obligatorio'), (b'opcional', b'opcional')])),
                 ('creditos', models.PositiveIntegerField()),
                 ('horas_teoricas', models.PositiveIntegerField(default=0)),
                 ('horas_practicas', models.PositiveIntegerField(default=0)),

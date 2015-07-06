@@ -76,8 +76,8 @@ class Modulo(models.Model):
 #creamos el modelo Asignatura
 class Asignatura(models.Model):
     Tipo_Categoria = (
-        ('obligatorio', 'OBLIGATORIO'),
-        ('opcional', 'OPCIONAL'),
+        ('obligatorio', 'obligatorio'),
+        ('opcional', 'opcional'),
     )
     nombre_asignatura = models.CharField(max_length = 50)
     codigo = models.CharField(max_length = 4)   

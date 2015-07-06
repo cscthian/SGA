@@ -2,6 +2,7 @@
 from django.db import models
 from apps.notas.models import Modulo
 from django.conf import settings
+from django.template.defaultfilters import slugify
 
 
 class Carrera(models.Model):
@@ -15,24 +16,27 @@ class Carrera(models.Model):
     def __unicode__(self):
         return str(self.nombre_carrera)
 
+
 class Programacion(models.Model):
 
     vacantes = models.PositiveIntegerField()
     inicio_labores = models.DateField()
     fin_labores = models.DateField()
-    semestre=models.CharField(max_length=20)
+    semestre = models.CharField(max_length=20)
     finalizado = models.BooleanField(default=False)
-    
-    class meta: 
-        verbose_name_plural='Programaciones'
-    
+
+    class meta:
+        verbose_name_plural = 'Programaciones'
+
     def __unicode__(self):
         return self.semestre
+
 
 class Alumno(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     carrera_profesional = models.ForeignKey(Carrera)
-    slug = models.SlugField(editable=False, null=True, blank=True)
+    tipo_descuento = models.ForeignKey('pagos.Descuento')
+    slug = models.SlugField(editable=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -41,7 +45,7 @@ class Alumno(models.Model):
 
     def __unicode__(self):
         return self.user.get_full_name()
-        
+
 
 class Matricula(models.Model):
     TURNO_CHOICES = (
@@ -56,5 +60,4 @@ class Matricula(models.Model):
     fecha_matricula = models.DateTimeField()
     periodo = models.CharField('tiempo duracion', max_length=50)
     estado_matricula = models.BooleanField(blank=False)
-    tipo_descuento = models.ForeignKey('pagos.Descuento', null=True, blank=True)
     programacion = models.ForeignKey(Programacion, null=True, blank=True)

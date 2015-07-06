@@ -29,3 +29,7 @@ def LogOut(request):
 
 class AdminView(TemplateView):
     template_name = 'users/panel/panel.html'
+
+
+class DocenteView(TemplateView):
+    template_name = 'users/docente/panel/docente_panel.html'

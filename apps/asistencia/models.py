@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.template.defaultfilters import slugify
 from django.db import models
-from apps.academico.models import Asignatura
 
 
 class Docente(models.Model):
@@ -61,12 +60,12 @@ class Aula(models.Model):
 
 class CargaAcademica(models.Model):
     docente = models.ForeignKey(Docente)
-    asignatura = models.ForeignKey(Asignatura)
+    asignatura = models.ForeignKey('notas.Asignatura')
     aula = models.ForeignKey(Aula)
     horario = models.ForeignKey(Horario)
 
     class meta:
-        verbose_name_plural = 'Carga Academica'
+        verbose_name_plural = 'Carga academica'
 
 
 class AsistenciaDocente(models.Model):
@@ -76,3 +75,15 @@ class AsistenciaDocente(models.Model):
 
     class meta:
         verbose_name_plural = 'Asistencia del docente'
+
+
+class AsistenciaAlumno(models.Model):
+    docente = models.ForeignKey(settings.AUTH_USER_MODEL)
+    matricula = models.ForeignKey('matricula.Matricula')
+    asignatura = models.ForeignKey('notas.Asignatura')
+    estado = models.BooleanField(default=False)
+    fecha = models.DateTimeField(blank=True, null=True)
+    hora_Fin = models.DateTimeField(blank=True, null=True)
+
+    class meta:
+        verbose_name_plural = 'Asistencia del alumno'
