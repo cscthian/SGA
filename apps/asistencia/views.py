@@ -3,13 +3,12 @@ from django.views.generic import TemplateView, DetailView, CreateView, UpdateVie
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 
-from apps.asistencia.models import Horario, Aula
+from .models import Horario, Aula
 
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
-from .forms import DniForm, HorarioForm, AulaForm 
-from .models import Aula
+from .forms import DniForm, HorarioForm, AulaForm
 
 
 class AsistenciaDocente(SingleObjectMixin, FormView):
@@ -50,13 +49,12 @@ class AsistenciaDocente(SingleObjectMixin, FormView):
         return context
 
 
-
 class PanelAulaView(TemplateView):
     template_name = 'aula/panel_aula.html'
 
     def get_context_data(self, **kwargs):
         context = super(PanelAulaView, self).get_context_data(**kwargs)
-        context['aulas'] = Aula.objects.all().order_by('dia')
+        context['aulas'] = Aula.objects.all().order_by('nro_aula')
         context['cantidad'] = context['aulas'].count()
         return context
 
@@ -69,20 +67,20 @@ class DetalleAula(DetailView):
 class AgregarAula(CreateView):
     form_class = AulaForm
     template_name = 'aula/agregar_aula.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('asistencia_app:panel_aula')
 
 
 class ModificarAula(UpdateView):
     model = Aula
     template_name = 'aula/modificar_aula.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('asistencia_app:panel_aula')
     form_class = AulaForm
 
 
 class EliminarAula(DeleteView):
     template_name = 'aula/eliminar_aula.html'
     model = Aula
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('asistencia_app:panel_aula')
 
 
 class PanelHorarioView(TemplateView):
@@ -90,8 +88,8 @@ class PanelHorarioView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PanelHorarioView, self).get_context_data(**kwargs)
-        context['horarios'] = Aula.objects.all().order_by('nombres')
-        context['cantidad'] = context['aulas'].count()
+        context['horarios'] = Horario.objects.all().order_by('dia')
+        context['cantidad'] = context['horarios'].count()
         return context
 
 
@@ -103,18 +101,17 @@ class DetalleHorario(DetailView):
 class AgregarHorario(CreateView):
     form_class = HorarioForm
     template_name = 'horario/agregar_horario.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('asistencia_app:panel_horario')
 
 
 class ModificarHorario(UpdateView):
     model = Horario
     template_name = 'horario/modificar_horario.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('asistencia_app:panel_horario')
     form_class = HorarioForm
 
 
 class EliminarHorario(DeleteView):
     template_name = 'horario/eliminar_horario.html'
     model = Horario
-    success_url = reverse_lazy('inicio')
-
+    success_url = reverse_lazy('asistencia_app:panel_horario')

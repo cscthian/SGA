@@ -5574,12 +5574,12 @@ small {
 
 .btn, .btn-large, .btn-flat {
   border: none;
-  border-radius: 2px;
+  border-radius: 10px;
   display: inline-block;
   height: 36px;
   line-height: 36px;
   outline: 0;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   text-transform: uppercase;
   vertical-align: middle;
   -webkit-tap-highlight-color: transparent; }
@@ -5596,7 +5596,7 @@ small {
     color: #9F9F9F; }
 
 .btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   line-height: inherit; }
 
 .btn, .btn-large {
@@ -5604,7 +5604,7 @@ small {
   color: #FFF;
   background-color: #26a69a;
   text-align: center;
-  letter-spacing: .5px;
+  letter-spacing: .4px;
   -webkit-transition: .2s ease-out;
   -moz-transition: .2s ease-out;
   -o-transition: .2s ease-out;

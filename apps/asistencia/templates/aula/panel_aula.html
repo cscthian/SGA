@@ -1,39 +1,43 @@
 {% extends "users/panel/panel.html" %}
 
 {% block contenido_panel %}
-    <div class="container container-panel">
+    <div class="container panel-container">
       <div class="row">
-        <div class="col s8">
-          <h6>Hay <span class="count-panel">5</span> docentes disponibles</h6>
+        <div class="col s6 m8">
+          <h6>Hay <span class="panel-count">{{ cantidad }}</span> aulas</h6>
         </div>
-        <div class="col s4">
-          <a class="waves-effect waves-light btn" href="#"><i class="fa fa-plus left"></i>agregar docente</a>
+        <div class="col s6 m4">
+          <a class="waves-effect waves-light btn" href="{% url 'asistencia_app:agregar_aula' %}"><i class="fa fa-plus left"></i>agregar aula</a>
         </div>
       </div>
       <div class="divider"></div>
       <div class="row">
-        <table class="bordered hoverable">
+        <table class="hoverable centered bordered responsive-table">
         <thead>
           <tr>
               <th>Numero de aula</th>
               <th>Piso</th>
-              <th>Tipo Aula</th>              
-              <th>Capcidad</th>              
+              <th>Tipo de Aula</th>
+              <th>capacidad</th>
               <th>Acciones</th>              
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>
-              <a href="#" class="btn green"><i class="fa fa-eye"></i></a>
-              <a href="#" class="btn yellow"><i class="fa fa-edit"></i></a>
-              <a href="#" class="btn red"><i class="fa fa-trash-o"></i></a>
-            </td>
-          </tr>
+
+          {% for aula in  aulas %}
+            <tr>
+              <td>{{ aula.nro_aula }}</td>
+              <td>{{ aula.piso }}</td>
+              <td>{{ aula.get_tipo_aula_display }}</td>
+              <td>{{ aula.capacidad }}</td>
+              <td>
+                <a href="{% url 'asistencia_app:detalle_aula' aula.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+                <a href="{% url 'asistencia_app:modificar_aula' aula.pk %}" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
+                <a href="{% url 'asistencia_app:eliminar_aula' aula.pk %}" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
+              </td>
+            </tr>            
+          {% endfor %}
+
         </tbody>
       </table>
       </div>

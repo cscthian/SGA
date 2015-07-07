@@ -7,8 +7,8 @@ urlpatterns = [
         views.Inicio.as_view(),
         name='inicio'
     ),
+    ############### URL ALUMNO#########################
     url(
-        ############### URL ALUMNO#########################
         r'^home_alumno/$',
         views.HomeAlumno.as_view(),
         name='home_alumno'
@@ -18,6 +18,7 @@ urlpatterns = [
         views.EliminarAlumno.as_view(),
         name='eliminar_alumno'
     ),
+
     url(
         r'^modificar_alumno/$',
         views.ModificarAlumno.as_view(),
@@ -27,10 +28,10 @@ urlpatterns = [
         r'^detalle_alumno/$',
         views.DetalleAlumno.as_view(),
         name='detalle_alumno'
-        ############### FIN ALUMNO #########################
     ),
+    ############### FIN ALUMNO ######################
+    ############### URL CARRERA #####################
     url(
-        ############### URL CARRERA #########################
         r'^home_carrera/$',
         views.HomeCarrera.as_view(),
         name='home_carrera'
@@ -54,10 +55,10 @@ urlpatterns = [
         r'^agregar_carrera/$',
         views.AgregarCarrera.as_view(),
         name='agregar_carrera'
-        ############### FIN CARRERA #########################
     ),
+    ############### FIN CARRERA #########################
+    ############### URL MATRICULA #######################
     url(
-        ############### URL MATRICULA #########################
         r'^pre_matricula/$',
         views.PreMatricula.as_view(),
         name='pre_matricula'

@@ -1,40 +1,39 @@
 {% extends "users/panel/panel.html" %}
 
 {% block contenido_panel %}
-    <div class="container container-panel">
+    <div class="container panel-container">
       <div class="row">
-        <div class="col s8">
-          <h6>Hay <span class="count-panel">5</span> horarios</h6>
+        <div class="col s6 m8">
+          <h6>Hay <span class="panel-count">5</span> horarios</h6>
         </div>
-        <div class="col s4">
-          <a class="waves-effect waves-light btn" href="#"><i class="fa fa-plus left"></i>agregar Horario</a>
+        <div class="col s6 m4">
+          <a class="waves-effect waves-light btn" href="{% url 'asistencia_app:agregar_horario' %}"><i class="fa fa-plus left"></i>agregar horario</a>
         </div>
       </div>
       <div class="divider"></div>
       <div class="row">
-        <table class="bordered hoverable">
+        <table class="hoverable centered bordered responsive-table">
         <thead>
           <tr>
               <th>Dia</th>
-              <th>Hora Inicio</th>
-              <th>Hora Fin</th>              
+              <th>Hora incio</th>
+              <th>Hora fin</th>
               <th>Acciones</th>              
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
+            <td>lunes</td>
+            <td>7 am</td>
+            <td>9 pm</td>
             <td>
-              <a href="#" class="btn green"><i class="fa fa-eye"></i></a>
-              <a href="#" class="btn yellow"><i class="fa fa-edit"></i></a>
-              <a href="#" class="btn red"><i class="fa fa-trash-o"></i></a>
+              <a href="#" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+              <a href="#" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
+              <a href="#" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
         </tbody>
       </table>
       </div>
     </div>
-    
 {% endblock contenido_panel %}

@@ -21,12 +21,12 @@ class DniForm(forms.Form):
 
 
 class HorarioForm(forms.ModelForm):
-    class meta:
+    class Meta:
         model = Horario
         fields = ('__all__')
 
 
 class AulaForm(forms.ModelForm):
-    class meta:
+    class Meta:
         model = Aula
         fields = ('__all__')

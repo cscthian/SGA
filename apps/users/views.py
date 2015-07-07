@@ -33,3 +33,7 @@ class AdminView(TemplateView):
 
 class DocenteView(TemplateView):
     template_name = 'users/docente/panel/docente_panel.html'
+
+
+class AgregarDocente(TemplateView):
+    template_name = 'users/docente/panel/agregar_docente.html'
