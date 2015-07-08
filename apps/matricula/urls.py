@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     url(
         r'^$',
-        views.Inicio.as_view(),
+        views.InicioView.as_view(),
         name='inicio'
     ),
     ############### URL ALUMNO#########################
