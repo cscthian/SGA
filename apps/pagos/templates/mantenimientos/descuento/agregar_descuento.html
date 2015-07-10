@@ -1,0 +1,73 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Descuentos</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">CRUD de Descuentos</a>
+            </div>            
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="page-header">
+            <h4>
+                <a href="http://127.0.0.1:8000/" class="btn btn-success">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
+                </a>
+                <strong> Crear Descuento</strong>
+            </h4>   
+        </div><!-- page-header -->
+        
+        <div class="row">
+            <div class="col-md-12">
+                <form role="form" method="POST" enctype="multipart/form-data">
+                    <p class="lead"><span class="glyphicon glyphicon-info-sign"></span> Ingresa los datos del alumno.</p>
+                    
+                    <div class="alert alert-danger" role="alert">
+                        Errores
+                    </div>
+
+                    <div class="form-group">
+                        <label>label</label>
+                        nombre
+                    </div>
+                    <div class="form-group">
+                        <label>label</label>
+                        apellidos
+                    </div>
+                    <div class="form-group">
+                        <label>label</label>
+                        fecha
+                        <p class="help-block">Ingresa la fecha de nacimiento. DD/MM/AA</p>
+                    </div>
+                    <div class="form-group">
+                        <label>label</label>
+                        carrera profesional
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Guardar alumno</button>
+                    </div>
+                </form>
+        
+            </div><!-- col-md-12 -->        
+        </div><!-- /row -->
+    </div><!-- /container -->
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>
