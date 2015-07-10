@@ -29,7 +29,11 @@
               <div id="logo-container">
                 <div class="row">
                   <div class="col col-profile s4">
-                    <img src="{{ user.avatar.url }}" alt="{{ user.username }}" class="circle responsive-img valign">
+                    {% if not user.avatar.url %}
+                      <img src="{% static 'img/usuario.png' %}" alt="{{ user.get_full_name }}" class="circle responsive-img valign">
+                    {% else %}
+                      <img src="{{ user.avatar.url }}" alt="{{ user.get_full_name }}" class="circle responsive-img valign">
+                    {% endif %}
                   </div>
                   <div class="col col-profile s8">
                     <ul id="profile-dropdown" class="dropdown-content">
@@ -39,8 +43,8 @@
                       <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Salir</a>
                       </li>
                     </ul>
-                    <a class="waves-effect waves-light btn-flat white-text dropdown-button profile-btn" data-activates="profile-dropdown">Henrry Sairitupac<i class="mdi-navigation-arrow-drop-down right-profile"></i></a>
-                    <p class="user-roal">Administrator</p>
+                    <a class="waves-effect waves-light btn-flat white-text dropdown-button profile-btn" data-activates="profile-dropdown">{{ user.first_name }}<i class="mdi-navigation-arrow-drop-down right-profile"></i></a>
+                    <p class="user-roal">{{ user.get_type_user_display }}</p>
                   </div>
                 </div>
               </div>

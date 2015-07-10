@@ -7,8 +7,8 @@ from .forms import *
 from .models import *
 
 
-class Inicio(TemplateView):
-    template_name = 'matricula/index.html'
+class InicioView(TemplateView):
+    template_name = 'home/index.html'
 
 
 class HomeCarrera(TemplateView):
