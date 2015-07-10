@@ -27,9 +27,9 @@
               <td>{{ descuento.tipo_descuento }}</td>
               <td>{{ descuento.porcentaje }}</td>
               <td>
-                <a href="#" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
-                <a href="#" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
-                <a href="#" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
+                <a href="{% url 'pagos_app:detalle_descuento' descuento.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+                <a href="{% url 'pagos_app:modificar_descuento' descuento.pk %}" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
+                <a href="{% url 'pagos_app:eliminar_descuento' descuento.pk %}" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
               </td>
             </tr>            
           {% endfor %}
