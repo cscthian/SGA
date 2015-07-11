@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
         ('asistencia', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('notas', '0001_initial'),
-        ('matricula', '0002_auto_20150706_1520'),
+        ('matricula', '0002_auto_20150711_0907'),
     ]
 
     operations = [

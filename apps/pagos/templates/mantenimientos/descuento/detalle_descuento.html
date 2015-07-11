@@ -1,0 +1,39 @@
+{% extends "users/panel/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+        <div class="row">
+            <div class="col s5">
+                <a class="waves-effect waves-light btn btn-back" href="{% url 'asistencia_app:panel_aula' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
+            </div>
+            <div class="col s7">
+                <h5>Descuento: {{ descuento }} detalle</h5>    
+            </div>
+        </div>
+
+        <div class="divider"></div>
+        
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <div class="card-panel">
+                    <div class="row">
+                        <ul class="collection">
+                            <li class="collection-item">
+                                <span class="title">Tipo de Descuento:</span>
+                                <p>{{ descuento.tipo_descuento }}</p>
+                            </li>
+                            <li class="collection-item">
+                                <span class="title">Porcentaje:</span>
+                                <p>{{ descuento.porcentaje }}</p>
+                            </li>                            
+                        </ul> <!-- fin de collection -->
+                    </div>
+
+                </div><!-- fin de card-panel -->
+
+            </div>
+        </div><!-- fin de row -->
+        
+    </div><!-- fin de panel-container -->
+
+{% endblock contenido_panel %}

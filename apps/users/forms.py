@@ -27,6 +27,7 @@ class LoginForm(forms.Form):
 
 
 class UserForm(forms.ModelForm):
+
     password1 = forms.CharField(
         label='contraseña',
         max_length=12,
@@ -71,8 +72,6 @@ class UserForm(forms.ModelForm):
     def clean_first_name(self):
 
         name = self.cleaned_data['first_name']
-        print '======================'
-        print name
         if not name.isalpha():
             self.add_error(
                 'first_name',
@@ -88,7 +87,6 @@ class UserForm(forms.ModelForm):
         password2 = self.cleaned_data['password2']
 
         if password1 and password2 and password1 != password2:
-            print '..........distintas contraseñas............'
             self.add_error('password2', 'las contraseñas no coinciden..!!')
         elif len(password2) < 5:
             print 'menor a 5 caracteres'
@@ -97,6 +95,4 @@ class UserForm(forms.ModelForm):
                 'la contraseña debe tener por lo menos 5 caracteres!!'
             )
         else:
-            print '***************'
-            print 'hola'
             return password2

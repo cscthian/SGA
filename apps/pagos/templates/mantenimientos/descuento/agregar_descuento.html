@@ -1,0 +1,57 @@
+{% extends "users/panel/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+        <div class="row">
+            <div class="col s5">
+                <a class="waves-effect waves-light btn btn-back" href="{% url 'pagos_app:panel_descuento' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
+            </div>
+            <div class="col s7">
+                <h5>Crear una nueva aula</h5>    
+            </div>
+        </div>
+
+
+        <div class="divider"></div>
+        {% if form.errors %}
+            <div class="card-panel red lighten-1">
+                <span class="white-text"> {{ form.errors }} </span>
+            </div>
+            <div class="divider"></div>
+        {% endif %}
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <div class="card-panel">
+                    <div class="row">
+                        <form class="col s12" method="POST">{% csrf_token %}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form.tipo_descuento }}
+                                    {{ form.tipo_descuento.label_tag }}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form.porcentaje }}
+                                    {{ form.porcentaje.label_tag }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action">guardar
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- fin de card-panel -->
+
+            </div>
+        </div><!-- fin de row -->
+        
+    </div><!-- fin de panel-container -->
+{% endblock contenido_panel %}

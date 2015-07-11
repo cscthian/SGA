@@ -15,8 +15,13 @@
                         <li><a href="#">Asignatura</a></li>
                         <li><a href="#">Carreras Profesionales</a></li>
                         <li><a href="#">Modulos</a></li>
+                        <li class="divider"></li>
                         <li><a href="{% url 'asistencia_app:panel_horario' %}">Horarios</a></li>
-                        <li><a href="{% url 'asistencia_app:panel_aula' %}">Aulas</a></li>
+                        <li><a href="{% url 'asistencia_app:panel_aula' %}">Aulas</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="{% url 'pagos_app:panel_descuento' %}">descuentos</a></li>
+                        <li><a href="{% url 'pagos_app:estructurapagos_panel' %}">estructura de pagos</a></li>
                     </ul>
                 </div>
             </li>
