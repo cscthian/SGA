@@ -108,7 +108,10 @@
     $('.modal-trigger').leanModal();
     $('.scrollspy').scrollSpy();
     $('.button-collapse').sideNav({'edge': 'left'});
-    $('.datepicker').pickadate({selectYears: 20});
+    $('.datepicker').pickadate({
+      selectYears: 20,
+      formatSubmit: 'dd/mm/yyyy',
+    });
     $('select').not('.disabled').material_select();
 
 

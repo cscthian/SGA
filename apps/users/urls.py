@@ -18,6 +18,11 @@ urlpatterns = [
         name='panel_admin'
     ),
     url(
+        r'^panel/admin/usuario/agregar/$',
+        views.AgregarAdministrador.as_view(),
+        name='panel_admin'
+    ),
+    url(
         r'^panel/admin/docente$',
         views.DocenteView.as_view(),
         name='panel_docente'

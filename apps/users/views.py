@@ -3,7 +3,10 @@ from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.contrib.auth import authenticate, login, logout
 
-from .forms import LoginForm
+from django.core.urlresolvers import reverse_lazy
+
+from .models import User
+from .forms import LoginForm, UserForm
 
 
 class LogIn(FormView):
@@ -37,3 +40,20 @@ class DocenteView(TemplateView):
 
 class AgregarDocente(TemplateView):
     template_name = 'users/docente/panel/agregar_docente.html'
+
+
+class AgregarAdministrador(FormView):
+    template_name = 'users/administrador/panel/agregar_administrador.html'
+    form_class = UserForm
+    success_url = reverse_lazy('asistencia_app:panel_aula')
+
+    def form_valid(self, form):
+        user = form.save()
+        user.type_user = '4'
+        user.set_password(form.cleaned_data['password1'])
+        user.save()
+        return super(AgregarAdministrador, self).form_valid(form)
+
+    def form_invalid(self, form):
+        print 'form eroors'
+        return super(AgregarAdministrador, self).form_invalid(form)
