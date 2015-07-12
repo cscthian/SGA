@@ -28,6 +28,33 @@ class LoginForm(forms.Form):
 
 class UserForm(forms.ModelForm):
 
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'email',
+            'first_name',
+            'last_name',
+            'avatar',
+            'address',
+            'phone',
+            'gender',
+            'date_birth',
+        )
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'validate'}),
+            'email': forms.EmailInput(attrs={'class': 'validate'}),
+            'first_name': forms.TextInput(attrs={'class': 'validate'}),
+            'last_name': forms.TextInput(attrs={'class': 'validate'}),
+            'phone': forms.TextInput(attrs={'class': 'validate'}),
+            'avatar': forms.ClearableFileInput(attrs={'class': 'validate'}),
+            'address': forms.TextInput(attrs={'class': 'validate'}),
+            'gender': forms.Select(attrs={'class': 'validate'}),
+            'date_birth': forms.DateInput(attrs={'class': 'datepicker'}),
+        }
+
+
+class RegistroUserForm(UserForm):
     password1 = forms.CharField(
         label='contraseña',
         max_length=12,
@@ -39,8 +66,7 @@ class UserForm(forms.ModelForm):
         widget=forms.PasswordInput(attrs={'class': 'validate'}),
     )
 
-    class Meta:
-        model = User
+    class Meta(UserForm.Meta):
         fields = (
             'username',
             'email',
@@ -54,35 +80,8 @@ class UserForm(forms.ModelForm):
             'password1',
             'password2',
         )
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'validate'}),
-            'email': forms.EmailInput(attrs={'class': 'validate'}),
-            'first_name': forms.TextInput(attrs={'class': 'validate'}),
-            'last_name': forms.TextInput(attrs={'class': 'validate'}),
-            'phone': forms.TextInput(attrs={'class': 'validate'}),
-            'avatar': forms.ClearableFileInput(attrs={'class': 'validate'}),
-            'address': forms.TextInput(attrs={'class': 'validate'}),
-            'gender': forms.Select(attrs={'class': 'validate'}),
-            'date_birth': forms.DateInput(attrs={'class': 'datepicker'}),
-            'password1': forms.PasswordInput(attrs={'class': 'validate'}),
-            'password2': forms.PasswordInput(attrs={'class': 'validate'}),
-
-        }
-
-    def clean_first_name(self):
-
-        name = self.cleaned_data['first_name']
-        if not name.isalpha():
-            self.add_error(
-                'first_name',
-                'el nombre solo debe contener solo letras..'
-            )
-        else:
-            print 'sali del nombre'
-            return name
 
     def clean_password2(self):
-        print '1'
         password1 = self.cleaned_data['password1']
         password2 = self.cleaned_data['password2']
 

@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse_lazy
 
 from .models import User
-from .forms import LoginForm, UserForm
+from .forms import LoginForm, RegistroUserForm
 
 
 class LogIn(FormView):
@@ -38,13 +38,9 @@ class DocenteView(TemplateView):
     template_name = 'users/docente/panel/docente_panel.html'
 
 
-class AgregarDocente(TemplateView):
-    template_name = 'users/docente/panel/agregar_docente.html'
-
-
 class AgregarAdministrador(FormView):
     template_name = 'users/administrador/panel/agregar_administrador.html'
-    form_class = UserForm
+    form_class = RegistroUserForm
     success_url = reverse_lazy('asistencia_app:panel_aula')
 
     def form_valid(self, form):

@@ -18,7 +18,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.academico',
     'apps.asistencia',
     'apps.users',
     'apps.pagos',
@@ -66,9 +65,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'DBSGA',
         'USER': 'sga',
-        'PASSWORD':'sga123',
-        'HOST':'localhost',
-        'PORT':'5432',
+        'PASSWORD': 'sga123',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

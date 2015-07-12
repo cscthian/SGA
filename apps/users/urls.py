@@ -22,14 +22,4 @@ urlpatterns = [
         views.AgregarAdministrador.as_view(),
         name='panel_admin'
     ),
-    url(
-        r'^panel/admin/docente$',
-        views.DocenteView.as_view(),
-        name='panel_docente'
-    ),
-    url(
-        r'^panel/admin/docente/add/$',
-        views.AgregarDocente.as_view(),
-        name='agregar_docente'
-    ),
 ]

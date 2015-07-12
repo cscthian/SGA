@@ -110,7 +110,7 @@
     $('.button-collapse').sideNav({'edge': 'left'});
     $('.datepicker').pickadate({
       selectYears: 20,
-      formatSubmit: 'dd/mm/yyyy',
+      formatSubmit: 'dd/mm/yyyy'
     });
     $('select').not('.disabled').material_select();
 

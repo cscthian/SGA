@@ -22,7 +22,7 @@ class Docente(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.slug = slugify(self.user.get.full_name())
+            self.slug = slugify(self.user.get_full_name())
         super(Docente, self).save(*args, **kwargs)
 
     def __unicode__(self):

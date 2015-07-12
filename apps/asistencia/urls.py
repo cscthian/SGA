@@ -43,9 +43,15 @@ urlpatterns = [
         views.PanelHorarioView.as_view(),
         name='panel_horario'
     ),
+
     url(
-        r'^panel/admin/horario/add/$',
-        views.AgregarHorario.as_view(),
-        name='agregar_horario'
+        r'^panel/admin/docente/agregar/$',
+        views.AgregarDocente.as_view(),
+        name='agregar_docente'
+    ),
+    url(
+        r'^panel/admin/docente/$',
+        views.PanelDocenteView.as_view(),
+        name='panel_docente'
     ),
 ]
