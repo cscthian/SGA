@@ -28,9 +28,37 @@ urlpatterns = [
         views.EliminarDescuento.as_view(),
         name='eliminar_descuento'
     ),
+
+
     url(
         r'^panel/admin/estructurapagos/$',
         views.EstructurapagoView.as_view(),
-        name='estructurapagos_panel'
+        name='panel_estructurapagos'
+    ),
+    url(
+        r'^panel/admin/estructurapagos/agregar/$',
+        views.AgregarEstructuraPagos.as_view(),
+        name='agregar_estructurapagos'
+    ),
+    url(
+        r'^panel/admin/estructurapagos/detalle/(?P<pk>\d+)/$',
+        views.DetalleEstructuraPagos.as_view(),
+        name='detalle_estructurapagos'
+    ),   
+    url(
+        r'^panel/admin/estructurapagos/modificar/(?P<pk>\d+)/$',
+        views.ModificarEstructuraPagos.as_view(),
+        name='modificar_estructurapagos'
+    ),
+    url(
+        r'^panel/admin/estructurapagos/eliminar/(?P<pk>\d+)/$',
+        views.EliminarEstructuraPagos.as_view(),
+        name='eliminar_estructurapagos'
+    ),
+
+    url(
+        r'^panel/admin/procesos/comprobante/$',
+        views.ComprobanteView.as_view(),
+        name='panel_Comprobante'
     ),
 ]

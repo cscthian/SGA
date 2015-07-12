@@ -1,0 +1,49 @@
+{% extends "users/panel/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+      <div class="row">
+        <div class="col s6 m8">
+          <h6>Hay <span class="panel-count">{{ cantidad }}</span> Estrucutura de pagos</h6>
+        </div>
+        <div class="col s6 m4">
+          <a class="waves-effect waves-light btn" href="{% url 'pagos_app:agregar_estructurapagos' %}"><i class="fa fa-plus left"></i>agregar estructura de pago</a>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <table class="hoverable centered bordered responsive-table">
+        <thead>
+          <tr>
+              <th>Monto Matricula</th>
+              <th>Monto Mensualidad</th>
+              <th>Fecha Liminte1</th>
+              <th>Fecha Liminte2</th>
+              <th>Fecha Liminte3</th>
+              <th>Fecha Liminte4</th>
+              <th>Acciones</th>              
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for estructurapago in  estructurapagos %}
+            <tr>
+              <td>{{ estructurapago.monto_matricula }}</td>
+              <td>{{ estructurapago.monto_mensualidad }}</td>
+              <td>{{ estructurapago.fecha_limite1 }}</td>
+              <td>{{ estructurapago.fecha_limite2 }}</td>
+              <td>{{ estructurapago.fecha_limite3 }}</td>
+              <td>{{ estructurapago.fecha_limite4 }}</td>
+              <td>
+                <a href="{% url 'pagos_app:detalle_estructurapagos' estructurapagos.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+                <a href="{% url 'pagos_app:modificar_descuento' descuento.pk %}" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
+                <a href="{% url 'pagos_app:eliminar_descuento' descuento.pk %}" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
+              </td>
+            </tr>            
+          {% endfor %}
+
+        </tbody>
+      </table>
+      </div>
+    </div>
+{% endblock contenido_panel %}

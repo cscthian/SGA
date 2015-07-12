@@ -1,1 +1,45 @@
-comprobante_panel.html
+{% extends "users/panel/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+      <div class="row">
+        <div class="col s6 m8">
+          <h6>Hay <span class="panel-count">{{ cantidad }}</span> tipos de Comprobante</h6>
+        </div>
+        <div class="col s6 m4">
+          <a class="waves-effect waves-light btn" href="{% url 'pagos_app:panel_comprobante' %}"><i class="fa fa-plus left"></i>agregar Comprobante</a>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <table class="hoverable centered bordered responsive-table">
+        <thead>
+          <tr>
+              <th>Tipo </th>
+              <th>Serie</th>
+              <th>numero</th>
+              <th>monto_subtotal</th>
+              <th>monto_igv</th>
+              <th>monto_total</th>
+              <th>Acciones</th>              
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for descuento in  descuentos %}
+            <tr>
+              <td>{{ descuento.tipo_descuento }}</td>
+              <td>{{ descuento.porcentaje }}</td>
+              <td>
+                <a href="{#}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+                <a href="{% url 'pagos_app:modificar_descuento' descuento.pk %}" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
+                <a href="{% url 'pagos_app:eliminar_descuento' descuento.pk %}" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
+              </td>
+            </tr>            
+          {% endfor %}
+
+        </tbody>
+      </table>
+      </div>
+    </div>
+{% endblock contenido_panel %}
