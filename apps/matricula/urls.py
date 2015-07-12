@@ -60,7 +60,7 @@ urlpatterns = [
     ############### URL MATRICULA #######################
     url(
         r'^pre_matricula/$',
-        views.PreMatricula.as_view(),
+        views.RegistrarPreMatricula.as_view(),
         name='pre_matricula'
     ),
     url(

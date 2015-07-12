@@ -8,9 +8,10 @@ class Modulo(models.Model):
 
     class meta:
         verbose_name_plural = 'Modulos'
+        ordering = ['nombre']
 
     def __unicode__(self):
-        return self.nombre_modulo
+        return self.nombre
 
 
 class Asignatura(models.Model):

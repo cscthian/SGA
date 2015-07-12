@@ -171,9 +171,4 @@ class AgregarDocente(FormView):
             especialidad=especialidad,
             titulo=titulo,
         )
-
-        # user = form.save()
-        # user.type_user = '4'
-        # user.set_password(form.cleaned_data['password1'])
-        # user.save()
         return super(AgregarDocente, self).form_valid(form)

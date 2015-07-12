@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse_lazy
 
+from django.utils import timezone
+import datetime
 from .forms import *
 
 from .models import *
+from apps.users.models import User
 
 
 class InicioView(TemplateView):
@@ -89,10 +93,75 @@ class HomeMatricula(TemplateView):
         return context
 
 
-class PreMatricula(CreateView):
+class RegistrarPreMatricula(FormView):
+    template_name = 'matricula/pre_matricula.html'
     form_class = PreMatriculaForm
-    template_name = 'matricula/agregar.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('asistencia_app:panel_aula')
+
+    def form_valid(self, form):
+        dni = form.cleaned_data['username']
+        nombres = form.cleaned_data['first_name']
+        apellidos = form.cleaned_data['last_name']
+        telefono = form.cleaned_data['phone']
+        email = form.cleaned_data['email']
+        sexo = form.cleaned_data['gender']
+        avatar = form.cleaned_data['avatar']
+        direccion = form.cleaned_data['address']
+        fecha_nacimineto = form.cleaned_data['date_birth']
+        tipo_user = '1'
+
+        password = form.cleaned_data['username']
+
+        user = User.objects.create_user(
+            username=dni,
+            first_name=nombres,
+            last_name=apellidos,
+            phone=telefono,
+            email=email,
+            gender=sexo,
+            avatar=avatar,
+            address=direccion,
+            date_birth=fecha_nacimineto,
+            type_user=tipo_user,
+            password=password,
+        )
+        user.save()
+
+        carrera = form.cleaned_data['carrera_profesional']
+        print carrera
+        # regitro del alumno
+        alumno = Alumno(user=user, carrera_profesional=carrera)
+        alumno.save()
+
+        print alumno
+
+        # registro de una pre-matricula
+
+        # recuperas el primer modulo de la carrera
+        modulo = Modulo.objects.filter(
+            carrera_profesional__nombre_carrera=carrera,
+            nombre='1',
+        )[0]
+        print modulo
+
+        turno = form.cleaned_data['turno']
+        fecha = '10/10/2015'
+        print fecha
+
+        # recuperamos el semstre actual
+        programacion = Programacion.objects.all()[0]
+        print programacion
+
+        pre_matricula = Matricula(
+            alumno=alumno,
+            modulo=modulo,
+            turno=turno,
+            fecha_matricula=fecha,
+            programacion=programacion,
+        )
+        pre_matricula.save()
+
+        return super(RegistrarPreMatricula, self).form_valid(form)
 
 
 class VerificarAlumno(TemplateView):
