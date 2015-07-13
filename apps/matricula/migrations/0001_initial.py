@@ -21,19 +21,21 @@ class Migration(migrations.Migration):
             name='Carrera',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('nombre_carrera', models.CharField(max_length=50, verbose_name=b'Nombre')),
-                ('siglas', models.CharField(max_length=4, verbose_name=b'Abrebiatura')),
-                ('titulo', models.CharField(max_length=50, verbose_name=b'Licenciatura')),
+                ('nombre', models.CharField(max_length=50, verbose_name=b'nombre')),
+                ('siglas', models.CharField(max_length=4, verbose_name=b'abrebiatura')),
+                ('titulo', models.CharField(max_length=50, verbose_name=b'licenciatura')),
             ],
+            options={
+                'verbose_name_plural': 'Carreras',
+            },
         ),
         migrations.CreateModel(
             name='Matricula',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('turno', models.CharField(max_length=7, choices=[(b'Maniana1', b'7:00 am - 11:30 am'), (b'Tarde', b'1:00 pm - 5:30 pm'), (b'Noche', b'5:30 pm - 10:00 pm')])),
+                ('turno', models.CharField(max_length=2, choices=[(b'm1', b'7:00 am - 11:30 am'), (b'm2', b'8:30 am - 1:00 pm'), (b't1', b'1:00 pm - 5:30 pm'), (b'n1', b'5:30 pm - 10:00 pm')])),
                 ('fecha_matricula', models.DateTimeField()),
-                ('periodo', models.CharField(max_length=50, verbose_name=b'tiempo duracion')),
-                ('estado_matricula', models.BooleanField()),
+                ('estado_matricula', models.BooleanField(default=False)),
                 ('alumno', models.ForeignKey(to='matricula.Alumno')),
             ],
         ),
@@ -47,5 +49,9 @@ class Migration(migrations.Migration):
                 ('semestre', models.CharField(max_length=20)),
                 ('finalizado', models.BooleanField(default=False)),
             ],
+            options={
+                'ordering': ['inicio_labores'],
+                'verbose_name_plural': 'Programaciones',
+            },
         ),
     ]

@@ -4,7 +4,7 @@ from django.template.defaultfilters import slugify
 
 class Modulo(models.Model):
     nombre = models.CharField('nombre', max_length=50)
-    carrera_profesional = models.ForeignKey('matricula.Carrera')
+    carrera = models.ForeignKey('matricula.Carrera')
 
     class meta:
         verbose_name_plural = 'Modulos'

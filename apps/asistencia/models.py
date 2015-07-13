@@ -43,8 +43,8 @@ class Horario(models.Model):
 
 class Aula(models.Model):
     AULA_CHOICES = (
-        ('L', 'Laboratorio'),
-        ('T', 'Teoria'),
+        ('L', 'laboratorio'),
+        ('T', 'teoria'),
     )
     nro_aula = models.CharField('numero de Aula', max_length=50)
     piso = models.CharField(max_length=50)

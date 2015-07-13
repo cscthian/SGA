@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django import forms
 from .models import *
 from apps.pagos.models import Descuento
@@ -31,10 +32,10 @@ class PreMatriculaForm(UserForm):
 
     carrera_profesional = forms.ModelChoiceField(queryset=None)
     TURNO_CHOICES = (
-        ('Maniana1', '7:00 am - 11:30 am'),
-        ('Maniana2', '8:30 am - 1:00 pm'),
-        ('Tarde', '1:00 pm - 5:30 pm'),
-        ('Noche', '5:30 pm - 10:00 pm'),
+        ('m1', '7:00 am - 11:30 am'),
+        ('m2', '8:30 am - 1:00 pm'),
+        ('t1', '1:00 pm - 5:30 pm'),
+        ('n2', '5:30 pm - 10:00 pm'),
     )
     turno  = forms.ChoiceField(label='turno', choices=TURNO_CHOICES)
 

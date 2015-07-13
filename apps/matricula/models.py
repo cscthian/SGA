@@ -6,15 +6,15 @@ from django.template.defaultfilters import slugify
 
 
 class Carrera(models.Model):
-    nombre_carrera = models.CharField('Nombre', max_length=50)
-    siglas = models.CharField('Abrebiatura', max_length=4)
-    titulo = models.CharField('Licenciatura', max_length=50)
+    nombre = models.CharField('nombre', max_length=50)
+    siglas = models.CharField('abrebiatura', max_length=4)
+    titulo = models.CharField('licenciatura', max_length=50)
 
-    class meta:
+    class Meta:
         verbose_name_plural = 'Carreras'
 
     def __unicode__(self):
-        return str(self.nombre_carrera)
+        return str(self.nombre)
 
 
 class Programacion(models.Model):
@@ -25,7 +25,7 @@ class Programacion(models.Model):
     semestre = models.CharField(max_length=20)
     finalizado = models.BooleanField(default=False)
 
-    class meta:
+    class Meta:
         verbose_name_plural = 'Programaciones'
         ordering = ['inicio_labores']
 
@@ -50,14 +50,14 @@ class Alumno(models.Model):
 
 class Matricula(models.Model):
     TURNO_CHOICES = (
-        ('Maniana1', '7:00 am - 11:30 am'),
-        ('Maniana2', '8:30 am - 1:00 pm'),
-        ('Tarde', '1:00 pm - 5:30 pm'),
-        ('Noche', '5:30 pm - 10:00 pm'),
+        ('m1', '7:00 am - 11:30 am'),
+        ('m2', '8:30 am - 1:00 pm'),
+        ('t1', '1:00 pm - 5:30 pm'),
+        ('n1', '5:30 pm - 10:00 pm'),
     )
     alumno = models.ForeignKey(Alumno)
     modulo = models.ForeignKey(Modulo)
-    turno = models.CharField(max_length=7, choices=TURNO_CHOICES)
+    turno = models.CharField(max_length=2, choices=TURNO_CHOICES)
     fecha_matricula = models.DateTimeField()
     estado_matricula = models.BooleanField(default=False)
     programacion = models.ForeignKey(Programacion)

@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('nro_aula', models.CharField(max_length=50, verbose_name=b'numero de Aula')),
                 ('piso', models.CharField(max_length=50)),
-                ('tipo_aula', models.CharField(max_length=1, choices=[(b'L', b'Laboratorio'), (b'T', b'Teoria')])),
+                ('tipo_aula', models.CharField(max_length=1, choices=[(b'L', b'laboratorio'), (b'T', b'teoria')])),
                 ('capacidad', models.PositiveIntegerField(default=0)),
             ],
         ),

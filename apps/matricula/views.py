@@ -138,14 +138,11 @@ class RegistrarPreMatricula(FormView):
         # registro de una pre-matricula
 
         # recuperas el primer modulo de la carrera
-        modulo = Modulo.objects.filter(
-            carrera_profesional__nombre_carrera=carrera,
-            nombre='1',
-        )[0]
+        modulo = Modulo.objects.filter(carrera__nombre=carrera, nombre='1')[0]
         print modulo
 
         turno = form.cleaned_data['turno']
-        fecha = '10/10/2015'
+        fecha = timezone.now()
         print fecha
 
         # recuperamos el semstre actual

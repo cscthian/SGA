@@ -143,6 +143,7 @@ class AgregarDocente(FormView):
         avatar = form.cleaned_data['avatar']
         direccion = form.cleaned_data['address']
         fecha_nacimineto = form.cleaned_data['date_birth']
+        print fecha_nacimineto
         tipo_user = '2'
         password = form.cleaned_data['password1']
 
