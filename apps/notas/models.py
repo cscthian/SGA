@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from apps.asistencia.models import Docente
 
 
 class Modulo(models.Model):
@@ -30,8 +31,20 @@ class Asignatura(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.slug = slugify(self.user.get.full_name())
+            self.slug = slugify(self.nombre)
         super(Asignatura, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.nombre
+
+
+class nota(models.Model):
+    matricula = models.ForeignKey('matricula.Matricula')
+    docente = models.ForeignKey(Docente)
+    asignatura = models.ForeignKey(Asignatura)
+    programacion = models.ForeignKey('matricula.Programacion')
+    nota1 = models.CharField('PP1', max_length=20, default='--')
+    nota2 = models.CharField('PP2', max_length=20, default='--')
+    nota3 = models.CharField('PP3', max_length=20, default='--')
+    nota4 = models.CharField('PP4', max_length=20, default='--')
+    promedio = models.DecimalField(max_digits=5, decimal_places=2)

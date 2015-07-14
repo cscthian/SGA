@@ -16,10 +16,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('concepto', models.CharField(max_length=1, choices=[(b'1', b'Matricula'), (b'2', b'Matricula Curso de Capacitacion'), (b'3', b'Subsanacion de Curso Cargo'), (b'4', b'Curso Cargo'), (b'5', b'Certificacion')])),
-                ('monto', models.DecimalField(default=0, max_digits=12, decimal_places=2)),
+                ('monto', models.DecimalField(default=0, max_digits=12, decimal_places=5)),
                 ('fecha_pago', models.DateField()),
-                ('saldo', models.DecimalField(default=0, max_digits=12, decimal_places=2)),
-                ('completado', models.BooleanField(default=False)),
                 ('matricula', models.ForeignKey(to='matricula.Matricula')),
             ],
         ),

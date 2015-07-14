@@ -36,12 +36,18 @@ class Migration(migrations.Migration):
                 ('tipo_aula', models.CharField(max_length=1, choices=[(b'L', b'laboratorio'), (b'T', b'teoria')])),
                 ('capacidad', models.PositiveIntegerField(default=0)),
             ],
+            options={
+                'verbose_name_plural': 'Aulas',
+            },
         ),
         migrations.CreateModel(
             name='CargaAcademica',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
             ],
+            options={
+                'verbose_name_plural': 'Carga academica',
+            },
         ),
         migrations.CreateModel(
             name='Docente',
@@ -61,5 +67,8 @@ class Migration(migrations.Migration):
                 ('hora_inicio', models.TimeField(null=True, blank=True)),
                 ('hora_final', models.TimeField(null=True, blank=True)),
             ],
+            options={
+                'verbose_name_plural': 'Horarios',
+            },
         ),
     ]

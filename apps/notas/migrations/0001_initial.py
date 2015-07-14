@@ -7,6 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('asistencia', '0001_initial'),
         ('matricula', '0001_initial'),
     ]
 
@@ -30,6 +31,21 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('nombre', models.CharField(max_length=50, verbose_name=b'nombre')),
                 ('carrera', models.ForeignKey(to='matricula.Carrera')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='nota',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('nota1', models.CharField(default=b'--', max_length=20, verbose_name=b'PP1')),
+                ('nota2', models.CharField(default=b'--', max_length=20, verbose_name=b'PP2')),
+                ('nota3', models.CharField(default=b'--', max_length=20, verbose_name=b'PP3')),
+                ('nota4', models.CharField(default=b'--', max_length=20, verbose_name=b'PP4')),
+                ('promedio', models.DecimalField(max_digits=5, decimal_places=2)),
+                ('asignatura', models.ForeignKey(to='notas.Asignatura')),
+                ('docente', models.ForeignKey(to='asistencia.Docente')),
+                ('matricula', models.ForeignKey(to='matricula.Matricula')),
+                ('programacion', models.ForeignKey(to='matricula.Programacion')),
             ],
         ),
         migrations.AddField(

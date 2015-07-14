@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.template.defaultfilters import slugify
 from django.db import models
+from datetime import date
 
 
 class Docente(models.Model):
@@ -34,7 +35,7 @@ class Horario(models.Model):
     hora_inicio = models.TimeField(blank=True, null=True)
     hora_final = models.TimeField(blank=True, null=True)
 
-    class meta:
+    class Meta:
         verbose_name_plural = 'Horarios'
 
     def __unicode__(self):
@@ -51,11 +52,22 @@ class Aula(models.Model):
     tipo_aula = models.CharField(max_length=1, choices=AULA_CHOICES)
     capacidad = models.PositiveIntegerField(default=0)
 
-    class meta:
+    class Meta:
         verbose_name_plural = 'Aulas'
 
     def __unicode__(self):
         return self.nro_aula
+
+
+class ManagerCargaAcademica(models.Manager):
+
+    def asignatura_docente(self, docente):
+        hoy = date.today()
+        return self.filter(
+            programacion__inicio__lte=hoy,
+            programacion__fin__gte=hoy,
+            docente__user__username=docente,
+        )
 
 
 class CargaAcademica(models.Model):
@@ -63,9 +75,15 @@ class CargaAcademica(models.Model):
     asignatura = models.ForeignKey('notas.Asignatura')
     aula = models.ForeignKey(Aula)
     horario = models.ForeignKey(Horario)
+    programacion = models.ForeignKey('matricula.Programacion')
 
-    class meta:
+    objects = ManagerCargaAcademica()
+
+    class Meta:
         verbose_name_plural = 'Carga academica'
+
+    def __unicode__(self):
+        return "%s %s " % (str(self.docente), str(self.asignatura))
 
 
 class AsistenciaDocente(models.Model):
@@ -78,7 +96,7 @@ class AsistenciaDocente(models.Model):
 
 
 class AsistenciaAlumno(models.Model):
-    docente = models.ForeignKey(settings.AUTH_USER_MODEL)
+    docente = models.ForeignKey(Docente)
     matricula = models.ForeignKey('matricula.Matricula')
     asignatura = models.ForeignKey('notas.Asignatura')
     estado = models.BooleanField(default=False)

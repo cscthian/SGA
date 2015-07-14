@@ -1,0 +1,25 @@
+{% extends "users/panel/base_panel.html" %}
+
+{% block title %}panel de registro de notas y asistencia{% endblock title %}
+
+  {% block titulo_nav %} Panel de docente{% endblock titulo_nav %}
+
+    {% block funciones %}
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            
+            {% for carga in ASIGNATURAS %}
+                <li class="bold"><a class="collapsible-header  waves-effect waves-teal">{{ carga.asignatura }}</a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="#">notas</a></li>
+                            <li><a href="#">asistencia</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
+                </li>
+            {% endfor %}
+            
+        </ul>
+    </li>
+    {% endblock funciones %}

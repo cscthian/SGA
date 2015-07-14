@@ -2,9 +2,9 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    # url(
-    #     r'^usuario/login/$',
-    #     views.LogIn.as_view(),
-    #     name='login'
-    # ),
+    url(
+        r'^panel/docente/$',
+        views.PanelDocenteView.as_view(),
+        name='panel_docente'
+    ),
 ]
