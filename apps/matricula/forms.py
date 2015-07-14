@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django import forms
 from .models import *
-from apps.pagos.models import Descuento
 from apps.users.forms import UserForm
 
 #creamos el form alumno
@@ -37,7 +36,7 @@ class PreMatriculaForm(UserForm):
         ('t1', '1:00 pm - 5:30 pm'),
         ('n2', '5:30 pm - 10:00 pm'),
     )
-    turno  = forms.ChoiceField(label='turno', choices=TURNO_CHOICES)
+    turno = forms.ChoiceField(label='turno', choices=TURNO_CHOICES)
 
     class Meta(UserForm.Meta):
         # campos q se van a mostar en el formulario pre_matricula

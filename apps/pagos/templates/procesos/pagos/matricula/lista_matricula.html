@@ -1,0 +1,58 @@
+{% extends "panel_caja/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+      <div class="row">
+        <div class="col s6 m8">
+          <h6>Hay <span class="panel-count">{{ cantidad }}</span> aulas</h6>
+        </div>
+        <div class="col s6 m4">
+          <!-- <a class="waves-effect waves-light btn" href="{% url 'asistencia_app:agregar_aula' %}"><i class="fa fa-plus left"></i>agregar aula</a> -->
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <table class="hoverable centered bordered responsive-table">
+        <thead>
+          <tr>
+              <th>Nombres</th>
+              <th>otros</th>
+              <th>otros</th>
+              <th>otros</th>
+              <th>otros</th>              
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for matricula in  object_list %}
+            <tr>
+              <td>{{ matricula.alumno }}</td>
+              <td>otros</td>
+              <td>otros</td>
+              <td>otros</td>
+              <td>
+                <a href="{% url 'pagos_app:pago_matricula' matricula.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>                
+              </td>
+            </tr>            
+          {% endfor %}
+          
+          <div class="pagination"> 
+            <span class="step­links"> 
+              {% if page_obj.has_previous %} 
+                <a href="?page={{ page_obj.previous_page_number }}">anterior</a> 
+              {% endif %} 
+              <span class="current"> 
+                  Pagina {{ page_obj.number }} de {{ paginator.num_pages }}. 
+              </span> 
+              {% if page_obj.has_next %} 
+                <a href="?page={{ page_obj.next_page_number }}">siguiente</a> 
+              {% endif %} 
+            </span> 
+          </div> 
+
+          
+        </tbody>
+      </table>
+      </div>
+    </div>
+{% endblock contenido_panel %}

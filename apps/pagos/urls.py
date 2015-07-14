@@ -29,7 +29,6 @@ urlpatterns = [
         name='eliminar_descuento'
     ),
 
-
     url(
         r'^panel/admin/estructurapagos/$',
         views.EstructurapagoView.as_view(),
@@ -61,5 +60,16 @@ urlpatterns = [
         r'^panel/caja/$',
         views.PanelCajaView.as_view(),
         name='panel_caja'
+    ),
+
+    url(
+        r'^panel/caja/pago/matricula/$',
+        views.MatriculaPendiente.as_view(),
+        name='matricula_pendiente'
+    ),
+    url(
+        r'^panel/caja/pago/matricula/(?P<pk>\d+)/$',
+        views.RegistrarPago.as_view(),
+        name='pago_matricula'
     ),
 ]

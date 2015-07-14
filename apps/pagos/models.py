@@ -41,7 +41,7 @@ class Aportacion(models.Model):
         ('5', 'Certificacion'),
     )
     concepto = models.CharField(max_length=1,choices=CONCEPTO_CHOICES)
-    monto = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    monto = models.DecimalField(max_digits=12, decimal_places=5, default=0)
     fecha_pago = models.DateField()    
     matricula = models.ForeignKey(Matricula)
 

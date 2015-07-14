@@ -4,6 +4,8 @@ from apps.notas.models import Modulo
 from django.conf import settings
 from django.template.defaultfilters import slugify
 
+from datetime import date
+
 
 class Carrera(models.Model):
     nombre = models.CharField('nombre', max_length=50)
@@ -52,8 +54,13 @@ class Alumno(models.Model):
 
 class ManagerMatricula(models.Manager):
 
-    def pre_matricula(self):
-        return self.filter(estado_matricula=False, )
+    def matricula_pendiente(self):
+        hoy = date.today()
+        return self.filter(
+            programacion__inicio__lte=hoy,
+            programacion__fin__gte=hoy,
+            completado=False,
+        )
 
 
 class Matricula(models.Model):
