@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 
-from .forms import DescuentoForm, EstructuraPagosForm, ComprobanteForm
+from .forms import DescuentoForm, EstructuraPagosForm
 from .models import Descuento, Estructura_Pago, Comprobante
 
 
@@ -40,7 +40,6 @@ class EliminarDescuento(DeleteView):
     success_url = reverse_lazy('pagos_app:panel_descuento')
 
 
-
 class EstructurapagoView(TemplateView):
     template_name = 'mantenimientos/estructurapagos/panel_estructurapagos.html'
 
@@ -49,7 +48,8 @@ class EstructurapagoView(TemplateView):
         context['EstructuraPagos'] = Estructura_Pago.objects.all()
         context['cantidad'] = context['EstructuraPagos'].count()
         return context
-    
+
+
 class DetalleEstructuraPagos(DetailView):
     template_name = 'mantenimientos/estructurapagos/detalle_estructurapagos.html'
     model = Estructura_Pago
@@ -74,11 +74,5 @@ class EliminarEstructuraPagos(DeleteView):
     success_url = reverse_lazy('pagos_app:panel_estructurapagos')
 
 
-class ComprobanteView(TemplateView):
-    template_name = 'procesos/panel_comprobante.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ComprobanteView, self).get_context_data(**kwargs)
-        context['Comprobante'] = Comprobante.objects.all()
-        context['cantidad'] = context['Comprobante'].count()
-        return context
+class PanelCajaView(TemplateView):
+    template_name = 'panel_caja/panel.html'

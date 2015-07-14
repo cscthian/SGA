@@ -1,0 +1,25 @@
+{% extends "users/panel/base_panel.html" %}
+
+{% block title %}panel de pagos de servicios{% endblock title %}
+
+  {% block titulo_nav %} Panel de caja{% endblock titulo_nav %}
+
+    {% block funciones %}
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Pagos</a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{% url 'pagos_app:lista_matricula' %}">matricula</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">sugsanación</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">curso libre</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </div>
+            </li>
+            
+        </ul>
+    </li>
+    {% endblock funciones %}

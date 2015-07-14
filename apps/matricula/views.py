@@ -128,26 +128,20 @@ class RegistrarPreMatricula(FormView):
         user.save()
 
         carrera = form.cleaned_data['carrera_profesional']
-        print carrera
-        # regitro del alumno
+
+        # ---regitro del alumno
         alumno = Alumno(user=user, carrera_profesional=carrera)
         alumno.save()
 
-        print alumno
-
-        # registro de una pre-matricula
+        # ---registro de una pre-matricula
 
         # recuperas el primer modulo de la carrera
         modulo = Modulo.objects.filter(carrera__nombre=carrera, nombre='1')[0]
-        print modulo
-
         turno = form.cleaned_data['turno']
         fecha = timezone.now()
-        print fecha
 
         # recuperamos el semstre actual
         programacion = Programacion.objects.all()[0]
-        print programacion
 
         pre_matricula = Matricula(
             alumno=alumno,

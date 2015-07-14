@@ -20,14 +20,14 @@ class Carrera(models.Model):
 class Programacion(models.Model):
 
     vacantes = models.PositiveIntegerField()
-    inicio_labores = models.DateField()
-    fin_labores = models.DateField()
+    inicio = models.DateField()
+    fin = models.DateField()
     semestre = models.CharField(max_length=20)
     finalizado = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = 'Programaciones'
-        ordering = ['inicio_labores']
+        ordering = ['inicio']
 
     def __unicode__(self):
         return self.semestre
@@ -36,7 +36,9 @@ class Programacion(models.Model):
 class Alumno(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     carrera_profesional = models.ForeignKey(Carrera)
-    tipo_descuento = models.ForeignKey('pagos.Descuento', blank=True, null=True)
+    tipo_descuento = models.ForeignKey(
+        'pagos.Descuento', blank=True, null=True
+    )
     slug = models.SlugField(editable=False)
 
     def save(self, *args, **kwargs):
@@ -48,6 +50,12 @@ class Alumno(models.Model):
         return self.user.get_full_name()
 
 
+class ManagerMatricula(models.Manager):
+
+    def pre_matricula(self):
+        return self.filter(estado_matricula=False, )
+
+
 class Matricula(models.Model):
     TURNO_CHOICES = (
         ('m1', '7:00 am - 11:30 am'),
@@ -55,9 +63,17 @@ class Matricula(models.Model):
         ('t1', '1:00 pm - 5:30 pm'),
         ('n1', '5:30 pm - 10:00 pm'),
     )
+
     alumno = models.ForeignKey(Alumno)
     modulo = models.ForeignKey(Modulo)
     turno = models.CharField(max_length=2, choices=TURNO_CHOICES)
     fecha_matricula = models.DateTimeField()
     estado_matricula = models.BooleanField(default=False)
+    saldo = models.DecimalField(max_digits=12, decimal_places=2, default=600)
+    completado = models.BooleanField(default=False)
     programacion = models.ForeignKey(Programacion)
+
+    objects = ManagerMatricula()
+
+    def __unicode__(self):
+        return str(self.alumno)

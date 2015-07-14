@@ -42,9 +42,7 @@ class Aportacion(models.Model):
     )
     concepto = models.CharField(max_length=1,choices=CONCEPTO_CHOICES)
     monto = models.DecimalField(max_digits=12, decimal_places=2, default=0)
-    fecha_pago = models.DateField()
-    saldo = models.DecimalField(max_digits=12, decimal_places=2, default=0)
-    completado = models.BooleanField(default=False)
+    fecha_pago = models.DateField()    
     matricula = models.ForeignKey(Matricula)
 
     class meta: 
