@@ -30,7 +30,7 @@ class ComprobanteForm(forms.ModelForm):
 
 
 class PagoForm(forms.ModelForm):
-    monto = forms.DecimalField(max_digits=4, decimal_places=2, required=True)
+    monto = forms.DecimalField(max_digits=10, decimal_places=5, required=True)
     descuento = forms.ModelChoiceField(queryset=None)
 
     class Meta:

@@ -1,79 +1,71 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <ul class="nav nav-pills">
-        <li class="active"><a href="{% url 'home' %}">Inicio</a></li>
-        <li><a href="{% url 'listarAsignatura' %}">Asignatura</a></li>
-        <li><a href="{% url 'listarAlumno' %}">Alumnos</a></li>
-        <li><a href="{% url 'listarCarrera' %}">Carreras profesionales</a></li>
-        <li><a href="{% url 'listarModulo' %}">Modulo</a></li>
-        <li><a href="{% url 'listarDocente' %}">Docente</a></li>
-        <li><a href="{% url 'listarModulo' %}">Aulas</a></li>
-    </ul>
-    <meta charset="UTF-8">
-    <title>modifcar Alumnos</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-</head>
-<body>
-    <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">CRUD de Alummnos</a>
-            </div>            
-        </div>
-    </div>
+{% extends "users/panel/panel.html" %}
 
-    <div class="container">
-
-        <div class="page-header">
-            <h4>
-                <a href="{% url 'home' %}" class="btn btn-success">
-                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
-                </a>
-                <strong> Modifar datos de {{ alumno }}</strong>
-            </h4>
-        </div><!-- page-header -->
-        
+{% block contenido_panel %}
+    <div class="container panel-container">
         <div class="row">
-            <div class="col-md-12">
-                <form role="form" action="{% url 'modificar' alumno.pk %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
-                    <p class="lead"><span class="glyphicon glyphicon-info-sign"></span> Ingresa los datos del alumno.</p>
-                    
-                    {% if form.errors %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ form.errors }}
-                        </div>                        
-                    {% endif %}
+            <div class="col s5">
+                <a class="waves-effect waves-light btn btn-back" href="{% url 'asistencia_app:panel_aula' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
+            </div>
+            <div class="col s7">
+                <h5>Modificando: aula {{ aula }}</h5>    
+            </div>
+        </div>
 
-                    <div class="form-group">
-                        <label>{{ form.nombre_carrera.label_tag }}</label>
-                        {{ form.nombre_carrera }}
+
+        <div class="divider"></div>
+        {% if form.errors %}
+            <div class="card-panel red lighten-1">
+                <span class="white-text"> {{ form.errors }} </span>
+            </div>
+            <div class="divider"></div>
+        {% endif %}
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <div class="card-panel">
+                    <div class="row">
+                        <form class="col s12" action="{% url 'asistencia_app:modificar_aula' aula.pk %}" method="POST">{% csrf_token %}
+                            
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form.nro_aula }}
+                                    {{ form.nro_aula.label_tag }}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form.piso }}
+                                    {{ form.piso.label_tag }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form.tipo_aula }}
+                                    {{ form.tipo_aula.label_tag }}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form.capacidad }}
+                                    {{ form.capacidad.label_tag }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                      <button class="btn cyan waves-effect waves-light right" type="submit" name="action">actualizar
+                                        <i class="mdi-content-send right"></i>
+                                      </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label>{{ form.siglas.label_tag }}</label>
-                        {{ form.siglas }}
-                    </div>
-                    <div class="form-group">
-                        <label>{{ form.titulo.label_tag }}</label>
-                        {{ form.titulo }}
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Guardar alumno</button>
-                    </div>
-                </form>
+                </div><!-- fin de card-panel -->
+
+            </div>
+        </div><!-- fin de row -->
         
-            </div><!-- col-md-12 -->        
-        </div><!-- /row -->
-    </div><!-- /container -->
-
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="{% static 'js/bootstrap.js' %}"></script>
-</body>
-</html>
+    </div><!-- fin de panel-container -->
+{% endblock contenido_panel %}

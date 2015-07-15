@@ -1,75 +1,49 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Crear Alumnos</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-</head>
-<body>
-    <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">CRUD de Alummnos</a>
-            </div>            
+{% extends "users/panel/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+        <div class="row">
+            <div class="col s5">
+                <a class="waves-effect waves-light btn btn-back" href="{% url 'asistencia_app:panel_aula' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
+            </div>
+            <div class="col s7">
+                <h5>Alumno: {{ alumno }} detalle</h5>    
+            </div>
         </div>
-    </div>
 
-    <div class="container">
-
-        <div class="page-header">
-            <h4>
-                <a href="{% url 'listarCarrera' %}" class="btn btn-success">
-                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
-                </a>
-                <strong>Alumno: {{ alumno }}</strong>
-            </h4>
-        </div><!-- page-header -->
+        <div class="divider"></div>
         
         <div class="row">
-            <div class="col-md-9">
+            <div class="col s12 m6 l6">
+                <div class="card-panel">
+                    <div class="row">
+                        <ul class="collection">
+                            <li class="collection-item">
+                                <span class="title">first_name:</span>
+                                <p>{{ alumno.nombres }}</p>
+                            </li>
+                            <li class="collection-item">
+                                <span class="title">last_name:</span>
+                                <p>{{ alumno.apellidos }}</p>
+                            </li>
+                            <li class="collection-item">
+                                <span class="title">  email:</span>
+                                <p>{{ aula.get_tipo_aula_display }}</p>
+                            </li>
+                            <li class="collection-item">
+                                <span class="title">
+                                    address:</span>
+                                <p>{{ aula.capacidad }}</p>
+                            </li>
 
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <th>DNI</th>
-                            <td>{{ alumno.users.first_name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Apellidos</th>
-                            <td>{{ alumno.users.last_name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Fecha Nacimiento</th>
-                            <td>{{ alumno.date_birth }}</td>
-                        </tr>
-                        <tr>
-                            <th>Carrera Profesional</th>
-                            <td>{{ alumno.tipo_alumno }}</td>
-                        </tr>
-                        <tr>
-                            <th>Carrera Profesional</th>
-                            <td>{{ alumno.carrera_profesional }}</td>
-                        </tr>
-                        <tr>
-                            <th>email</th>
-                            <td>{{ alumno.email }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                        </ul> <!-- fin de collection -->
+                    </div>
 
-            </div><!-- col-md-12 -->
+                </div><!-- fin de card-panel -->
 
-        </div><!-- /row -->
-    </div><!-- /container -->
+            </div>
+        </div><!-- fin de row -->
+        
+    </div><!-- fin de panel-container -->
 
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="{% static 'js/bootstrap.js' %}"></script>
-</body>
-</html>
+{% endblock contenido_panel %}

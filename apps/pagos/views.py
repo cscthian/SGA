@@ -4,7 +4,7 @@ from django.views.generic.edit import FormMixin
 from django.core.urlresolvers import reverse_lazy
 
 from .forms import DescuentoForm, EstructuraPagosForm, PagoForm
-from .models import Descuento, Estructura_Pago
+from .models import Descuento, Estructura_Pago, Aportacion, Comprobante
 
 from apps.matricula.models import Matricula
 
@@ -125,6 +125,7 @@ class RegistrarPago(FormMixin, DetailView):
 
     def form_valid(self, form):
         
+        #datos para la tabla aportacion
         concepto = '1'
         monto = form.cleaned_data['monto']        
         fecha = timezone.now()
@@ -136,29 +137,33 @@ class RegistrarPago(FormMixin, DetailView):
             fecha_pago=fecha,
             matricula=matricula
         )
-
+        aportacion.save()
+        print '=============================================='
+        print aportacion
+        #datos que se actualizaran en matricula
+        matricula.saldo = matricula.saldo - monto
+        if matricula.saldo == 0:
+            matricula.completado = True
+        #actualizamos la tabla matricula
+        matricula.save()
+        #datos para la tabla comprombante
         tipo = form.cleaned_data['tipo']
         serie = form.cleaned_data['serie']
         numero = form.cleaned_data['numero']
 
         descuento =form.cleaned_data['descuento']
-        monto_descuento = monto*descuento.porcentaje/100.0
+        #convertimos el descuento en su porcntaje
+        monto_descuento = monto*(descuento.porcentaje/100)
         sub_total = monto - monto_descuento
 
         comprabante = Comprobante(
             tipo=tipo,
             serie=serie,
             numero=numero,
-            
+            monto_subtotal = monto,
+            monto_igv=0,
+            monto_total=sub_total,
         )
-
-
-
-
-        print monto
-        print fecha
-        print matricula
-        print porcentaje
-        print monto_descuento
-        print sub_total
-        return super(RegistrarPago, self).form_valid(form)
+        comprabante.save()
+        print '=============================================='
+        print comprabante

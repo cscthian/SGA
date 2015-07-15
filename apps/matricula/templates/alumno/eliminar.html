@@ -1,52 +1,33 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>eliminar Alumnos</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-</head>
-<body>
-    <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">CRUD de Alumnos</a>
-            </div>            
-        </div>
-    </div>
+{% extends "users/panel/panel.html" %}
 
-    <div class="container">
-
-        <div class="page-header">
-            <h4>
-                <strong>Eliminando: {{ alumno }}</strong>
-            </h4>
-        </div><!-- page-header -->
-
+{% block contenido_panel %}
+    <div class="container panel-container">
         <div class="row">
-            
-            <div class="col-md-12">
+            <div class="col s12">
+                <h5>Eliminando: aula {{ aula }}</h5>    
+            </div>
+        </div>
 
-                <form role="form" action="http://127.0.0.1:8000/eliminar_alumno/" method="POST">{% csrf_token %}
-                    <p class="">¿Desea eliminar el alumno "nombre evento"?</p>
+        <div class="divider"></div>
+        
+        <div class="row">
+            <div class="col s12 m6 offset-m3">
+                <div class="card-panel grey lighten-5 z-depth-1">
+                    <div class="row valign-wrapper">
+                        <form action="{% url 'asistencia_app:eliminar_aula' aula.pk %}" method="POST">{% csrf_token %}
+                            <div class="col s12">
+                                <h6 class="center-align">¿Desea eliminar el aula "{{ aula }}"?</h6>
+                            </div>
+                            <div class="col s12 center">
+                                <button class="waves-effect waves-light btn btn-panel red" type="submit" name="action">si</button>
+                                <a href="{% url 'asistencia_app:panel_aula' %}" class="waves-effect waves-light btn panel-btn white black-text">no</a>
+                            </div>
+                        </form>                        
+                    </div>
+                </div><!-- fin de card-panel -->
 
-                    <input type="submit" value="Sí" class="btn btn-danger"> 
-                    <a href="http://127.0.0.1:8000/eliminar_alumno/" class="btn btn-default">No</a>
-                </form>
-
-            </div><!-- col-md-12 -->
-
-        </div><!-- /row -->
-
-    </div><!-- /container -->
-
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="{% static 'js/bootstrap.js' %}"></script>
-</body>
-</html>
+            </div>
+        </div><!-- fin de row -->
+        
+    </div><!-- fin de panel-container -->
+{% endblock contenido_panel %}
