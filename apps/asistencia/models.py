@@ -4,6 +4,11 @@ from django.db import models
 from datetime import date
 
 
+class ManagerDocente(models.Manager):
+    pass
+
+
+
 class Docente(models.Model):
     TIPO_CHOICES = (
         ('contratado', 'contratado'),
@@ -31,15 +36,25 @@ class Docente(models.Model):
 
 
 class Horario(models.Model):
-    dia = models.CharField(max_length=10)
+    DIA_CHOICES = (
+        ('lunes', 'lunes'),
+        ('martes', 'martes'),
+        ('miercoles', 'miercoles'),
+        ('jueves', 'jueves'),
+        ('viernes', 'viernes'),
+        ('sabado', 'sabado'),
+    )
+    dia = models.CharField(max_length=10, choices=DIA_CHOICES)
     hora_inicio = models.TimeField(blank=True, null=True)
     hora_final = models.TimeField(blank=True, null=True)
 
     class Meta:
+        ordering = ['dia', 'hora_inicio']
         verbose_name_plural = 'Horarios'
+        unique_together = (('dia', 'hora_inicio', 'hora_final'),)
 
     def __unicode__(self):
-        return str(self.dia)
+        return "%s: %s - %s" % (self.dia, str(self.hora_inicio), str(self.hora_final))
 
 
 class Aula(models.Model):
@@ -74,7 +89,7 @@ class CargaAcademica(models.Model):
     docente = models.ForeignKey(Docente)
     asignatura = models.ForeignKey('notas.Asignatura')
     aula = models.ForeignKey(Aula)
-    horario = models.ForeignKey(Horario)
+    horario = models.ManyToManyField(Horario)
     programacion = models.ForeignKey('matricula.Programacion')
 
     objects = ManagerCargaAcademica()
@@ -87,11 +102,13 @@ class CargaAcademica(models.Model):
 
 
 class AsistenciaDocente(models.Model):
-    carga_academica = models.ForeignKey(CargaAcademica)
+    docente = models.ForeignKey(Docente)
+    asignatura = models.ForeignKey('notas.Asignatura')
+    programacion = models.ForeignKey('matricula.Programacion')
     hora_Inicio = models.DateTimeField(blank=True, null=True)
     hora_Fin = models.DateTimeField(blank=True, null=True)
 
-    class meta:
+    class Meta:
         verbose_name_plural = 'Asistencia del docente'
 
 
@@ -101,7 +118,6 @@ class AsistenciaAlumno(models.Model):
     asignatura = models.ForeignKey('notas.Asignatura')
     estado = models.BooleanField(default=False)
     fecha = models.DateTimeField(blank=True, null=True)
-    hora_Fin = models.DateTimeField(blank=True, null=True)
 
-    class meta:
+    class Meta:
         verbose_name_plural = 'Asistencia del alumno'

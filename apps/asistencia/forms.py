@@ -7,11 +7,16 @@ from apps.users.forms import RegistroUserForm
 
 class DniForm(forms.Form):
     dni = forms.CharField(
-        label='ingrese el dni',
+        label='ingrese su dni',
         max_length='8',
         widget=forms.TextInput(attrs={'class': 'validate'}),
     )
 
+    def clean_dni(self):
+        dni = self.cleaned_data['dni']
+        if not dni.digit():
+            msj = 'no dni no peude contener caracteres'
+            self.add_error('dni', msj)
     # def clean(self):
     #     cleaned_data = super(LoginForm, self).clean()
     #     username = cleaned_data.get('username')
