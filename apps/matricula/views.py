@@ -14,6 +14,7 @@ from apps.users.models import User
 class InicioView(TemplateView):
     template_name = 'home/index.html'
 
+"""MANTENIMIENTOS DE LA TABLA CARRERA"""
 
 class HomeCarrera(TemplateView):
     '''clase que devolvera la lista de carreras profesionales'''
@@ -21,15 +22,15 @@ class HomeCarrera(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomeCarrera, self).get_context_data(**kwargs)
-        context['carrera'] = Carrera.objects.all().order_by('siglas')
-        context['cantidad'] = context['carrera'].count()
+        context['carreras'] = Carrera.objects.all().order_by('siglas')
+        context['cantidad'] = context['carreras'].count()
         return context
 
 
 class AgregarCarrera(CreateView):
     form_class = CarreraForm
     template_name = 'carrera/agregar.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('matricula_app:home_carrera')
 
 
 class DetalleCarrera(DetailView):
@@ -40,15 +41,18 @@ class DetalleCarrera(DetailView):
 class ModificarCarrera(UpdateView):
     model = Carrera
     template_name = 'carrera/modificar.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('matricula_app:home_carrera')
     form_class = CarreraForm
 
 
 class EliminarCarrera(DeleteView):
     template_name = 'carrera/eliminar.html'
     model = Carrera
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('matricula_app:home_carrera')
 
+
+
+"""MATENIMIENTOS DE LA TABLA ALUMNO"""
 
 class HomeAlumno(TemplateView):
     '''clase que devolvera la lista de alumnos'''
@@ -78,6 +82,44 @@ class EliminarAlumno(DeleteView):
     model = Alumno
     success_url = reverse_lazy('inicio')
 
+
+
+"""MANTENIMEITOS Y PROCESOS DE LA TABLA PROGRAMACION"""
+
+class HomeProgramacion(TemplateView):
+    template_name = 'Programacion/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeProgramacion, self).get_context_data(**kwargs)
+        context['programaciones'] = Programacion.objects.all().order_by('semestre')
+        context['cantidad'] = context['programaciones'].count()
+        return context
+
+
+class AgregarProgramacion(CreateView):
+    form_class = ProgramacionForm
+    template_name = 'Programacion/agregar.html'
+    success_url = reverse_lazy('matricula_app:home_programacion')
+
+
+class DetalleProgramacion(DetailView):
+    template_name = 'Programacion/detalle.html'
+    model = Programacion
+
+
+class ModificarProgramacion(UpdateView):
+    model = Programacion
+    template_name = 'Programacion/modificar.html'
+    success_url = reverse_lazy('matricula_app:home_programacion')
+    form_class = CarreraForm
+
+
+class EliminarProgramacion(DeleteView):
+    template_name = 'Programacion/eliminar.html'
+    model = Carrera
+    success_url = reverse_lazy('matricula_app:home_programacion')
+""" FIN DE TABLA PROGRAMACION"""
+
 ################### FIN VISTAS MANTENIMIENTO ALUMNOS ##################
 ######################## VISTAS PARA MATRICULA ########################
 
@@ -88,15 +130,15 @@ class HomeMatricula(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomeMatricula, self).get_context_data(**kwargs)
-        context['matriculados'] = Matricula.objects.all().order_by('modulo')
-        context['cantidad'] = context['matriculados'].count()
+        context['matriculas'] = Matricula.objects.all().order_by('modulo')
+        context['cantidad'] = context['matriculas'].count()
         return context
 
 
 class RegistrarPreMatricula(FormView):
     template_name = 'matricula/pre_matricula.html'
     form_class = PreMatriculaForm
-    success_url = reverse_lazy('asistencia_app:panel_aula')
+    success_url = reverse_lazy('matricula_app:lista_matriculados')
 
     def form_valid(self, form):
         dni = form.cleaned_data['username']
@@ -137,6 +179,8 @@ class RegistrarPreMatricula(FormView):
 
         # recuperas el primer modulo de la carrera
         modulo = Modulo.objects.filter(carrera__nombre=carrera, nombre='1')[0]
+        print '=============================================================='
+        print modulo.pk
         turno = form.cleaned_data['turno']
         fecha = timezone.now()
 
@@ -155,19 +199,18 @@ class RegistrarPreMatricula(FormView):
         return super(RegistrarPreMatricula, self).form_valid(form)
 
 
-class VerificarAlumno(TemplateView):
-    template_name = 'matricula/verificar_alumno.html'
+class MatricularAlumno(TemplateView):
+    template_name = 'matricula/matricular_alumno.html'
 
     def post(self, request, *args, **kwargs):
-        dni = request.POST.get('dni')
+        dni = request.POST.get('username')
         try:
-            alumno = Alumno.objects.get(dni=dni)
-        except Alumno.DoesNotExist:
-            return render(request, 'pre_matricula')
-        print alumno
-        return render(request, 'inicio')
+            user = User.objects.get(username=dni)
+        except User.DoesNotExist:
+            return render(request,'matricula_app:pre_matricula')
+        return render(request,'pagos_app:pago_matricula')
 
     def get_context_data(self, **kwargs):
-        context = super(VerificarAlumno, self).get_context_data(**kwargs)
+        context = super(MatricularAlumno, self).get_context_data(**kwargs)
         context['form'] = DniForm
         return context

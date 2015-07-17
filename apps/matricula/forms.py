@@ -17,6 +17,14 @@ class CarreraForm(forms.ModelForm):
         model = Carrera
         fields = ("__all__")
 
+class ProgramacionForm(forms.ModelForm):
+    class Meta:
+        model = Programacion
+        fields = ("__all__")
+        widgets = {
+            'inicio': forms.DateInput(attrs={'class': 'datepicker'}),
+            'fin': forms.DateInput(attrs={'class': 'datepicker'}),
+        }
 
 class DniForm(forms.Form):
     dni = forms.CharField(

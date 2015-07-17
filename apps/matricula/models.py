@@ -1,10 +1,12 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
-from apps.notas.models import Modulo
+from apps.notas.models import Modulo, Asignatura
 from django.conf import settings
 from django.template.defaultfilters import slugify
 
 from datetime import date
+
+from django.core.validators import RegexValidator
 
 
 class Carrera(models.Model):
@@ -24,7 +26,7 @@ class Programacion(models.Model):
     vacantes = models.PositiveIntegerField()
     inicio = models.DateField()
     fin = models.DateField()
-    semestre = models.CharField(max_length=20)
+    semestre = models.CharField(max_length=20, unique=True)
     finalizado = models.BooleanField(default=False)
 
     class Meta:
@@ -38,9 +40,6 @@ class Programacion(models.Model):
 class Alumno(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     carrera_profesional = models.ForeignKey(Carrera)
-    tipo_descuento = models.ForeignKey(
-        'pagos.Descuento', blank=True, null=True
-    )
     slug = models.SlugField(editable=False)
 
     def save(self, *args, **kwargs):
@@ -76,11 +75,18 @@ class Matricula(models.Model):
     turno = models.CharField(max_length=2, choices=TURNO_CHOICES)
     fecha_matricula = models.DateTimeField()
     estado_matricula = models.BooleanField(default=False)
-    saldo = models.DecimalField(max_digits=12, decimal_places=2, default=600)
+    saldo = models.DecimalField(max_digits=12, decimal_places=2, default=600,)
     completado = models.BooleanField(default=False)
     programacion = models.ForeignKey(Programacion)
+    tipo_descuento = models.ForeignKey(
+        'pagos.Descuento', blank=True, null=True, default=1
+    )
 
     objects = ManagerMatricula()
 
     def __unicode__(self):
         return str(self.alumno)
+
+class CursosCargo(models.Model):
+    matricula = models.ForeignKey(Matricula)
+    aisgnatura = models.ForeignKey(Asignatura)

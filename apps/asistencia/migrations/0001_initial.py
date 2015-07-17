@@ -16,8 +16,10 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('estado', models.BooleanField(default=False)),
                 ('fecha', models.DateTimeField(null=True, blank=True)),
-                ('hora_Fin', models.DateTimeField(null=True, blank=True)),
             ],
+            options={
+                'verbose_name_plural': 'Asistencia del alumno',
+            },
         ),
         migrations.CreateModel(
             name='AsistenciaDocente',
@@ -26,6 +28,9 @@ class Migration(migrations.Migration):
                 ('hora_Inicio', models.DateTimeField(null=True, blank=True)),
                 ('hora_Fin', models.DateTimeField(null=True, blank=True)),
             ],
+            options={
+                'verbose_name_plural': 'Asistencia del docente',
+            },
         ),
         migrations.CreateModel(
             name='Aula',
@@ -63,12 +68,17 @@ class Migration(migrations.Migration):
             name='Horario',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('dia', models.CharField(max_length=10)),
+                ('dia', models.CharField(max_length=10, choices=[(b'lunes', b'lunes'), (b'martes', b'martes'), (b'miercoles', b'miercoles'), (b'jueves', b'jueves'), (b'viernes', b'viernes'), (b'sabado', b'sabado')])),
                 ('hora_inicio', models.TimeField(null=True, blank=True)),
                 ('hora_final', models.TimeField(null=True, blank=True)),
             ],
             options={
+                'ordering': ['dia', 'hora_inicio'],
                 'verbose_name_plural': 'Horarios',
             },
+        ),
+        migrations.AlterUniqueTogether(
+            name='horario',
+            unique_together=set([('dia', 'hora_inicio', 'hora_final')]),
         ),
     ]

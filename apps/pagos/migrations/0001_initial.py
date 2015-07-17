@@ -28,9 +28,9 @@ class Migration(migrations.Migration):
                 ('tipo', models.CharField(max_length=10)),
                 ('serie', models.CharField(max_length=11)),
                 ('numero', models.CharField(max_length=11)),
-                ('monto_subtotal', models.DecimalField(default=0, max_digits=12, decimal_places=2)),
-                ('monto_igv', models.DecimalField(default=0, max_digits=12, decimal_places=2)),
-                ('monto_total', models.DecimalField(default=0, max_digits=12, decimal_places=2)),
+                ('monto_subtotal', models.DecimalField(default=0, max_digits=12, decimal_places=5)),
+                ('monto_igv', models.DecimalField(default=0, max_digits=12, decimal_places=5)),
+                ('monto_total', models.DecimalField(default=0, max_digits=12, decimal_places=5)),
             ],
         ),
         migrations.CreateModel(
@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('tipo_descuento', models.CharField(max_length=50)),
-                ('porcentaje', models.IntegerField()),
+                ('porcentaje', models.DecimalField(default=0, max_digits=12, decimal_places=5)),
             ],
         ),
         migrations.CreateModel(
@@ -56,8 +56,8 @@ class Migration(migrations.Migration):
             name='Estructura_Pago',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('monto_matricula', models.DecimalField(default=0, max_digits=12, decimal_places=2)),
-                ('monto_mensualidad', models.DecimalField(default=0, max_digits=12, decimal_places=2)),
+                ('monto_matricula', models.DecimalField(default=0, max_digits=12, decimal_places=5)),
+                ('monto_mensualidad', models.DecimalField(default=0, max_digits=12, decimal_places=5)),
                 ('fecha_limite1', models.DateTimeField()),
                 ('fecha_limite2', models.DateTimeField()),
                 ('fecha_limite3', models.DateTimeField()),

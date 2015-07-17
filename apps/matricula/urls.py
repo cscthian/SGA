@@ -30,6 +30,7 @@ urlpatterns = [
         name='detalle_alumno'
     ),
     ############### FIN ALUMNO ######################
+    
     ############### URL CARRERA #####################
     url(
         r'^home_carrera/$',
@@ -37,17 +38,17 @@ urlpatterns = [
         name='home_carrera'
     ),
     url(
-        r'^eliminar_carrera/$',
+        r'^eliminar_carrera/(?P<pk>\d+)$',
         views.EliminarCarrera.as_view(),
         name='eliminar_carrera'
     ),
     url(
-        r'^modificar_carrera/$',
+        r'^modificar_carrera/(?P<pk>\d+)$',
         views.ModificarCarrera.as_view(),
         name='modificar_carrera'
     ),
     url(
-        r'^detalle_carrera/$',
+        r'^detalle_carrera/(?P<pk>\d+)$',
         views.DetalleCarrera.as_view(),
         name='detalle_carrera'
     ),
@@ -57,6 +58,33 @@ urlpatterns = [
         name='agregar_carrera'
     ),
     ############### FIN CARRERA #########################
+    ############### URL PROGRAMACION ####################
+    url(
+        r'^home_programacion$',
+        views.HomeProgramacion.as_view(),
+        name='home_programacion'
+    ),
+    url(
+        r'^agregar_programacion$',
+        views.AgregarProgramacion.as_view(),
+        name='agregar_programacion'
+    ),
+    url(
+        r'^detalle_programacion/(?P<pk>\d+)$',
+        views.DetalleProgramacion.as_view(),
+        name='detalle_programacion'
+    ),
+    url(
+        r'^modificar_programacion/(?P<pk>\d+)$',
+        views.ModificarProgramacion.as_view(),
+        name='modificar_programacion'
+    ),
+    url(
+        r'^eliminar_programacion/(?P<pk>\d+)$',
+        views.EliminarProgramacion.as_view(),
+        name='eliminar_programacion'
+    ),
+    ############### fin url programacion
     ############### URL MATRICULA #######################
     url(
         r'^pre_matricula/$',
@@ -64,8 +92,13 @@ urlpatterns = [
         name='pre_matricula'
     ),
     url(
-        r'^verificar_alumno/$',
-        views.VerificarAlumno.as_view(),
-        name='verificar_alumno'
+        r'^matricular_alumno/$',
+        views.MatricularAlumno.as_view(),
+        name='matricular_alumno'
+    ),
+    url(
+        r'^lista_matriculados/$',
+        views.HomeMatricula.as_view(),
+        name='lista_matriculados'
     ),
 ]
