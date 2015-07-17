@@ -1,27 +1,90 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, DeleteView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, FormMixin
 from django.views.generic.detail import SingleObjectMixin
 
-from .models import Horario, Aula, Docente
+from .models import Horario, Aula, Docente, CargaAcademica
 from apps.users.models import User
 
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
-from .forms import DniForm, HorarioForm, AulaForm, DocenteForm
+from .forms import DniForm, HorarioForm, AulaForm, DocenteForm, AsistenciaAlumnoForm
 
 
 class AsistenciaDocente(FormView):
     template_name = 'asistencia/asistencia_docente.html'
     form_class = DniForm
 
-    def get_success_url(self):
-        return reverse('asistencia_app:asistencia_docente')
-
     def form_valid(self, form):
         # guardar asistencia
-        return super(AsistenciaDocente, self).form_valid(form)
+        dni = form.cleaned_data['dni']
+
+        docente = Docente.objects.get(user__username=dni)
+
+        return HttpResponseRedirect(
+            reverse(
+                'asistencia_app:asistencia_docente_detalle',
+                kwargs={'pk': docente.pk},
+            )
+        )
+
+
+class AsistenciaDocenteDetalle(FormMixin, DetailView):
+    model = Docente
+    form_class = DniForm
+    template_name = 'asistencia/asistencia_docente_detalle.html'
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'asistencia_app:asistencia_docente_detalle',
+            kwargs={'pk': self.object.pk},
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super(AsistenciaDocenteDetalle, self).get_context_data(**kwargs)
+        # self.get_form() es form_class enviamos el formulario {{ form }}
+        context['form'] = self.get_form()
+        # self.object es el objecto docente que psa pro url
+        carga = CargaAcademica.objects.carga_docente(self.object.user)
+        context['carga_academica'] = carga
+        return context
+
+    def post(self, request, *args, **kwargs):
+        # get_object() es el parametro matricula q se psa por url
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        # si el formulrio es valido cambiamos el valur de la url
+        # con en el nuevo docente
+        dni = form.cleaned_data['dni']
+        self.object = Docente.objects.get(user__username=dni)
+        return super(AsistenciaDocenteDetalle, self).form_valid(form)
+
+
+class AsistenciaAlumno(FormView):
+    form_class = AsistenciaAlumnoForm
+    template_name = 'asistencia/asistencia_alumno.html'
+    success_url = '/'
+
+    def get_form_kwargs(self):
+        kwargs = super(AsistenciaAlumno, self).get_form_kwargs()
+        kwargs.update({
+            'pk': self.kwargs.get('pk', 0)
+        })
+        return kwargs
+
+    def form_valid(self, form):
+        alumnos = form.cleaned_data['alumnos']
+        for alumno in alumnos:
+            print alumno
+        return super(AsistenciaAlumno, self).form_valid(form)
+
 
 class PanelAulaView(TemplateView):
     template_name = 'aula/panel_aula.html'
@@ -116,7 +179,6 @@ class AgregarDocente(FormView):
         avatar = form.cleaned_data['avatar']
         direccion = form.cleaned_data['address']
         fecha_nacimineto = form.cleaned_data['date_birth']
-        print fecha_nacimineto
         tipo_user = '2'
         password = form.cleaned_data['password1']
 

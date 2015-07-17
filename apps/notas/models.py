@@ -15,25 +15,35 @@ class Modulo(models.Model):
     def __unicode__(self):
         return self.nombre
 
-
 class Asignatura(models.Model):
     TIPO_CATEGORIA_CHOICES = (
         ('obligatorio', 'obligatorio'),
         ('opcional', 'opcional'),
     )
-    codigo = models.CharField(max_length=4, unique=True)
+    codigo = models.CharField(max_length=10, unique=True)
     nombre = models.CharField(max_length=50)
     categoria = models.CharField(max_length=15, choices=TIPO_CATEGORIA_CHOICES)
-    creditos = models.PositiveIntegerField(default=0)
-    modulo = models.ForeignKey(Modulo)
-    horas_teoricas = models.PositiveIntegerField(default=0)
-    horas_practicas = models.PositiveIntegerField(default=0)
+    horas_teorica = models.PositiveIntegerField(default=0)
+    horas_practica = models.PositiveIntegerField(default=0)
     slug = models.SlugField(editable=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.nombre)
         super(Asignatura, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.nombre
+
+
+class Modulo(models.Model):
+    nombre = models.CharField('nombre', max_length=50)
+    carrera = models.ForeignKey('matricula.Carrera')
+    asignatura = models.ManyToManyField(Asignatura)
+
+    class Meta:
+        verbose_name_plural = 'Modulos'
+        ordering = ['nombre']
 
     def __unicode__(self):
         return self.nombre
@@ -56,6 +66,11 @@ class ManagerNotas(models.Manager):
         else:
             #el modulo es modulo aprobado
             return True
+            #comprobamos si es menor o igual <= que la nota aprobatoria
+            promedio__lte=6,
+            #filtramos la consulta por alumno
+            matricula__pk='1'
+        )
 
 class Nota(models.Model):
     matricula = models.ForeignKey('matricula.Matricula')

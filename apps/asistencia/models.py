@@ -1,12 +1,19 @@
 from django.conf import settings
 from django.template.defaultfilters import slugify
 from django.db import models
-from datetime import date
+from datetime import date, datetime
+
+
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class ManagerDocente(models.Manager):
-    pass
-
+    def es_docente(self, user):
+        try:
+            self.get(user__username=user)
+        except ObjectDoesNotExist:
+            return False
+        return True
 
 
 class Docente(models.Model):
@@ -25,6 +32,8 @@ class Docente(models.Model):
     especialidad = models.CharField(max_length=2, choices=ESPECIALIDAD_CHOICES)
     titulo = models.CharField(max_length=50)
     slug = models.SlugField(editable=False)
+
+    objects = ManagerDocente()
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -82,7 +91,30 @@ class ManagerCargaAcademica(models.Manager):
             programacion__inicio__lte=hoy,
             programacion__fin__gte=hoy,
             docente__user__username=docente,
-        )
+        ).distinct()
+
+    def carga_docente(self, docente):
+        dias = [
+            'lunes', 'martes', 'miercoles',
+            'jueves', 'viernes', 'sabado', 'domingo',
+        ]
+        hoy = datetime.today()
+        dia = date.weekday(hoy)
+        carga = self.filter(
+            docente__user__username=docente,
+            horario__dia=dias[dia],
+            programacion__inicio__lte=hoy,
+            programacion__fin__gte=hoy,
+        ).distinct()
+        return carga
+
+    def tiene_carga(self, docente):
+        carga = self.carga_docente(docente)
+
+        if carga:
+            return True
+        else:
+            return False
 
 
 class CargaAcademica(models.Model):

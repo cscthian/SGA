@@ -2,16 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(
-        r'^asistencia/docente/$',
-        views.AsistenciaDocente.as_view(),
-        name='asistencia_docente'
-    ),
-    url(
-        r'^asistencia/alumno/$',
-        views.AsistenciaDocente.as_view(),
-        name='asistencia_alumno'
-    ),
+
     url(
         r'^panel/admin/aula/$',
         views.PanelAulaView.as_view(),
@@ -54,4 +45,21 @@ urlpatterns = [
         views.PanelDocenteView.as_view(),
         name='panel_docente'
     ),
+
+    url(
+        r'^asistencia/docente/$',
+        views.AsistenciaDocente.as_view(),
+        name='asistencia_docente'
+    ),
+    url(
+        r'^asistencia/docente/(?P<pk>\d+)/$',
+        views.AsistenciaDocenteDetalle.as_view(),
+        name='asistencia_docente_detalle'
+    ),
+    url(
+        r'^asistencia/alumno/(?P<pk>\d+)/$',
+        views.AsistenciaAlumno.as_view(),
+        name='asistencia_alumno'
+    ),
+
 ]
