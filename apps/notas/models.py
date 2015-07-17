@@ -3,18 +3,6 @@ from django.template.defaultfilters import slugify
 from apps.asistencia.models import Docente
 
 
-class Modulo(models.Model):
-    nombre = models.CharField('nombre', max_length=50)
-    carrera = models.ForeignKey('matricula.Carrera')
-    costo = models.DecimalField(max_digits=7, decimal_places=2)
-
-    class meta:
-        verbose_name_plural = 'Modulos'
-        ordering = ['nombre']
-
-    def __unicode__(self):
-        return self.nombre
-
 class Asignatura(models.Model):
     TIPO_CATEGORIA_CHOICES = (
         ('obligatorio', 'obligatorio'),
@@ -40,6 +28,7 @@ class Modulo(models.Model):
     nombre = models.CharField('nombre', max_length=50)
     carrera = models.ForeignKey('matricula.Carrera')
     asignatura = models.ManyToManyField(Asignatura)
+    costo = models.DecimalField(max_digits=7, decimal_places=2)
 
     class Meta:
         verbose_name_plural = 'Modulos'
@@ -56,7 +45,7 @@ class ManagerNotas(models.Manager):
             #comprobamos si es menor o igual <= que la nota maxima desaprobatoria
             promedio__lte = 10,
             #filtramos la consulta por alumno
-            matricula__pk = '3'
+            matricula__alumno__user__unsername = '121314'
         )
     # funcion para verificar si un alumno tiene modulo aprobado    
     def condicion_aprobado(self):
@@ -66,11 +55,6 @@ class ManagerNotas(models.Manager):
         else:
             #el modulo es modulo aprobado
             return True
-            #comprobamos si es menor o igual <= que la nota aprobatoria
-            promedio__lte=6,
-            #filtramos la consulta por alumno
-            matricula__pk='1'
-        )
 
 class Nota(models.Model):
     matricula = models.ForeignKey('matricula.Matricula')

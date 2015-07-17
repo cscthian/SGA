@@ -16,12 +16,11 @@ class Migration(migrations.Migration):
             name='Asignatura',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('codigo', models.CharField(unique=True, max_length=4)),
+                ('codigo', models.CharField(unique=True, max_length=10)),
                 ('nombre', models.CharField(max_length=50)),
                 ('categoria', models.CharField(max_length=15, choices=[(b'obligatorio', b'obligatorio'), (b'opcional', b'opcional')])),
-                ('creditos', models.PositiveIntegerField(default=0)),
-                ('horas_teoricas', models.PositiveIntegerField(default=0)),
-                ('horas_practicas', models.PositiveIntegerField(default=0)),
+                ('horas_teorica', models.PositiveIntegerField(default=0)),
+                ('horas_practica', models.PositiveIntegerField(default=0)),
                 ('slug', models.SlugField(editable=False)),
             ],
         ),
@@ -30,8 +29,14 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('nombre', models.CharField(max_length=50, verbose_name=b'nombre')),
+                ('costo', models.DecimalField(max_digits=7, decimal_places=2)),
+                ('asignatura', models.ManyToManyField(to='notas.Asignatura')),
                 ('carrera', models.ForeignKey(to='matricula.Carrera')),
             ],
+            options={
+                'ordering': ['nombre'],
+                'verbose_name_plural': 'Modulos',
+            },
         ),
         migrations.CreateModel(
             name='Nota',
@@ -46,10 +51,5 @@ class Migration(migrations.Migration):
                 ('docente', models.ForeignKey(to='asistencia.Docente')),
                 ('matricula', models.ForeignKey(to='matricula.Matricula')),
             ],
-        ),
-        migrations.AddField(
-            model_name='asignatura',
-            name='modulo',
-            field=models.ForeignKey(to='notas.Modulo'),
         ),
     ]
