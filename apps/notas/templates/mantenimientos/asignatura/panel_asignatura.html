@@ -1,0 +1,51 @@
+{% extends "users/panel/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+      <div class="row">
+        <div class="col s6 m8">
+          <h6>Hay <span class="panel-count">{{ cantidad }}</span> asignaturas</h6>
+        </div>
+        <div class="col s6 m4">
+          <a class="waves-effect waves-light btn" href="{% url 'notas_app:agregar_asignatura' %}"><i class="fa fa-plus left"></i>agregar asignatura</a>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <table class="hoverable centered bordered responsive-table">
+        <thead>
+          <tr>
+              <th>Codigo</th>
+              <th>Nombre</th>
+              <th>Categoria</th>
+              <th>Creditos</th>
+              <th>Modulo</th>
+              <th>Horas Teoricas</th>
+              <th>Horas Practicas</th>                      
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for asignatura in  asignaturas %}
+            <tr>
+              <td>{{ asignatura.codigo }}</td>
+              <td>{{ asignatura.nombre }}</td>
+              <td>{{ asignatura.get_categoria_display }}</td>
+              <td>{{ asignatura.creditos }}</td>
+              <td>{{ asignatura.modulo }}</td>
+              <td>{{ asignatura.horas_teoricas }}</td>
+              <td>{{ asignatura.horas_practicas }}</td>
+
+              <td>
+                <a href="{% url 'notas_app:detalle_asignatura' asignatura.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+                <a href="{% url 'notas_app:modificar_asignatura' asignatura.pk %}" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
+                <a href="{% url 'notas_app:eliminar_asignatura' asignatura.pk %}" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
+              </td>
+            </tr>            
+          {% endfor %}
+
+        </tbody>
+      </table>
+      </div>
+    </div>
+{% endblock contenido_panel %}
