@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>asitnecia docnete</title>
+</head>
+<body>
+    <form method="POST">{% csrf_token %}
+        {{ form }}
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Guardar alumno</button>
+        </div>
+    </form>
+    <div>
+        {% for carga in carga_academica %}
+            {{ carga }}
+        {% endfor %}
+    </div>
+</body>
+</html>

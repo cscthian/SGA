@@ -13,7 +13,7 @@
                     <div class="collapsible-body">
                         <ul>
                             <li><a href="#">notas</a></li>
-                            <li><a href="#">asistencia</a></li>
+                            <li><a href="{% url 'asistencia_app:asistencia_alumno' carga.asignatura.pk %}">asistencia {{ carga.asignatura.pk }}</a></li>
                             <li class="divider"></li>
                         </ul>
                     </div>
