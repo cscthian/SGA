@@ -4,10 +4,10 @@
     <div class="container panel-container">
         <div class="row">
             <div class="col s5">
-                <a class="waves-effect waves-light btn btn-back" href="{% url 'matricula_app:home_carrera' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
+                <a class="waves-effect waves-light btn btn-back" href="{% url 'asistencia_app:panel_aula' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
             </div>
             <div class="col s7">
-                <h5>Modificando: carrera {{ carrera }}</h5>    
+                <h5>Crear una nuevo Alumno</h5>    
             </div>
         </div>
 
@@ -23,32 +23,39 @@
             <div class="col s12 m6 l6">
                 <div class="card-panel">
                     <div class="row">
-                        <form class="col s12" action="{% url 'matricula_app:modificar_carrera' carrera.pk %}" method="POST">{% csrf_token %}
-                            
+                        <form class="col s12" method="POST">{% csrf_token %}
+
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ form.nombre }}
-                                    {{ form.nombre.label_tag }}
+                                    {{ form.nro_aula }}
+                                    {{ form.nro_aula.label_tag }}
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ form.siglas }}
-                                    {{ form.siglas.label_tag }}
+                                    {{ form.piso }}
+                                    {{ form.piso.label_tag }}
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ form.titulo }}
-                                    {{ form.titulo.label_tag }}
+                                    {{ form.tipo_aula }}
+                                    {{ form.tipo_aula.label_tag }}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form.capacidad }}
+                                    {{ form.capacidad.label_tag }}
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                      <button class="btn cyan waves-effect waves-light right" type="submit" name="action">actualizar
+                                      <button class="btn cyan waves-effect waves-light right" type="submit" name="action">guardar
                                         <i class="mdi-content-send right"></i>
                                       </button>
                                 </div>

@@ -1,0 +1,44 @@
+{% extends "users/panel/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+      <div class="row">
+        <div class="col s6 m8">
+          <h6>Hay <span class="panel-count">{{ cantidad }}</span> Matriculas</h6>
+        </div>
+        <div class="col s6 m4">
+          <a class="waves-effect waves-light btn" href="{% url 'matricula_app:pre_matricula' %}"><i class="fa fa-plus left"></i>Matricula Nueva</a>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <table class="hoverable centered bordered responsive-table">
+        <thead>
+          <tr>
+              <th>Alumno</th>
+              <th>Modulo</th>
+              <th>Turno</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Saldo</th>
+              <th>Programacion</th>              
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for matricula in  matriculas %}
+            <tr>
+              <td>{{ matricula.alumno }}</td>
+              <td>{{ matricula.modulo }}</td>
+              <td>{{ matricula.turno }}</td>
+              <td>{{ matricula.fecha_matricula }}</td>
+              <td>{{ matricula.estado_matricula }}</td>
+              <td>{{ matricula.programacion }}</td>
+            </tr>            
+          {% endfor %}
+
+        </tbody>
+      </table>
+      </div>
+    </div>
+{% endblock contenido_panel %}

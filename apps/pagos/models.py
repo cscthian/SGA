@@ -8,22 +8,22 @@ class Comprobante(models.Model):
     tipo = models.CharField(max_length=10)
     serie = models.CharField(max_length=11)
     numero = models.CharField(max_length=11)
-    monto_subtotal = models.DecimalField(max_digits=12, decimal_places=2, default=0)
-    monto_igv = models.DecimalField(max_digits=12, decimal_places=2, default=0)
-    monto_total = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    monto_subtotal = models.DecimalField(max_digits=12, decimal_places=5, default=0)
+    monto_igv = models.DecimalField(max_digits=12, decimal_places=5, default=0)
+    monto_total = models.DecimalField(max_digits=12, decimal_places=5, default=0)
 
 
 class Descuento(models.Model):
     tipo_descuento = models.CharField(max_length=50)
-    porcentaje = models.IntegerField()
+    porcentaje = models.DecimalField(max_digits=12, decimal_places=5, default=0)
 
     def __unicode__(self):
         return self.tipo_descuento
 
 
 class Estructura_Pago(models.Model):
-    monto_matricula = models.DecimalField(max_digits=12, decimal_places=2, default=0)
-    monto_mensualidad = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    monto_matricula = models.DecimalField(max_digits=12, decimal_places=5, default=0)
+    monto_mensualidad = models.DecimalField(max_digits=12, decimal_places=5, default=0)
     fecha_limite1 = models.DateTimeField()
     fecha_limite2 = models.DateTimeField()
     fecha_limite3 = models.DateTimeField()

@@ -37,13 +37,28 @@ class Modulo(models.Model):
         return self.nombre
 
 
-class nota(models.Model):
+class ManagerNotas(models.Manager):
+
+    def cursos_cargo(self):
+        return self.filter(
+            #comprobamos si es menor o igual <= que la nota aprobatoria
+            promedio__lte=6,
+            #filtramos la consulta por alumno
+            matricula__pk='1'
+        )
+
+    def verificar_cursos(self):
+        return self.filter(
+            matricula__programacion__semestre='2015-2')
+
+
+class Nota(models.Model):
     matricula = models.ForeignKey('matricula.Matricula')
     docente = models.ForeignKey(Docente)
     asignatura = models.ForeignKey(Asignatura)
-    programacion = models.ForeignKey('matricula.Programacion')
-    nota1 = models.CharField('PP1', max_length=20, default='NSP')
-    nota2 = models.CharField('PP2', max_length=20, default='NSP')
-    nota3 = models.CharField('PP3', max_length=20, default='NSP')
+    nota1 = models.CharField('PP1', max_length=20, default='--')
+    nota2 = models.CharField('PP2', max_length=20, default='--')
+    nota3 = models.CharField('PP3', max_length=20, default='--')
     nota4 = models.CharField('PP4', max_length=20, default='--')
     promedio = models.DecimalField(max_digits=5, decimal_places=2)
+    objects = ManagerNotas()

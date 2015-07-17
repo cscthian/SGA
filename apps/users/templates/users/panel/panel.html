@@ -13,7 +13,7 @@
                         <li><a href="{% url 'asistencia_app:panel_docente' %}">Docentes</a></li>
                         <li><a href="#">Admistrativos</a></li>
                         <li><a href="#">Asignatura</a></li>
-                        <li><a href="#">Carreras Profesionales</a></li>
+                        <li><a href="{% url 'matricula_app:home_carrera' %}">Carreras Profesionales</a></li>
                         <li><a href="#">Modulos</a></li>
                         <li class="divider"></li>
                         <li><a href="{% url 'asistencia_app:panel_horario' %}">Horarios</a></li>
@@ -28,10 +28,11 @@
             <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Procesos</a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a href="badges.html">Matricula</a></li>
+                        <li><a href="{% url 'matricula_app:matricular_alumno' %}">Matricula</a></li>
+                        <li><a href="{% url 'matricula_app:lista_matriculados' %}">Pre Matricula</a></li>
                         <li><a href="buttons.html">Asistencia Docente</a></li>
                         <li><a href="cards.html">Asistencia Admintrativo</a></li>
-                        <li><a href="footer.html">Pagos</a></li>
+                        <li><a href="{% url 'matricula_app:matricular_alumno' %}">Pagos</a></li>
                     </ul>
                 </div>
             </li>

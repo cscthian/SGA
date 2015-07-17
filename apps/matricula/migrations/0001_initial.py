@@ -30,6 +30,12 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
+            name='CursosCargo',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Matricula',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),

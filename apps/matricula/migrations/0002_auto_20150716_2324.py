@@ -24,6 +24,16 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(to='matricula.Programacion'),
         ),
         migrations.AddField(
+            model_name='cursoscargo',
+            name='aisgnatura',
+            field=models.ForeignKey(to='notas.Asignatura'),
+        ),
+        migrations.AddField(
+            model_name='cursoscargo',
+            name='matricula',
+            field=models.ForeignKey(to='matricula.Matricula'),
+        ),
+        migrations.AddField(
             model_name='alumno',
             name='carrera_profesional',
             field=models.ForeignKey(to='matricula.Carrera'),

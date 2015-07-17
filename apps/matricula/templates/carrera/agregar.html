@@ -1,70 +1,64 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Nueva Carrera</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-</head>
-<body>
-    <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Mantenimiento Carrera</a>
-            </div>            
-        </div>
-    </div>
+{% extends "users/panel/panel.html" %}
 
-    <div class="container">
-
-        <div class="page-header">
-            <h4>
-                <a href="http://127.0.0.1:8000/" class="btn btn-success">
-                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
-                </a>
-                <strong> Nueva Carrera</strong>
-            </h4>
-        </div><!-- page-header -->
-        
+{% block contenido_panel %}
+    <div class="container panel-container">
         <div class="row">
-            <div class="col-md-12">
-                <form role="form" method="POST" enctype="multipart/form-data">{% csrf_token %}
-                    <p class="lead"><span class="glyphicon glyphicon-info-sign"></span> Ingrese los datos de la Carrera</p>
-                    
-                    {% if form.errors %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ form.errors }}
-                        </div>                        
-                    {% endif %}
+            <div class="col s5">
+                <a class="waves-effect waves-light btn btn-back" href="{% url 'matricula_app:home_carrera' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
+            </div>
+            <div class="col s7">
+                <h5>Crear Carrera Profesional</h5>    
+            </div>
+        </div>
 
-                    <div class="form-group">
-                        <label>{{ form.nombre_carrera.label_tag }}</label>
-                        {{ form.nombre_carrera }}
+
+        <div class="divider"></div>
+        {% if form.errors %}
+            <div class="card-panel red lighten-1">
+                <span class="white-text"> {{ form.errors }} </span>
+            </div>
+            <div class="divider"></div>
+        {% endif %}
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <div class="card-panel">
+                    <div class="row">
+                        <form class="col s12" method="POST">{% csrf_token %}
+                            
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form.nombre }}
+                                    {{ form.nombre.label_tag }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form.siglas }}
+                                    {{ form.siglas.label_tag }}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form.titulo }}
+                                    {{ form.titulo.label_tag }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                      <button class="btn cyan waves-effect waves-light right" type="submit" name="action">guardar
+                                        <i class="mdi-content-send right"></i>
+                                      </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label>{{ form.siglas.label_tag }}</label>
-                        {{ form.siglas }}
-                    </div>
-                    <div class="form-group">
-                        <label>{{ form.titulo.label_tag }}</label>
-                        {{ form.titulo }}
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Guardar Carrera</button>
-                    </div>
-                </form>
+                </div><!-- fin de card-panel -->
+
+            </div>
+        </div><!-- fin de row -->
         
-            </div><!-- col-md-12 -->        
-        </div><!-- /row -->
-    </div><!-- /container -->
-
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="{% static 'js/bootstrap.js' %}"></script>
-</body>
-</html>
+    </div><!-- fin de panel-container -->
+{% endblock contenido_panel %}

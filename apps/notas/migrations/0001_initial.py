@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='nota',
+            name='Nota',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('nota1', models.CharField(default=b'--', max_length=20, verbose_name=b'PP1')),
@@ -45,7 +45,6 @@ class Migration(migrations.Migration):
                 ('asignatura', models.ForeignKey(to='notas.Asignatura')),
                 ('docente', models.ForeignKey(to='asistencia.Docente')),
                 ('matricula', models.ForeignKey(to='matricula.Matricula')),
-                ('programacion', models.ForeignKey(to='matricula.Programacion')),
             ],
         ),
         migrations.AddField(
