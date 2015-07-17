@@ -54,7 +54,7 @@ class Migration(migrations.Migration):
                 ('vacantes', models.PositiveIntegerField()),
                 ('inicio', models.DateField()),
                 ('fin', models.DateField()),
-                ('semestre', models.CharField(max_length=20)),
+                ('semestre', models.CharField(unique=True, max_length=20)),
                 ('finalizado', models.BooleanField(default=False)),
             ],
             options={

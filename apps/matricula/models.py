@@ -79,8 +79,7 @@ class Matricula(models.Model):
     completado = models.BooleanField(default=False)
     programacion = models.ForeignKey(Programacion)
     tipo_descuento = models.ForeignKey(
-        'pagos.Descuento', blank=True, null=True, default=1
-    )
+        'pagos.Descuento', blank=True, null=True, default=1)
 
     objects = ManagerMatricula()
 

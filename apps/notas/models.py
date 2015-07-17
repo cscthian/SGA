@@ -6,6 +6,7 @@ from apps.asistencia.models import Docente
 class Modulo(models.Model):
     nombre = models.CharField('nombre', max_length=50)
     carrera = models.ForeignKey('matricula.Carrera')
+    costo = models.DecimalField(max_digits=7, decimal_places=2)
 
     class meta:
         verbose_name_plural = 'Modulos'
@@ -42,14 +43,19 @@ class ManagerNotas(models.Manager):
 
     def cursos_cargo(self):
         return self.filter(
-            #comprobamos si es menor o igual <= que la nota aprobatoria
-            promedio__lte = 6,
+            #comprobamos si es menor o igual <= que la nota maxima desaprobatoria
+            promedio__lte = 10,
             #filtramos la consulta por alumno
-            matricula__pk = '1'
+            matricula__pk = '3'
         )
-    def verificar_cursos(self):
-        return self.filter(
-            matricula__programacion__semestre = '2015-2')
+    # funcion para verificar si un alumno tiene modulo aprobado    
+    def condicion_aprobado(self):
+        #verificamos si desaprobo mas de un curso
+        if self.cursos_cargo().count()>1:
+            return False
+        else:
+            #el modulo es modulo aprobado
+            return True
 
 class Nota(models.Model):
     matricula = models.ForeignKey('matricula.Matricula')
