@@ -17,11 +17,9 @@
           <tr>
               <th>Codigo</th>
               <th>Nombre</th>
-              <th>Categoria</th>
-              <th>Creditos</th>
-              <th>Modulo</th>
-              <th>Horas Teoricas</th>
-              <th>Horas Practicas</th>                      
+              <th>Categoria</th>             
+              <th>Horas Teorica</th>
+              <th>Horas Practica</th>                      
           </tr>
         </thead>
         <tbody>
@@ -31,10 +29,8 @@
               <td>{{ asignatura.codigo }}</td>
               <td>{{ asignatura.nombre }}</td>
               <td>{{ asignatura.get_categoria_display }}</td>
-              <td>{{ asignatura.creditos }}</td>
-              <td>{{ asignatura.modulo }}</td>
-              <td>{{ asignatura.horas_teoricas }}</td>
-              <td>{{ asignatura.horas_practicas }}</td>
+              <td>{{ asignatura.horas_teorica }}</td>
+              <td>{{ asignatura.horas_practica }}</td>
 
               <td>
                 <a href="{% url 'notas_app:detalle_asignatura' asignatura.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>

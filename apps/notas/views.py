@@ -17,8 +17,8 @@ class PanelAsignaturaView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PanelAsignaturaView, self).get_context_data(**kwargs)
-        context['asignatura'] = Asignatura.objects.all().order_by('nro_asignatura')
-        context['cantidad'] = context['asignatura'].count()
+        context['asignaturas'] = Asignatura.objects.all().order_by('codigo')
+        context['cantidad'] = context['asignaturas'].count()
         return context
 
 class DetalleAsignatura(DetailView):

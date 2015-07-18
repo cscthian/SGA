@@ -24,7 +24,7 @@ urlpatterns = [
         name='detalle_asignatura'
     ),
     url(
-        r'^panel/admin/asignatura/modficar/(?P<pk>\d+)/$',
+        r'^panel/admin/asignatura/modificar/(?P<pk>\d+)/$',
         views.ModificarAsignatura.as_view(),
         name='modificar_asignatura'
     ),

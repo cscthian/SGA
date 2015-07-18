@@ -4,7 +4,7 @@
     <div class="container panel-container">
         <div class="row">
             <div class="col s5">
-                <a class="waves-effect waves-light btn btn-back" href="{% url 'asistencia_app:panel_aula' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
+                <a class="waves-effect waves-light btn btn-back" href="{% url 'notas_app:panel_asignatura' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
             </div>
             <div class="col s7">
                 <h5>Modificando: aula {{ aula }}</h5>    
@@ -23,7 +23,7 @@
             <div class="col s12 m6 l6">
                 <div class="card-panel">
                     <div class="row">
-                        <form class="col s12" action="{% url 'asistencia_app:modificar_aula' aula.pk %}" method="POST">{% csrf_token %}
+                        <form class="col s12" action="{% url 'notas_app:modificar_asignatura' asignatura.pk %}" method="POST">{% csrf_token %}
                             
                             <div class="row">
                                 <div class="input-field col s12">
