@@ -7,5 +7,28 @@
 {% block content %}
     {% include "home/header.html" %}
     <p>Bienvenido al sitio web del Instituto de Sistemas Cusco ISC-UNSAAC.</p>
+    <div class="container">
+        <div class="row">
+    {% for curso in cursomes %}
+        {% for asignatura in curso.asignatura.all %}
+            <div class="col s12 m4 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                       <img class="activator" src="{{ asignatura.imagen.url }}">
+                    </div>
+                    <div class="card-content">
+                      <span class="card-title activator grey-text text-darken-4">{{ asignatura.nombre }}<i class="label-icons right">more_vert</i></span>
+                      <p><a href="#">Inscribirse</a></p>
+                    </div>
+                    <div class="card-reveal">
+                      <span class="card-title grey-text text-darken-4">{{ asignatura.nombre }}<i class="comment right"></i></span>
+                      <p>{{ asignatura.descripcion|truncatewords:25 }}</p>
+                    </div>
+                </div>
+            </div>                    
+        {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
     {% include "home/footer.html" %}
 {% endblock content %}

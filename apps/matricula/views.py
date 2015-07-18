@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, DetailView
 from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse_lazy
+from apps.cursolibre.models import Ciclo
+
 
 from django.utils import timezone
-import datetime
+from datetime import datetime
 from .forms import *
 
 from .models import *
@@ -13,6 +15,29 @@ from apps.users.models import User
 
 class InicioView(TemplateView):
     template_name = 'home/index.html'
+
+    def get_context_data(self, **kwargs):
+        hoy = datetime.now()
+        meses = [
+        'enero',
+        'febrero',
+        'marzo',
+        'abril',
+        'mayo',
+        'junio',
+        'julio',
+        'agosto',
+        'septiembre',
+        'octubre',
+        'noviembre',
+        'diciembre',
+        ]
+        mes = hoy.strftime('%m')
+        anio = hoy.strftime('%Y')
+        context = super(InicioView, self).get_context_data(**kwargs)
+        context['cursomes'] = Ciclo.objects.filter(mes=meses[int(mes)-1], anio=anio)[:3]
+
+        return context
 
 """MANTENIMIENTOS DE LA TABLA CARRERA"""
 
