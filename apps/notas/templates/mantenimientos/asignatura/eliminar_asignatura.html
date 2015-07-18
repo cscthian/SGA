@@ -4,7 +4,7 @@
     <div class="container panel-container">
         <div class="row">
             <div class="col s12">
-                <h5>Eliminando: aula {{ aula }}</h5>    
+                <h5>Eliminando: Asignatura {{ asignatura }}</h5>    
             </div>
         </div>
 
@@ -14,13 +14,13 @@
             <div class="col s12 m6 offset-m3">
                 <div class="card-panel grey lighten-5 z-depth-1">
                     <div class="row valign-wrapper">
-                        <form action="{% url 'asistencia_app:eliminar_aula' aula.pk %}" method="POST">{% csrf_token %}
+                        <form action="{% url 'notas_app:eliminar_asignatura' asignatura.pk %}" method="POST">{% csrf_token %}
                             <div class="col s12">
-                                <h6 class="center-align">¿Desea eliminar el aula "{{ aula }}"?</h6>
+                                <h6 class="center-align">¿Desea eliminar la asignatura "{{ asignatura }}"?</h6>
                             </div>
                             <div class="col s12 center">
                                 <button class="waves-effect waves-light btn btn-panel red" type="submit" name="action">si</button>
-                                <a href="{% url 'asistencia_app:panel_aula' %}" class="waves-effect waves-light btn panel-btn white black-text">no</a>
+                                <a href="{% url 'notas_app:panel_asignatura' %}" class="waves-effect waves-light btn panel-btn white black-text">no</a>
                             </div>
                         </form>                        
                     </div>

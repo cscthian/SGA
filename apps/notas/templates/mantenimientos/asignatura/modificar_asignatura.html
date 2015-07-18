@@ -7,7 +7,7 @@
                 <a class="waves-effect waves-light btn btn-back" href="{% url 'notas_app:panel_asignatura' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
             </div>
             <div class="col s7">
-                <h5>Modificando: aula {{ aula }}</h5>    
+                <h5>Modificando: asignatura {{ asignatura }}</h5>    
             </div>
         </div>
 
@@ -27,29 +27,36 @@
                             
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ form.nro_aula }}
-                                    {{ form.nro_aula.label_tag }}
+                                    {{ form.codigo }}
+                                    {{ form.codigo.label_tag }}
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ form.piso }}
-                                    {{ form.piso.label_tag }}
+                                    {{ form.nombre }}
+                                    {{ form.nombre.label_tag }}
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ form.tipo_aula }}
-                                    {{ form.tipo_aula.label_tag }}
+                                    {{ form.categoria }}
+                                    {{ form.categoria.label_tag }}
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ form.capacidad }}
-                                    {{ form.capacidad.label_tag }}
+                                    {{ form.horas_teorica }}
+                                    {{ form.horas_teorica.label_tag }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form.horas_practica }}
+                                    {{ form.horas_practica.label_tag }}
                                 </div>
                             </div>
 

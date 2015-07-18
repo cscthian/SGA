@@ -4,10 +4,10 @@
     <div class="container panel-container">
         <div class="row">
             <div class="col s5">
-                <a class="waves-effect waves-light btn btn-back" href="{% url 'asistencia_app:panel_aula' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
+                <a class="waves-effect waves-light btn btn-back" href="{% url 'notas_app:panel_asignatura' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
             </div>
             <div class="col s7">
-                <h5>Aula: {{ aula }} detalle</h5>    
+                <h5>Asignatura: {{ asignatura }} detalle</h5>    
             </div>
         </div>
 
@@ -19,20 +19,24 @@
                     <div class="row">
                         <ul class="collection">
                             <li class="collection-item">
-                                <span class="title">Numero de aula:</span>
-                                <p>{{ aula.nro_aula }}</p>
+                                <span class="title">Codigo:</span>
+                                <p>{{ asignatura.codigo }}</p>
                             </li>
                             <li class="collection-item">
-                                <span class="title">Piso:</span>
-                                <p>{{ aula.piso }}</p>
+                                <span class="title">Asignatura:</span>
+                                <p>{{ asignatura.nombre }}</p>
                             </li>
                             <li class="collection-item">
-                                <span class="title">tipo de aula:</span>
-                                <p>{{ aula.get_tipo_aula_display }}</p>
+                                <span class="title">Categoria:</span>
+                                <p>{{ asignatura.categoria }}</p>
                             </li>
                             <li class="collection-item">
-                                <span class="title">capacidad:</span>
-                                <p>{{ aula.capacidad }}</p>
+                                <span class="title">Horas Teoricas:</span>
+                                <p>{{ asignatura.horas_teorica }}</p>
+                            </li>
+                            <li class="collection-item">
+                                <span class="title">Horas Practicas:</span>
+                                <p>{{ asignatura.horas_practica }}</p>
                             </li>
 
                         </ul> <!-- fin de collection -->
