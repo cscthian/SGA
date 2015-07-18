@@ -15,24 +15,27 @@
         <table class="hoverable centered bordered responsive-table">
         <thead>
           <tr>
+              <th>ID</th>
               <th>Alumno</th>
               <th>Modulo</th>
               <th>Turno</th>
               <th>Fecha</th>
               <th>Estado</th>
               <th>Saldo</th>
-              <th>Programacion</th>              
+              <th>Semestre</th>              
           </tr>
         </thead>
         <tbody>
 
           {% for matricula in  matriculas %}
             <tr>
+              <td>{{ matricula.pk }}</td>
               <td>{{ matricula.alumno }}</td>
               <td>{{ matricula.modulo }}</td>
               <td>{{ matricula.turno }}</td>
               <td>{{ matricula.fecha_matricula }}</td>
               <td>{{ matricula.estado_matricula }}</td>
+              <td>{{ matricula.saldo }}</td>
               <td>{{ matricula.programacion }}</td>
             </tr>            
           {% endfor %}

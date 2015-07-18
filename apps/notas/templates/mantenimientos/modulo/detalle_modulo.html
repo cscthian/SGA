@@ -1,0 +1,52 @@
+{% extends "users/panel/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+        <div class="row">
+            <div class="col s5">
+                <a class="waves-effect waves-light btn btn-back" href="{% url 'notas_app:panel_asignatura' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
+            </div>
+            <div class="col s7">
+                <h5>Asignatura: {{ asignatura }} detalle</h5>    
+            </div>
+        </div>
+
+        <div class="divider"></div>
+        
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <div class="card-panel">
+                    <div class="row">
+                        <ul class="collection">
+                            <li class="collection-item">
+                                <span class="title">Codigo:</span>
+                                <p>{{ asignatura.codigo }}</p>
+                            </li>
+                            <li class="collection-item">
+                                <span class="title">Asignatura:</span>
+                                <p>{{ asignatura.nombre }}</p>
+                            </li>
+                            <li class="collection-item">
+                                <span class="title">Categoria:</span>
+                                <p>{{ asignatura.categoria }}</p>
+                            </li>
+                            <li class="collection-item">
+                                <span class="title">Horas Teoricas:</span>
+                                <p>{{ asignatura.horas_teorica }}</p>
+                            </li>
+                            <li class="collection-item">
+                                <span class="title">Horas Practicas:</span>
+                                <p>{{ asignatura.horas_practica }}</p>
+                            </li>
+
+                        </ul> <!-- fin de collection -->
+                    </div>
+
+                </div><!-- fin de card-panel -->
+
+            </div>
+        </div><!-- fin de row -->
+        
+    </div><!-- fin de panel-container -->
+
+{% endblock contenido_panel %}

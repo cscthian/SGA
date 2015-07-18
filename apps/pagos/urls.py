@@ -72,4 +72,9 @@ urlpatterns = [
         views.RegistrarPago.as_view(),
         name='pago_matricula'
     ),
+    url(
+        r'^panel/caja/pago/matricula/descuento/(?P<pk>\d+)/$',
+        views.DescuentoMatriculaView.as_view(),
+        name='pago_matricula_descuento'
+    ),
 ]

@@ -29,6 +29,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('nombre', models.CharField(max_length=50, verbose_name=b'nombre')),
+                ('costo', models.DecimalField(max_digits=7, decimal_places=2)),
                 ('asignatura', models.ManyToManyField(to='notas.Asignatura')),
                 ('carrera', models.ForeignKey(to='matricula.Carrera')),
             ],
