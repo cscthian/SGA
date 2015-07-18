@@ -42,19 +42,23 @@ class ManagerNotas(models.Manager):
 
     def cursos_cargo(self):
         return self.filter(
-            #comprobamos si es menor o igual <= que la nota maxima desaprobatoria
+            #comprobamos si es menor o igual <= que lanota maxima desaprobatoria
             promedio__lte = 10,
-            #filtramos la consulta por alumno
+
+        #filtramos la consulta por alumno
+
             matricula__alumno__user__unsername = '121314'
         )
-    # funcion para verificar si un alumno tiene modulo aprobado    
+        #funcion para verificar si un alumno tiene modulo aprobado
+
     def condicion_aprobado(self):
         #verificamos si desaprobo mas de un curso
-        if self.cursos_cargo().count()>1:
+        if self.cursos_cargo().count() > 1:
             return False
         else:
             #el modulo es modulo aprobado
             return True
+
 
 class Nota(models.Model):
     matricula = models.ForeignKey('matricula.Matricula')

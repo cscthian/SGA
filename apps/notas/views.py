@@ -1,16 +1,17 @@
-from django.shortcuts import render
+#from django.shortcuts import render
 from django.views.generic import TemplateView,DetailView,CreateView,UpdateView,DeleteView
-from django.views.generic.edit import FormView
+#from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from .models import Asignatura
 from django.core.urlresolvers import reverse_lazy, reverse
-from django.http import HttpResponseRedirect
+#from django.http import HttpResponseRedirect
 from .forms import AsignaturaForm
 # Create your views here.
 
 
 class PanelDocenteView(TemplateView):
     template_name = 'panel_docente/panel.html'
+
 
 class PanelAsignaturaView(TemplateView):
     template_name = 'mantenimientos/asignatura/panel_asignatura.html'
@@ -20,6 +21,7 @@ class PanelAsignaturaView(TemplateView):
         context['asignaturas'] = Asignatura.objects.all().order_by('codigo')
         context['cantidad'] = context['asignaturas'].count()
         return context
+
 
 class DetalleAsignatura(DetailView):
     template_name = 'mantenimientos/asignatura/detalle_asignatura.html'
@@ -37,6 +39,7 @@ class ModificarAsignatura(UpdateView):
     form_class = AsignaturaForm
     template_name = 'mantenimientos/asignatura/modificar_asignatura.html'
     success_url = reverse_lazy('notas_app:panel_asignatura')
+
 
 class EliminarAsignatura(DeleteView):
     template_name = 'mantenimientos/asignatura/eliminar_asignatura.html'
