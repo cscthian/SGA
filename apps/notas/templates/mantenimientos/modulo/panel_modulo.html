@@ -4,10 +4,10 @@
     <div class="container panel-container">
       <div class="row">
         <div class="col s6 m8">
-          <h6>Hay <span class="panel-count">{{ cantidad }}</span> asignaturas</h6>
+          <h6>Hay <span class="panel-count">{{ nro }}</span> modulos</h6>
         </div>
         <div class="col s6 m4">
-          <a class="waves-effect waves-light btn" href="{% url 'notas_app:agregar_asignatura' %}"><i class="fa fa-plus left"></i>agregar asignatura</a>
+          <a class="waves-effect waves-light btn" href="{% url 'notas_app:agregar_modulo' %}"><i class="fa fa-plus left"></i>agregar modulo</a>
         </div>
       </div>
       <div class="divider"></div>
@@ -15,27 +15,25 @@
         <table class="hoverable centered bordered responsive-table">
         <thead>
           <tr>
-              <th>Codigo</th>
               <th>Nombre</th>
-              <th>Categoria</th>             
-              <th>Horas Teorica</th>
-              <th>Horas Practica</th>                      
+              <th>Carrera</th>             
+              <th>Asignaturas</th>
+              <th>Costo</th>                      
           </tr>
         </thead>
         <tbody>
 
-          {% for asignatura in  asignaturas %}
+          {% for modulo in  modulos %}
             <tr>
-              <td>{{ asignatura.codigo }}</td>
-              <td>{{ asignatura.nombre }}</td>
-              <td>{{ asignatura.get_categoria_display }}</td>
-              <td>{{ asignatura.horas_teorica }}</td>
-              <td>{{ asignatura.horas_practica }}</td>
+              <td>{{ modulo.nombre }}</td>
+              <td>{{ modulo.carrera }}</td>
+              <td>{{ modulo.asignatura }}</td>
+              <td>{{ modulo.costo }}</td>
 
               <td>
-                <a href="{% url 'notas_app:detalle_asignatura' asignatura.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
-                <a href="{% url 'notas_app:modificar_asignatura' asignatura.pk %}" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
-                <a href="{% url 'notas_app:eliminar_asignatura' asignatura.pk %}" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
+                <a href="{% url 'notas_app:detalle_modulo' modulo.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+                <a href="{% url 'notas_app:modificar_modulo' modulo.pk %}" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
+                <a href="{% url 'notas_app:eliminar_modulo' modulo.pk %}" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
               </td>
             </tr>            
           {% endfor %}

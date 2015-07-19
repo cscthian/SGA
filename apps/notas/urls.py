@@ -33,4 +33,30 @@ urlpatterns = [
         views.EliminarAsignatura.as_view(),
         name='eliminar_asignatura'
     ),
+    url(
+        r'^panel/admin/modulo/$',
+        views.PanelModuloView.as_view(),
+        name='panel_modulo'
+    ),
+    url(
+        r'^panel/admin/modulo/agregar/$',
+        views.AgregarModulo.as_view(),
+        name='agregar_modulo'
+    ),
+
+    url(
+        r'^panel/admin/modulo/detalle/(?P<pk>\d+)/$',
+        views.DetalleModulo.as_view(),
+        name='detalle_modulo'
+    ),
+    url(
+        r'^panel/admin/modulo/modificar/(?P<pk>\d+)/$',
+        views.ModificarModulo.as_view(),
+        name='modificar_modulo'
+    ),
+    url(
+        r'^panel/admin/modulo/eliminar/(?P<pk>\d+)/$',
+        views.EliminarModulo.as_view(),
+        name='eliminar_modulo'
+    ),
 ]
