@@ -13,6 +13,8 @@ urlpatterns = [
     url(r'^', include('apps.pagos.urls', namespace="pagos_app")),
     # urls para la aplicacion de notas
     url(r'^', include('apps.notas.urls', namespace="notas_app")),
+    # urls para la aplicacion de notas
+    url(r'^', include('apps.cursolibre.urls', namespace="cursolibre_app")),
 
     url(r'^admin/', include(admin.site.urls)),
 ]

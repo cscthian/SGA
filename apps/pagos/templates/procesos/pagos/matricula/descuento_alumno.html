@@ -5,9 +5,6 @@
     <title>Document</title>
 </head>
 <body>
-    {{ matricula }}
-    {{ matricula.saldo }}
-    <a href="{% url 'pagos_app:pago_matricula_descuento' matricula.pk %}"> aplicar descuento</a>
     <form action="" method="POST">{% csrf_token %}
         {{ form }}
         <div class="row">

@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, DeleteView, ListView
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import FormMixin, FormView
 from django.core.urlresolvers import reverse_lazy
 
-from .forms import DescuentoForm, EstructuraPagosForm, PagoForm
+from .forms import DescuentoForm, EstructuraPagosForm, PagoForm, DescuentoForm
 from .models import Descuento, Estructura_Pago, Aportacion, Comprobante
 
 from apps.matricula.models import Matricula
@@ -167,3 +167,41 @@ class RegistrarPago(FormMixin, DetailView):
         comprabante.save()
         print '=============================================='
         print comprabante
+
+
+class DescuentoMatriculaView(FormMixin, DetailView):
+    model = Matricula
+    form_class = DescuentoForm
+    template_name = 'procesos/pagos/matricula/descuento_alumno.html'
+
+
+    def get_success_url(self):
+        return reverse_lazy('pagos_app:pago_matricula',kwargs={'pk':self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super(DescuentoMatriculaView, self).get_context_data(**kwargs)
+        # self.get_form() es form_class enviamos el formulario {{ form }}
+        context['form'] = self.get_form()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        # get_object() es el parametro matricula q se psa por url
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        descuento = form.cleaned_data['descuento']
+        matricula = self.object
+        saldo_actual = matricula.saldo
+        porcentaje = descuento.porcentaje
+        nuevo_saldo = saldo_actual-(saldo_actual*porcentaje/100)
+        matricula.saldo = nuevo_saldo
+        matricula.save()
+        print porcentaje
+        print descuento
+        print nuevo_saldo
+        return super (DescuentoMatriculaView,self).form_valid(form)

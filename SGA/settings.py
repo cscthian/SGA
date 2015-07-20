@@ -23,6 +23,7 @@ INSTALLED_APPS = (
     'apps.pagos',
     'apps.matricula',
     'apps.notas',
+    'apps.cursolibre',
 )
 
 MIDDLEWARE_CLASSES = (

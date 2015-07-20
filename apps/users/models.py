@@ -40,12 +40,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('2', 'docente'),
         ('3', 'cajero'),
         ('4', 'administrador'),
+        ('5', 'alumnocursolibre'),
     )
     username = models.CharField('dni', max_length=8, unique=True)
     email = models.EmailField('correo electronico')
     first_name = models.CharField('nombres', max_length=50)
     last_name = models.CharField('apellidos', max_length=50)
-    avatar = models.ImageField(upload_to='users')
+    avatar = models.ImageField(upload_to='users', blank=True, null=True)
     address = models.CharField('direccion', max_length=50)
     phone = models.CharField('telefono', max_length=50)
     gender = models.CharField('sexo', max_length=1, choices=GENDER_CHOICES)

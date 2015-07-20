@@ -1,0 +1,45 @@
+{% extends "users/panel/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+      <div class="row">
+        <div class="col s6 m8">
+          <h6>Hay <span class="panel-count">{{ nro }}</span> modulos</h6>
+        </div>
+        <div class="col s6 m4">
+          <a class="waves-effect waves-light btn" href="{% url 'notas_app:agregar_modulo' %}"><i class="fa fa-plus left"></i>agregar modulo</a>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <table class="hoverable centered bordered responsive-table">
+        <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Carrera</th>             
+              <th>Asignaturas</th>
+              <th>Costo</th>                      
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for modulo in  modulos %}
+            <tr>
+              <td>{{ modulo.nombre }}</td>
+              <td>{{ modulo.carrera }}</td>
+              <td>{{ modulo.asignatura }}</td>
+              <td>{{ modulo.costo }}</td>
+
+              <td>
+                <a href="{% url 'notas_app:detalle_modulo' modulo.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+                <a href="{% url 'notas_app:modificar_modulo' modulo.pk %}" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
+                <a href="{% url 'notas_app:eliminar_modulo' modulo.pk %}" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
+              </td>
+            </tr>            
+          {% endfor %}
+
+        </tbody>
+      </table>
+      </div>
+    </div>
+{% endblock contenido_panel %}
