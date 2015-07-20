@@ -4,7 +4,6 @@ from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse_lazy
 from apps.cursolibre.models import Ciclo
 
-
 from django.utils import timezone
 from datetime import datetime
 from .forms import *

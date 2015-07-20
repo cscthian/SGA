@@ -29,10 +29,10 @@
               <div id="logo-container">
                 <div class="row">
                   <div class="col col-profile s4">
-                    {% if not user.avatar.url %}
+                    {% if not user.avatar %}
                       <img src="{% static 'img/usuario.png' %}" alt="{{ user.get_full_name }}" class="circle responsive-img valign">
                     {% else %}
-                      <img src="{{ user.avatar.url }}" alt="{{ user.get_full_name }}" class="circle responsive-img valign">
+                        <img src="{{ user.avatar.url }}" alt="{{ user.get_full_name }}" class="circle responsive-img valign">
                     {% endif %}
                   </div>
                   <div class="col col-profile s8">

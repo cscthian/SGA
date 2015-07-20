@@ -8,7 +8,15 @@
         <li><a href="{% url 'matricula_app:inicio' %}">Inicio</a></li>
         <li><a href="#">Misión & Visión</a></li>
         <li><a href="#">Contactenos</a></li>
-        <li><a href="{% url 'matricula_app:pre_matricula' %}">Pre Matricula</a></li>
+        
+        <li>
+          <ul id="matricula-dropdown" class="dropdown-content">
+            <li><a href="{% url 'matricula_app:pre_matricula' %}">carrera tecnica</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'cursolibre_app:pre_cursolibre' %}">curso libre</a></li>
+          </ul>
+          <a class="dropdown-button valign-wrapper" data-activates="matricula-dropdown">pre-matricula<i class="mdi-navigation-arrow-drop-down"></i></a>
+        </li>
         <li>
           {% if not user.is_authenticated %}
             <a href="{% url 'users_app:login' %}">Iniciar Sesión</a>

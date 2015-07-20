@@ -60,6 +60,7 @@ class MatriculaCursoLibre(models.Model):
     fecha = models.DateField()
     saldo = models.DecimalField(max_digits=6, decimal_places=2, editable=False)
     ciclo = models.ForeignKey(Ciclo)
+    estado = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
