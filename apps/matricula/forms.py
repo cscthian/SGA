@@ -1,8 +1,9 @@
 # -*- encoding: utf-8 -*-
 from django import forms
 from .models import *
-from apps.users.forms import UserForm
 
+from apps.users.forms import UserForm
+from apps.notas.models import *
 #creamos el form alumno
 
 
@@ -66,3 +67,31 @@ class PreMatriculaForm(UserForm):
         # *args = ??
         # **kwarg son los arqgumentos q se pasan por url
         self.fields['carrera_profesional'].queryset = Carrera.objects.all()
+
+class RegistrarMatriculaForm(forms.Form):
+    '''clase para registrar una matricula regular'''
+    TURNO_CHOICES = (
+        ('m1', '7:00 am - 11:30 am'),
+        ('m2', '8:30 am - 1:00 pm'),
+        ('t1', '1:00 pm - 5:30 pm'),
+        ('n2', '5:30 pm - 10:00 pm'),
+    )
+    alumno = forms.ModelChoiceField(queryset=None, label='Bienvenido : ')
+    turno = forms.ChoiceField(label='turno', choices=TURNO_CHOICES)
+    modulo = forms.CharField(label='modulo')
+    promedio = forms.DecimalField(label='Promedio')
+    asignatura = forms.ModelChoiceField(queryset=None, label='Cursos Desaprobados')
+
+    def __init__(self, *args, **kwargs):
+        # llamamos al metodo padre mediante el metodo super y sobreescribir
+        super(RegistrarMatriculaForm, self).__init__(*args, **kwargs)
+        # *args = ??
+        # **kwarg son los arqgumentos q se pasan por url
+        self.fields['alumno'].queryset = Alumno.objects.filter(user__username = '121314')
+        self.fields['asignatura'].queryset = Nota.objects.cursos_cargo()
+        #self.fields['promedio'].queryset = Nota.objects.promedio_alumno()
+    def clean_promedio(self):
+        promedio = self.cleaned_data['promedio']
+        if promedio > 20:
+            raise forms.ValidationError('Promedio Incorrecto 0<promedio <20')
+        return promedio

@@ -22,7 +22,8 @@ class Asignatura(models.Model):
 
     def __unicode__(self):
         return self.nombre
-
+        #consulta los cursos del modulo 1
+        #eturn self.filter(nambre='1', asignatura
 
 class Modulo(models.Model):
     nombre = models.CharField('nombre', max_length=50)
@@ -45,7 +46,7 @@ class ManagerNotas(models.Manager):
             #comprobamos si es menor o igual <= que la nota maxima desaprobatoria
             promedio__lte = 10,
             #filtramos la consulta por alumno
-            matricula__alumno__user__unsername = '121314'
+            matricula__alumno__user__username = '121314'
         )
     # funcion para verificar si un alumno tiene modulo aprobado    
     def condicion_aprobado(self):
@@ -55,6 +56,24 @@ class ManagerNotas(models.Manager):
         else:
             #el modulo es modulo aprobado
             return True
+
+    #funcion para devolver el promedio de un alumno en especifico
+    def promedio_alumno(self):
+        notas_alumno = self.filter(
+            matricula__alumno__user__username = '121314'
+            )
+        #toamos el query notas alumno y lo recorremos para calcular el promedio
+        i = 0
+        #declaramos una variable que sumara los promedios
+        suma_promedio = 0
+        #recorremos el query de notas del alumno
+        while i<notas_alumno.count():
+            #acumulamos los promedio en 'suma_promedio
+             suma_promedio = suma_promedio + notas_alumno[0].promedio
+             i+=1
+
+        #devolvemos el promedio general del alumno     
+        return suma_promedio/notas_alumno.count()
 
 class Nota(models.Model):
     matricula = models.ForeignKey('matricula.Matricula')
@@ -66,3 +85,6 @@ class Nota(models.Model):
     nota4 = models.CharField('PP4', max_length=20, default='--')
     promedio = models.DecimalField(max_digits=5, decimal_places=2)
     objects = ManagerNotas()
+
+    def __unicode__(self):
+        return self.asignatura.nombre

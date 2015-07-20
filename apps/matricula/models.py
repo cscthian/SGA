@@ -60,6 +60,11 @@ class ManagerMatricula(models.Manager):
             programacion__fin__gte=hoy,
             completado=False,
         )
+    def ultimo_modulo(self):
+        #listamos todas las matriculas del alumno 121314
+        matriculas = self.filter(alumno__user__username = '121314')
+        #retornamos el ultimo modulo
+        return matriculas[0].modulo
 
 
 class Matricula(models.Model):

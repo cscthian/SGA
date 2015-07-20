@@ -9,6 +9,7 @@ from .forms import *
 
 from .models import *
 from apps.users.models import User
+from apps.notas.models import *
 
 
 class InicioView(TemplateView):
@@ -198,6 +199,51 @@ class RegistrarPreMatricula(FormView):
 
         return super(RegistrarPreMatricula, self).form_valid(form)
 
+#clase para registrar la matricula de un alumno regular
+class RegistrarMatricula(FormView):
+    template_name = 'matricula/registrar_matricula.html'
+    form_class = RegistrarMatriculaForm
+    success_url = reverse_lazy('matricula_app:lista_matriculados')
+
+    def form_valid(self, form):
+       # recuperas el modulo que le corresponde
+        if Nota.objects.condicion_aprobado():
+            print '=============================================================='
+            print Nota.objects.condicion_aprobado()
+            modulo = Matricula.objects.ultimo_modulo()
+        else:
+            modulo = Matricula.objects.ultimo_modulo()
+            print modulo
+
+        print '=============================================================='
+        turno = form.cleaned_data['turno']
+        fecha = timezone.now() 
+
+        # recuperamos el semstre actual
+        programacion = Programacion.objects.all()[0]
+        alumno = form.cleaned_data['alumno']
+
+        matricula = Matricula(
+            alumno=alumno,
+            modulo=modulo,
+            turno=turno,
+            fecha_matricula=fecha,
+            programacion=programacion,
+        )
+        matricula.save()
+
+        nom_asig = form.cleaned_data['asignatura']
+        print '====================='
+        print nom_asig
+        asignatura = Asignatura.objects.filter(nombre = nom_asig)
+        print '**************'
+        print aisgnatura
+        cursocargo = CursosCargo(
+            matricula = matricula,
+            aisgnatura = asignatura,
+            )
+
+        return super(RegistrarMatricula, self).form_valid(form)
 
 class MatricularAlumno(TemplateView):
     template_name = 'matricula/matricular_alumno.html'

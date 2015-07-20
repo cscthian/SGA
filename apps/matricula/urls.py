@@ -101,4 +101,9 @@ urlpatterns = [
         views.HomeMatricula.as_view(),
         name='lista_matriculados'
     ),
+    url(
+        r'^registrar_matricula/$',
+        views.RegistrarMatricula.as_view(),
+        name='registrar_matricula'
+    ),
 ]

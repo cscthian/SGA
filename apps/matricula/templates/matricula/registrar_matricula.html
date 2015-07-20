@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    {{ matricula }}
+    {{ matricula.pk }}
+    Bienvenido al registro al Panel de Registro de Matricula
+    <form action="" method="POST">{% csrf_token %}
+        {{ form }}
+        <div class="row">
+            <div class="input-field col s12">
+                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">guardar
+                    <i class="mdi-content-send right"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
