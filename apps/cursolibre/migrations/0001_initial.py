@@ -53,6 +53,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('fecha', models.DateField()),
                 ('saldo', models.DecimalField(editable=False, max_digits=6, decimal_places=2)),
+                ('estado', models.BooleanField(default=False)),
             ],
         ),
     ]

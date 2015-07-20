@@ -58,7 +58,7 @@ class Horario(models.Model):
     hora_final = models.TimeField(blank=True, null=True)
 
     class Meta:
-        ordering = ['dia', 'hora_inicio']
+        ordering = ['hora_inicio']
         verbose_name_plural = 'Horarios'
         unique_together = (('dia', 'hora_inicio', 'hora_final'),)
 
@@ -122,6 +122,7 @@ class CargaAcademica(models.Model):
     asignatura = models.ForeignKey('notas.Asignatura')
     aula = models.ForeignKey(Aula)
     horario = models.ManyToManyField(Horario)
+    grupo = models.ForeignKey('matricula.Turno')
     programacion = models.ForeignKey('matricula.Programacion')
 
     objects = ManagerCargaAcademica()

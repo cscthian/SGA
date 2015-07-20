@@ -1,0 +1,93 @@
+{% extends "home/base_index.html" %}
+
+{% load  staticfiles%}
+
+{% block title %}Pre-Matricula curso libre{% endblock title %}
+
+{% block content %}
+    {% include "home/header.html" %}
+    <div class="container">
+        <div class="row">
+            {% if form.errors %}
+                <div class="card-panel red lighten-1">
+                    <span class="white-text"> {{ form.errors }} </span>
+                </div>
+                <div class="divider"></div>
+            {% endif %}
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="card-panel">
+                    <div class="row">
+                        <form class="col s12" method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    {{ form.first_name }}
+                                    {{ form.first_name.label_tag }}
+                                </div>
+                                <div class="input-field col s6">
+                                    {{ form.last_name }}
+                                    {{ form.last_name.label_tag }}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    {{ form.username }}
+                                    {{ form.username.label_tag }}
+                                </div>
+                                <div class="input-field col s6">
+                                    {{ form.date_birth }}
+                                    {{ form.date_birth.label_tag }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    {{ form.email }}
+                                    {{ form.email.label_tag }}
+                                </div>
+                                <div class="input-field col s6">
+                                    {{ form.address }}
+                                    {{ form.address.label_tag }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    {{ form.phone }}
+                                    {{ form.phone.label_tag }}
+                                </div>
+                                <div class="input-field col s6">
+                                    {{ form.gender }}
+                                    {{ form.gender.label_tag }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="file-field input-field col s12">
+                                    <input class="file-path validate" type="text"/>
+                                    <div class="btn">
+                                        <span>Foto</span>
+                                        {{ form.avatar }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Inscribirse
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- fin de card-panel -->
+
+            </div>
+        </div><!-- fin de row -->
+        </div>
+    </div>
+    {% include "home/footer.html" %}
+{% endblock content %}

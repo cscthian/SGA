@@ -1,0 +1,36 @@
+{% extends "home/base_index.html" %}
+
+{% load  staticfiles%}
+
+{% block title %}Instituto de Sistema Cusco ISC{% endblock title %}
+
+{% block content %}
+    {% include "home/header.html" %}
+    <div class="container panel-container">
+        <div class="row">
+            <div class="col s12">
+                <h5>Inscribirse: al curso {{ asignaturalibre }}</h5>    
+            </div>
+        </div>
+
+        <div class="divider"></div>
+        
+        <div class="row">
+            <div class="col s12 m6 offset-m3">
+                <div class="card-panel grey lighten-5 z-depth-1">
+                    <div class="row valign-wrapper">
+                        <form method="POST">{% csrf_token %}
+                            {{ form }}
+                            <div class="col s12 center">
+                                <button class="waves-effect waves-light btn btn-panel" type="submit" name="action">Inscribirse</button>
+                            </div>
+                        </form>                        
+                    </div>
+                </div><!-- fin de card-panel -->
+
+            </div>
+        </div><!-- fin de row -->
+        
+    </div><!-- fin de panel-container -->
+    {% include "home/footer.html" %}
+{% endblock content %}

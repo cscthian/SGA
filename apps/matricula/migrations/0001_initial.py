@@ -39,7 +39,6 @@ class Migration(migrations.Migration):
             name='Matricula',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('turno', models.CharField(max_length=2, choices=[(b'm1', b'7:00 am - 11:30 am'), (b'm2', b'8:30 am - 1:00 pm'), (b't1', b'1:00 pm - 5:30 pm'), (b'n1', b'5:30 pm - 10:00 pm')])),
                 ('fecha_matricula', models.DateTimeField()),
                 ('estado_matricula', models.BooleanField(default=False)),
                 ('saldo', models.DecimalField(default=600, max_digits=12, decimal_places=2)),
@@ -61,5 +60,14 @@ class Migration(migrations.Migration):
                 'ordering': ['inicio'],
                 'verbose_name_plural': 'Programaciones',
             },
+        ),
+        migrations.CreateModel(
+            name='Turno',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('grupo', models.CharField(max_length=1)),
+                ('hora_inicio', models.TimeField()),
+                ('hora_fin', models.TimeField()),
+            ],
         ),
     ]

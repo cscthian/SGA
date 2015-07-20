@@ -1,10 +1,14 @@
 # -*- encoding: utf-8 -*-
 from django import forms
 from django.forms.models import ModelMultipleChoiceField
+
 from .models import Horario, Aula, Docente, CargaAcademica
+
 from apps.matricula.models import Matricula
 
 from apps.users.forms import RegistroUserForm
+
+from datetime import datetime
 
 
 class DniForm(forms.Form):
@@ -97,11 +101,24 @@ class AsistenciaAlumnoForm(forms.Form):
         required=False,
     )
 
-    def __init__(self, pk, *args, **kwargs):
+    def __init__(self, pk, user, *args, **kwargs):
         super(AsistenciaAlumnoForm, self).__init__(*args, **kwargs)
         print '============='
+        hoy = datetime.now()
+        hora = datetime.time(hoy)
         asignatura = pk
-        alumnos = Matricula.objects.filter(modulo__carrera__pk=asignatura)
+        docente = user
+        carga = CargaAcademica.objects.carga_docente(docente)
+        turno = carga.filter(
+            asignatura=pk,
+            horario__hora_inicio__lte=hora,
+            horario__hora__final__gte=hora,
+        )[0]
+        print turno
+        print turno.grupo
+        alumnos = Matricula.objects.filter(
+            modulo__carrera__pk=asignatura,
+        )
 
         self.fields['alumnos'].queryset = Docente.objects.all()
         print kwargs

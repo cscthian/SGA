@@ -73,7 +73,7 @@ class Migration(migrations.Migration):
                 ('hora_final', models.TimeField(null=True, blank=True)),
             ],
             options={
-                'ordering': ['dia', 'hora_inicio'],
+                'ordering': ['hora_inicio'],
                 'verbose_name_plural': 'Horarios',
             },
         ),

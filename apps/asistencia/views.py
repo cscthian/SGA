@@ -75,7 +75,8 @@ class AsistenciaAlumno(FormView):
     def get_form_kwargs(self):
         kwargs = super(AsistenciaAlumno, self).get_form_kwargs()
         kwargs.update({
-            'pk': self.kwargs.get('pk', 0)
+            'pk': self.kwargs.get('pk', 0),
+            'user': self.request.user,
         })
         return kwargs
 

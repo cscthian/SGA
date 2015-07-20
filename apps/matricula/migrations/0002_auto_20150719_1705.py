@@ -29,6 +29,11 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(default=1, blank=True, to='pagos.Descuento', null=True),
         ),
         migrations.AddField(
+            model_name='matricula',
+            name='turno',
+            field=models.ForeignKey(to='matricula.Turno'),
+        ),
+        migrations.AddField(
             model_name='cursoscargo',
             name='aisgnatura',
             field=models.ForeignKey(to='notas.Asignatura'),

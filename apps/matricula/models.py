@@ -62,6 +62,15 @@ class ManagerMatricula(models.Manager):
         )
 
 
+class Turno(models.Model):
+    grupo = models.CharField(max_length=1)
+    hora_inicio = models.TimeField()
+    hora_fin = models.TimeField()
+
+    def __unicode__(self):
+        return "%s - %s" % (str(self.hora_inicio), str(self.hora_fin))
+
+
 class Matricula(models.Model):
     TURNO_CHOICES = (
         ('m1', '7:00 am - 11:30 am'),
@@ -72,7 +81,7 @@ class Matricula(models.Model):
 
     alumno = models.ForeignKey(Alumno)
     modulo = models.ForeignKey(Modulo)
-    turno = models.CharField(max_length=2, choices=TURNO_CHOICES)
+    turno = models.ForeignKey(Turno)
     fecha_matricula = models.DateTimeField()
     estado_matricula = models.BooleanField(default=False)
     saldo = models.DecimalField(max_digits=12, decimal_places=2, default=600,)
@@ -85,6 +94,7 @@ class Matricula(models.Model):
 
     def __unicode__(self):
         return str(self.alumno)
+
 
 class CursosCargo(models.Model):
     matricula = models.ForeignKey(Matricula)

@@ -1,10 +1,15 @@
 from django.conf.urls import url
+from . import views
 
 urlpatterns = [
-    # urls para la aplicacion asistencia
-    # url(
-    #     r'^panel/admin/aula/$',
-    #     views.PanelAulaView.as_view(),
-    #     name='panel_aula'
-    # ),
+    url(
+        r'^curso/libre/(?P<pk>\d+)/$',
+        views.MatriculaCurso.as_view(),
+        name='matricula_cursolibre'
+    ),
+    url(
+        r'^curso/libre/matricula/$',
+        views.PreMatriculaCurso.as_view(),
+        name='pre_cursolibre'
+    ),
 ]
