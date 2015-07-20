@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
         ('asistencia', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('notas', '0001_initial'),
-        ('matricula', '0002_auto_20150719_1705'),
+        ('matricula', '0002_auto_20150720_1245'),
     ]
 
     operations = [
@@ -34,6 +34,11 @@ class Migration(migrations.Migration):
             model_name='cargaacademica',
             name='docente',
             field=models.ForeignKey(to='asistencia.Docente'),
+        ),
+        migrations.AddField(
+            model_name='cargaacademica',
+            name='grupo',
+            field=models.ForeignKey(to='matricula.Turno'),
         ),
         migrations.AddField(
             model_name='cargaacademica',

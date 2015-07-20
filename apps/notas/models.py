@@ -47,10 +47,6 @@ class ManagerNotas(models.Manager):
             promedio__lte = 10,
             #filtramos la consulta por alumno
             matricula__alumno__user__username = '121314'
-
-        #filtramos la consulta por alumno
-
-            matricula__alumno__user__unsername = '121314'
         )
         #funcion para verificar si un alumno tiene modulo aprobado
 
