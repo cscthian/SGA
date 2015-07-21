@@ -75,12 +75,6 @@ class Turno(models.Model):
 
 
 class Matricula(models.Model):
-    TURNO_CHOICES = (
-        ('m1', '7:00 am - 11:30 am'),
-        ('m2', '8:30 am - 1:00 pm'),
-        ('t1', '1:00 pm - 5:30 pm'),
-        ('n1', '5:30 pm - 10:00 pm'),
-    )
 
     alumno = models.ForeignKey(Alumno)
     modulo = models.ForeignKey(Modulo)
