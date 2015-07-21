@@ -93,6 +93,8 @@ class ManagerCargaAcademica(models.Manager):
             docente__user__username=docente,
         ).distinct()
 
+    
+
     def carga_docente(self, docente):
         dias = [
             'lunes', 'martes', 'miercoles',

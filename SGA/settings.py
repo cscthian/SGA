@@ -1,6 +1,6 @@
 from unipath import Path
 
-BASE_DIR = Path(__file__).ancestor(3)
+BASE_DIR = Path(__file__).ancestor(2)
 
 SECRET_KEY = '$96a-z!pd*tn!z8kodyuo1)yg#)xjq)xbe=g&87vqkqwdz4$0)'
 
@@ -94,6 +94,8 @@ AUTH_USER_MODEL = 'users.User'
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [BASE_DIR.child('static')]
 
 MEDIA_URL = '/media/'
 

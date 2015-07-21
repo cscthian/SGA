@@ -1,10 +1,14 @@
 #from django.shortcuts import render
-from django.views.generic import TemplateView,DetailView,CreateView,UpdateView,DeleteView
-#from django.views.generic.edit import FormView
+from django.db.models import F
+
+from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormView
+
 from django.views.generic.detail import SingleObjectMixin
-from .models import Asignatura , Modulo
+
 from django.core.urlresolvers import reverse_lazy, reverse
-#from django.http import HttpResponseRedirect
+
+from .models import Asignatura, Modulo
 from .forms import AsignaturaForm, ModuloForm
 # Create your views here.
 
@@ -79,3 +83,20 @@ class EliminarModulo(DeleteView):
     template_name = 'mantenimientos/modulo/eliminar_modulo.html'
     model = Modulo
     success_url = reverse_lazy('notas_app:panel_modulo')
+
+
+class NotaView(TemplateView):
+    template_name = 'notas/notas_parciales.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(NotaView, self).get_context_data(**kwargs)
+        print '===hola___==='
+        grupo_pk = kwargs.get('grupo', 0)
+        asignatura_pk = kwargs.get('pk', 0)
+        print grupo_pk
+        print asignatura_pk
+        asignatura = Asignatura.objects.filter(pk=asignatura_pk).annotate(
+            horas=F('horas_practica') + F('horas_teorica')
+        ).first()
+        context['asignatura'] = asignatura
+        return context

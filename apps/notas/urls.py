@@ -59,4 +59,9 @@ urlpatterns = [
         views.EliminarModulo.as_view(),
         name='eliminar_modulo'
     ),
+    url(
+        r'^panel/docente/notas/(?P<pk>\d+)/(?P<grupo>\d+)/$',
+        views.NotaView.as_view(),
+        name='notas_parciales'
+    ),
 ]
