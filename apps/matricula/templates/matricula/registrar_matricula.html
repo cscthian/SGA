@@ -23,9 +23,28 @@
             <div class="col s12 m12 l12">
                 <div class="card-panel">
                     <div class="row">
+                        
+                        <p>Bienvenido: {{matricula}}</p>
+                        <p>Modulos Cursados: {{modulo}}</p>
+                        <p>Promedio: {{promedio}}</p>
                         <form class="col s12" method="POST" enctype="multipart/form-data">{% csrf_token %}
-                            
-                            {{ form.as_p }}
+                            <div class="row">
+                                <div class="input-field col s12">
+                                  {{form.turno}}
+                                  {{form.turno.label_tag}}
+                                </div>
+                            </div>
+
+                                {{ form.asignatura.label_tag }}
+
+
+                            {% for asignatura in form.asignatura %}
+                                <p>
+                                    {{ asignatura.tag }}
+                                    <label for="{{ asignatura.id_for_label }}">
+                                    {{ asignatura.choice_label }}</label>
+                                </p>
+                            {% endfor %}
                             
                             <div class="row">
                                 <div class="input-field col s12">

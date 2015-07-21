@@ -64,9 +64,9 @@ class PreMatriculaForm(UserForm):
 
 class RegistrarMatriculaForm(forms.Form):
     '''clase para registrar una matricula regular'''
-    alumno = forms.ModelChoiceField(queryset=None, label='Bienvenido : ')
+    #alumno = forms.ModelChoiceField(queryset=None, label='Bienvenido : ')
     turno = forms.ModelChoiceField(label='turno', queryset=None)
-    modulo = forms.CharField(label='modulo')
+    #modulo = forms.CharField(label='modulo')
     #promedio = forms.ModelChoiceField(label='Promedio')
     asignatura = forms.ModelMultipleChoiceField(
         widget=forms.CheckboxSelectMultiple,
@@ -74,16 +74,16 @@ class RegistrarMatriculaForm(forms.Form):
         required=False,
         )
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self,user,*args, **kwargs):
         # llamamos al metodo padre mediante el metodo super y sobreescribir
         super(RegistrarMatriculaForm, self).__init__(*args, **kwargs)
         # **kwarg son los arqgumentos q se pasan por url
-        self.fields['alumno'].queryset = Alumno.objects.filter(user__username = '1111')
-        self.fields['asignatura'].queryset = Nota.objects.cursos_cargo()
+        #self.fields['alumno'].queryset = Alumno.objects.filter(user__username=user)
+        self.fields['asignatura'].queryset = Nota.objects.cursos_cargo(user)
         self.fields['turno'].queryset = Turno.objects.all()
         #self.fields['promedio'].queryset = Nota.objects.promedio_alumno()
-    def clean_promedio(self):
-        promedio = self.cleaned_data['promedio']
-        if promedio > 20:
-            raise forms.ValidationError('Promedio Incorrecto 0<promedio <20')
-        return promedio
+    # def clean_promedio(self):
+    #     promedio = self.cleaned_data['promedio']
+    #     if promedio > 20:
+    #         raise forms.ValidationError('Promedio Incorrecto 0<promedio <20')
+    #     return promedio

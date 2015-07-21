@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, DetailView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormMixin, FormView
 from django.core.urlresolvers import reverse_lazy
 from apps.cursolibre.models import Ciclo
 
@@ -228,6 +228,24 @@ class RegistrarMatricula(FormView):
     form_class = RegistrarMatriculaForm
     success_url = reverse_lazy('matricula_app:lista_matriculados')
 
+    def get_context_data(self, **kwargs):
+        context = super(RegistrarMatricula, self).get_context_data(**kwargs)
+        user = self.request.user
+        matricula = Matricula.objects.get(alumno__user__username=user)
+        context['matricula'] = matricula
+        modulo = Matricula.objects.ultimo_modulo(user)
+        context['modulo'] = modulo
+        promedio = Nota.objects.promedio_alumno(user)
+        context['promedio'] = promedio
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(RegistrarMatricula, self).get_form_kwargs()
+        kwargs.update({
+            'user': self.request.user,
+        })
+        return kwargs
+
     def form_valid(self, form):
        # recuperas el modulo que le corresponde
         if Nota.objects.condicion_aprobado():
@@ -264,6 +282,7 @@ class RegistrarMatricula(FormView):
                     )
                 cursocargo.save()
         return super(RegistrarMatricula, self).form_valid(form)
+
 
 class MatricularAlumno(TemplateView):
     template_name = 'matricula/matricular_alumno.html'

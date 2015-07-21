@@ -49,12 +49,12 @@ class Modulo(models.Model):
 
 class ManagerNotas(models.Manager):
 
-    def cursos_cargo(self):
+    def cursos_cargo(self,kwalumno):
         notas_desaprobadas = self.filter(
             #comprobamos si es menor o igual <= que lanota maxima desaprobatoria
             promedio__lte = 10,
             #filtramos la consulta por alumno
-            matricula__alumno__user__username = '1111'
+            matricula__alumno__user__username=kwalumno
         )
         #notas_desaprobadas.asignatura.all()
         #funcion para verificar si un alumno tiene modulo aprobado
@@ -69,9 +69,9 @@ class ManagerNotas(models.Manager):
             return True
 
     #funcion para devolver el promedio de un alumno en especifico
-    def promedio_alumno(self):
+    def promedio_alumno(self, kwalumno):
         notas_alumno = self.filter(
-            matricula__alumno__user__username = '1111'
+            matricula__alumno__user__username=kwalumno
             )
         #toamos el query notas alumno y lo recorremos para calcular el promedio
         i = 0
