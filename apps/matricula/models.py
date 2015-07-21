@@ -3,9 +3,7 @@ from django.db import models
 from apps.notas.models import Modulo, Asignatura
 from django.conf import settings
 from django.template.defaultfilters import slugify
-
 from datetime import date
-
 from django.core.validators import RegexValidator
 
 
