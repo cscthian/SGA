@@ -22,10 +22,19 @@ class Asignatura(models.Model):
 
     def __unicode__(self):
         return self.nombre
-
+        #consulta los cursos del modulo 1
+        #eturn self.filter(nambre='1', asignatura
 
 class Modulo(models.Model):
-    nombre = models.CharField('nombre', max_length=50)
+    MODULO_CHOICES = (
+        ('1', 'Modulo 1'),
+        ('2', 'Modulo 2'),
+        ('3', 'Modulo 3'),
+        ('4', 'Modulo 4'),
+        ('5', 'Modulo 5'),
+        ('6', 'Modulo 6'),
+    )
+    nombre = models.CharField('Nombre', max_length=2, choices=MODULO_CHOICES)
     carrera = models.ForeignKey('matricula.Carrera')
     asignatura = models.ManyToManyField(Asignatura)
     costo = models.DecimalField(max_digits=7, decimal_places=2)
@@ -40,16 +49,16 @@ class Modulo(models.Model):
 
 class ManagerNotas(models.Manager):
 
-    def cursos_cargo(self):
-        return self.filter(
+    def cursos_cargo(self,kwalumno):
+        notas_desaprobadas = self.filter(
             #comprobamos si es menor o igual <= que lanota maxima desaprobatoria
             promedio__lte = 10,
-
-        #filtramos la consulta por alumno
-
-            matricula__alumno__user__unsername = '121314'
+            #filtramos la consulta por alumno
+            matricula__alumno__user__username=kwalumno
         )
+        #notas_desaprobadas.asignatura.all()
         #funcion para verificar si un alumno tiene modulo aprobado
+        return notas_desaprobadas
 
     def condicion_aprobado(self):
         #verificamos si desaprobo mas de un curso
@@ -59,6 +68,23 @@ class ManagerNotas(models.Manager):
             #el modulo es modulo aprobado
             return True
 
+    #funcion para devolver el promedio de un alumno en especifico
+    def promedio_alumno(self, kwalumno):
+        notas_alumno = self.filter(
+            matricula__alumno__user__username=kwalumno
+            )
+        #toamos el query notas alumno y lo recorremos para calcular el promedio
+        i = 0
+        #declaramos una variable que sumara los promedios
+        suma_promedio = 0
+        #recorremos el query de notas del alumno
+        while i<notas_alumno.count():
+            #acumulamos los promedio en 'suma_promedio
+             suma_promedio = suma_promedio + notas_alumno[0].promedio
+             i+=1
+
+        #devolvemos el promedio general del alumno     
+        return suma_promedio/notas_alumno.count()
 
 class Nota(models.Model):
     matricula = models.ForeignKey('matricula.Matricula')
@@ -70,3 +96,6 @@ class Nota(models.Model):
     nota4 = models.CharField('PP4', max_length=20, default='--')
     promedio = models.DecimalField(max_digits=5, decimal_places=2)
     objects = ManagerNotas()
+
+    def __unicode__(self):
+        return self.asignatura.nombre

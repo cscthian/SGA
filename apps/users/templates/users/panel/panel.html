@@ -18,7 +18,7 @@
                         <li class="divider"></li>
                         <li><a href="{% url 'asistencia_app:panel_horario' %}">Horarios</a></li>
                         <li><a href="{% url 'asistencia_app:panel_aula' %}">Aulas</a>
-                        </li>
+                        <li><a href="{% url 'matricula_app:home_programacion' %}">Programacion</a></li>
                         <li class="divider"></li>
                         <li><a href="{% url 'pagos_app:panel_descuento' %}">Descuentos</a></li>
                         <li><a href="{% url 'pagos_app:panel_estructurapagos' %}">Estructura de pagos</a></li>
@@ -28,22 +28,21 @@
             <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Procesos</a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a href="{% url 'matricula_app:matricular_alumno' %}">Matricula</a></li>
-                        <li><a href="{% url 'matricula_app:lista_matriculados' %}">Pre Matricula</a></li>
+                        <li><a href="{% url 'matricula_app:registrar_matricula' %}">Matricula</a></li>
+                        <li><a href="{% url 'matricula_app:pre_matricula' %}">Pre Matricula</a></li>
                         <li><a href="buttons.html">Asistencia Docente</a></li>
                         <li><a href="cards.html">Asistencia Admintrativo</a></li>
-                        <li><a href="{% url 'matricula_app:matricular_alumno' %}">Pagos</a></li>
                     </ul>
                 </div>
             </li>
             <li class="bold"><a class="collapsible-header waves-effect waves-teal">Consultas</a>
               <div class="collapsible-body">
                     <ul>
-                        <li><a href="collapsible.html">Collapsible</a></li>
-                        <li><a href="dialogs.html">Dialogs</a></li>
-                        <li><a href="dropdown.html">Dropdown</a></li>
-                        <li><a href="media.html">Media</a></li>
-                        <li><a href="modals.html">Modals</a></li>
+                        <li><a href="{% url 'matricula_app:matricula_semestre' %}">Matricula Por Semestre</a></li>
+                        <li><a href="#">Dialogs</a></li>
+                        <li><a href="#">Dropdown</a></li>
+                        <li><a href="#">Media</a></li>
+                        <li><a href="#">Modals</a></li>
                     </ul>
               </div>
             </li>

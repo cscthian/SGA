@@ -101,4 +101,17 @@ urlpatterns = [
         views.HomeMatricula.as_view(),
         name='lista_matriculados'
     ),
+    url(
+        r'^registrar_matricula/$',
+        views.RegistrarMatricula.as_view(),
+        name='registrar_matricula'
+    ),
+    ######### fin url Matricula #########################
+    ############ url Consultas ############################
+    url(
+        r'^consultas/matricula_semestre/$',
+        views.MatriculaPorSemestre.as_view(),
+        name='matricula_semestre'
+    ),
+    ########### fin url Consultas #########################
 ]

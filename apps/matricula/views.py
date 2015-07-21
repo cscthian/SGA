@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, DetailView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormMixin, FormView
 from django.core.urlresolvers import reverse_lazy
 from apps.cursolibre.models import Ciclo
 
@@ -10,6 +10,7 @@ from .forms import *
 
 from .models import *
 from apps.users.models import User
+from apps.notas.models import *
 
 
 class InicioView(TemplateView):
@@ -203,13 +204,12 @@ class RegistrarPreMatricula(FormView):
 
         # recuperas el primer modulo de la carrera
         modulo = Modulo.objects.filter(carrera__nombre=carrera, nombre='1')[0]
-        print '=============================================================='
-        print modulo.pk
         turno = form.cleaned_data['turno']
         fecha = timezone.now()
 
         # recuperamos el semstre actual
-        programacion = Programacion.objects.all()[0]
+        tamanio = Programacion.objects.all().count()
+        programacion = Programacion.objects.all()[tamanio-1]
 
         pre_matricula = Matricula(
             alumno=alumno,
@@ -221,6 +221,67 @@ class RegistrarPreMatricula(FormView):
         pre_matricula.save()
 
         return super(RegistrarPreMatricula, self).form_valid(form)
+
+#clase para registrar la matricula de un alumno regular
+class RegistrarMatricula(FormView):
+    template_name = 'matricula/registrar_matricula.html'
+    form_class = RegistrarMatriculaForm
+    success_url = reverse_lazy('matricula_app:lista_matriculados')
+
+    def get_context_data(self, **kwargs):
+        context = super(RegistrarMatricula, self).get_context_data(**kwargs)
+        user = self.request.user
+        matricula = Matricula.objects.get(alumno__user__username=user)
+        context['matricula'] = matricula
+        modulo = Matricula.objects.ultimo_modulo(user)
+        context['modulo'] = modulo
+        promedio = Nota.objects.promedio_alumno(user)
+        context['promedio'] = promedio
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(RegistrarMatricula, self).get_form_kwargs()
+        kwargs.update({
+            'user': self.request.user,
+        })
+        return kwargs
+
+    def form_valid(self, form):
+       # recuperas el modulo que le corresponde
+        if Nota.objects.condicion_aprobado():
+            modulo = Matricula.objects.ultimo_modulo()
+        else:
+            #generamos el nuevo modulo
+            nuevo_modulo = int(Matricula.objects.ultimo_modulo()) + 1
+            # recuperamos el nuevo modulo
+            modulo = Modulo.objects.get(nombre = nuevo_modulo)
+
+        turno = form.cleaned_data['turno']
+        fecha = timezone.now() 
+
+        # recuperamos el semstre actual
+        programacion = Programacion.objects.all()[0]
+        alumno = form.cleaned_data['alumno']
+
+        matricula = Matricula(
+            alumno=alumno,
+            modulo=modulo,
+            turno=turno,
+            fecha_matricula=fecha,
+            programacion=programacion,
+        )
+        matricula.save()
+
+        asignaturas = form.cleaned_data['asignatura']
+
+        if asignaturas.count()>0: 
+            for asignatura in asignaturas: 
+                cursocargo = CursosCargo(
+                    matricula = matricula,
+                    aisgnatura = asignatura.asignatura,
+                    )
+                cursocargo.save()
+        return super(RegistrarMatricula, self).form_valid(form)
 
 
 class MatricularAlumno(TemplateView):
@@ -237,4 +298,17 @@ class MatricularAlumno(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MatricularAlumno, self).get_context_data(**kwargs)
         context['form'] = DniForm
+        return context
+
+
+""" ================ views para consultas ========================="""
+
+class MatriculaPorSemestre(TemplateView):
+    '''clase que devolvera la lista de matriculados e un semestre'''
+    template_name = 'consultas/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MatriculaPorSemestre, self).get_context_data(**kwargs)
+        context['matriculas'] = Matricula.objects.all().order_by('modulo')
+        context['cantidad'] = context['matriculas'].count()
         return context
