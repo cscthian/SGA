@@ -52,14 +52,18 @@ urlpatterns = [
         name='asistencia_docente'
     ),
     url(
-        r'^asistencia/docente/(?P<pk>\d+)/$',
+        r'^panel/docente/asistencia/docente/(?P<pk>\d+)/$',
         views.AsistenciaDocenteDetalle.as_view(),
         name='asistencia_docente_detalle'
     ),
     url(
-        r'^asistencia/alumno/(?P<pk>\d+)/$',
-        views.AsistenciaAlumno.as_view(),
+        r'^panel/docente/asistencia/alumno/(?P<pk>\d+)/(?P<grupo>\d+)/$',
+        views.AsistenciaAlumnoView.as_view(),
         name='asistencia_alumno'
     ),
-
+    # url(
+    #     r'^asistencia/alumno/(?P<pk>\d+)/$',
+    #     views.AsistenciaAlumno.as_view(),
+    #     name='asistencia_alumno'
+    # ),
 ]

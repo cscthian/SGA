@@ -3,13 +3,17 @@ from django.views.generic import TemplateView, DetailView, CreateView, UpdateVie
 from django.views.generic.edit import FormView, FormMixin
 from django.views.generic.detail import SingleObjectMixin
 
-from .models import Horario, Aula, Docente, CargaAcademica
+from .models import Horario, Aula, Docente, CargaAcademica, AsistenciaAlumno, AsistenciaDocente
+
 from apps.users.models import User
+from apps.notas.models import Asignatura
 
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
 from .forms import DniForm, HorarioForm, AulaForm, DocenteForm, AsistenciaAlumnoForm
+
+from datetime import datetime
 
 
 class AsistenciaDocente(FormView):
@@ -67,24 +71,39 @@ class AsistenciaDocenteDetalle(FormMixin, DetailView):
         return super(AsistenciaDocenteDetalle, self).form_valid(form)
 
 
-class AsistenciaAlumno(FormView):
+class AsistenciaAlumnoView(FormView):
     form_class = AsistenciaAlumnoForm
     template_name = 'asistencia/asistencia_alumno.html'
-    success_url = '/'
+    success_url = reverse_lazy('notas_app:panel_docente')
 
     def get_form_kwargs(self):
-        kwargs = super(AsistenciaAlumno, self).get_form_kwargs()
+        kwargs = super(AsistenciaAlumnoView, self).get_form_kwargs()
         kwargs.update({
+            'grupo': self.kwargs.get('grupo', 0),
             'pk': self.kwargs.get('pk', 0),
             'user': self.request.user,
         })
         return kwargs
 
     def form_valid(self, form):
-        alumnos = form.cleaned_data['alumnos']
-        for alumno in alumnos:
-            print alumno
-        return super(AsistenciaAlumno, self).form_valid(form)
+        user = self.request.user
+        docente = Docente.objects.get(user=user)
+        print '==============dicente==========='
+        print docente
+        matriculas = form.cleaned_data['alumnos']
+        fecha = datetime.now()
+        asignatura_pk = self.kwargs.get('pk', 0)
+        asignatura = Asignatura.objects.get(pk=asignatura_pk)
+        for alumno in matriculas:
+            asistencia = AsistenciaAlumno(
+                docente=docente,
+                matricula=alumno,
+                asignatura=asignatura,
+                estado=True,
+                fecha=fecha,
+            )
+            asistencia.save()
+        return super(AsistenciaAlumnoView, self).form_valid(form)
 
 
 class PanelAulaView(TemplateView):

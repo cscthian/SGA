@@ -94,6 +94,16 @@ class DocenteForm(RegistroUserForm):
         )
 
 
+class GrupoForm(forms.Form):
+    turno = forms.ModelChoiceField(
+        queryset=None,
+        required=True,
+    )
+
+    def __init__(self, user, *args, **kwargs):
+        super(GrupoForm, self).__init__(*args, **kwargs)
+
+
 class AsistenciaAlumnoForm(forms.Form):
     alumnos = forms.ModelMultipleChoiceField(
         widget=forms.CheckboxSelectMultiple,
@@ -101,24 +111,17 @@ class AsistenciaAlumnoForm(forms.Form):
         required=False,
     )
 
-    def __init__(self, pk, user, *args, **kwargs):
+    def __init__(self, pk, user, grupo, *args, **kwargs):
         super(AsistenciaAlumnoForm, self).__init__(*args, **kwargs)
-        print '============='
         hoy = datetime.now()
-        hora = datetime.time(hoy)
         asignatura = pk
         docente = user
-        carga = CargaAcademica.objects.carga_docente(docente)
-        turno = carga.filter(
-            asignatura=pk,
-            horario__hora_inicio__lte=hora,
-            horario__hora__final__gte=hora,
-        )[0]
-        print turno
-        print turno.grupo
+
         alumnos = Matricula.objects.filter(
-            modulo__carrera__pk=asignatura,
+            modulo__asignatura=asignatura,
+            turno=grupo,
+            programacion__inicio__lte=hoy,
+            programacion__fin__gte=hoy,
         )
 
-        self.fields['alumnos'].queryset = Docente.objects.all()
-        print kwargs
+        self.fields['alumnos'].queryset = alumnos

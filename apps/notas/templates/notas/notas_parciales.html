@@ -1,0 +1,37 @@
+{% extends "panel_docente/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+
+
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <div class="card-panel">
+                    <div class="row">
+                        {{ asignatura }}
+                        {{ asignatura.horas }}
+                        {% if asignatura.horas == 8  %}
+                            <a href="">1</a>
+                            <a href="">2</a>
+                            <a href="">3</a>
+                            <a href="">4</a>
+                        {% endif %}
+                        {% if asignatura.horas == 6  %}
+                            <a href="">1</a>
+                            <a href="">2</a>
+                            <a href="">3</a>
+                        {% endif %}
+                        {% if asignatura.horas <= 4  %}
+                            <a href="">1</a>
+                            <a href="">2</a>
+                        {% endif %}
+
+                    </div>
+                </div><!-- fin de card-panel -->
+
+            </div>
+        </div><!-- fin de row -->
+        
+    </div><!-- fin de panel-container -->
+{% endblock contenido_panel %}

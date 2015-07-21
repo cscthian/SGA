@@ -55,3 +55,26 @@ docs/_build/
 
 # PyBuilder
 target/
+
+apps/asistencia/migrations/
+apps/asistencia/migrations/
+apps/cursolibre/migrations/
+apps/cursolibre/migrations/
+apps/matricula/migrations/
+apps/matricula/migrations/
+apps/matricula/migrations/
+apps/notas/migrations/
+apps/pagos/migrations/
+apps/users/migrations/
+media/
+apps/asistencia/migrations/*
+apps/asistencia/migrations/*
+apps/cursolibre/migrations/*
+apps/cursolibre/migrations/*
+apps/matricula/migrations/*
+apps/matricula/migrations/*
+apps/matricula/migrations/*
+apps/notas/migrations/*
+apps/pagos/migrations/*
+apps/users/migrations/*
+media/*
