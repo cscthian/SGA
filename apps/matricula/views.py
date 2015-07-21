@@ -248,11 +248,12 @@ class RegistrarMatricula(FormView):
 
     def form_valid(self, form):
        # recuperas el modulo que le corresponde
-        if Nota.objects.condicion_aprobado():
-            modulo = Matricula.objects.ultimo_modulo()
+        usuario = self.request.user
+        if Nota.objects.condicion_aprobado(usuario):
+            modulo = Matricula.objects.ultimo_modulo(usuario)
         else:
             #generamos el nuevo modulo
-            nuevo_modulo = int(Matricula.objects.ultimo_modulo()) + 1
+            nuevo_modulo = int(Matricula.objects.ultimo_modulo(usuario)) + 1
             # recuperamos el nuevo modulo
             modulo = Modulo.objects.get(nombre = nuevo_modulo)
 
@@ -261,7 +262,7 @@ class RegistrarMatricula(FormView):
 
         # recuperamos el semstre actual
         programacion = Programacion.objects.all()[0]
-        alumno = form.cleaned_data['alumno']
+        alumno = Alumno.objects.get(user__username=usuario)
 
         matricula = Matricula(
             alumno=alumno,

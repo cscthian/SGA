@@ -77,13 +77,5 @@ class RegistrarMatriculaForm(forms.Form):
     def __init__(self,user,*args, **kwargs):
         # llamamos al metodo padre mediante el metodo super y sobreescribir
         super(RegistrarMatriculaForm, self).__init__(*args, **kwargs)
-        # **kwarg son los arqgumentos q se pasan por url
-        #self.fields['alumno'].queryset = Alumno.objects.filter(user__username=user)
         self.fields['asignatura'].queryset = Nota.objects.cursos_cargo(user)
         self.fields['turno'].queryset = Turno.objects.all()
-        #self.fields['promedio'].queryset = Nota.objects.promedio_alumno()
-    # def clean_promedio(self):
-    #     promedio = self.cleaned_data['promedio']
-    #     if promedio > 20:
-    #         raise forms.ValidationError('Promedio Incorrecto 0<promedio <20')
-    #     return promedio

@@ -60,9 +60,9 @@ class ManagerNotas(models.Manager):
         #funcion para verificar si un alumno tiene modulo aprobado
         return notas_desaprobadas
 
-    def condicion_aprobado(self):
+    def condicion_aprobado(self, kwalumno):
         #verificamos si desaprobo mas de un curso
-        if self.cursos_cargo().count() > 1:
+        if self.cursos_cargo(kwalumno).count() > 1:
             return False
         else:
             #el modulo es modulo aprobado
@@ -80,8 +80,8 @@ class ManagerNotas(models.Manager):
         #recorremos el query de notas del alumno
         while i<notas_alumno.count():
             #acumulamos los promedio en 'suma_promedio
-             suma_promedio = suma_promedio + notas_alumno[0].promedio
-             i+=1
+            suma_promedio = suma_promedio + notas_alumno[i].promedio
+            i+=1
 
         #devolvemos el promedio general del alumno     
         return suma_promedio/notas_alumno.count()
