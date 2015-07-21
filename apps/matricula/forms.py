@@ -39,14 +39,7 @@ class PreMatriculaForm(UserForm):
     '''clase para registra pre-matricula'''
 
     carrera_profesional = forms.ModelChoiceField(queryset=None)
-    TURNO_CHOICES = (
-        ('m1', '7:00 am - 11:30 am'),
-        ('m2', '8:30 am - 1:00 pm'),
-        ('t1', '1:00 pm - 5:30 pm'),
-        ('n2', '5:30 pm - 10:00 pm'),
-    )
-    turno = forms.ChoiceField(label='turno', choices=TURNO_CHOICES)
-
+    turno = forms.ModelChoiceField(label='turno', queryset=None)
     class Meta(UserForm.Meta):
         # campos q se van a mostar en el formulario pre_matricula
         fields = (
@@ -67,28 +60,27 @@ class PreMatriculaForm(UserForm):
         # *args = ??
         # **kwarg son los arqgumentos q se pasan por url
         self.fields['carrera_profesional'].queryset = Carrera.objects.all()
+        self.fields['turno'].queryset = Turno.objects.all()
 
 class RegistrarMatriculaForm(forms.Form):
     '''clase para registrar una matricula regular'''
-    TURNO_CHOICES = (
-        ('m1', '7:00 am - 11:30 am'),
-        ('m2', '8:30 am - 1:00 pm'),
-        ('t1', '1:00 pm - 5:30 pm'),
-        ('n2', '5:30 pm - 10:00 pm'),
-    )
     alumno = forms.ModelChoiceField(queryset=None, label='Bienvenido : ')
-    turno = forms.ChoiceField(label='turno', choices=TURNO_CHOICES)
+    turno = forms.ModelChoiceField(label='turno', queryset=None)
     modulo = forms.CharField(label='modulo')
-    promedio = forms.DecimalField(label='Promedio')
-    asignatura = forms.ModelChoiceField(queryset=None, label='Cursos Desaprobados')
+    #promedio = forms.ModelChoiceField(label='Promedio')
+    asignatura = forms.ModelMultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple,
+        queryset=None,
+        required=False,
+        )
 
     def __init__(self, *args, **kwargs):
         # llamamos al metodo padre mediante el metodo super y sobreescribir
         super(RegistrarMatriculaForm, self).__init__(*args, **kwargs)
-        # *args = ??
         # **kwarg son los arqgumentos q se pasan por url
-        self.fields['alumno'].queryset = Alumno.objects.filter(user__username = '121314')
+        self.fields['alumno'].queryset = Alumno.objects.filter(user__username = '1111')
         self.fields['asignatura'].queryset = Nota.objects.cursos_cargo()
+        self.fields['turno'].queryset = Turno.objects.all()
         #self.fields['promedio'].queryset = Nota.objects.promedio_alumno()
     def clean_promedio(self):
         promedio = self.cleaned_data['promedio']

@@ -31,7 +31,7 @@ class Programacion(models.Model):
 
     class Meta:
         verbose_name_plural = 'Programaciones'
-        ordering = ['inicio']
+        ordering = ['semestre']
 
     def __unicode__(self):
         return self.semestre
@@ -62,7 +62,7 @@ class ManagerMatricula(models.Manager):
         )
     def ultimo_modulo(self):
         #listamos todas las matriculas del alumno 121314
-        matriculas = self.filter(alumno__user__username = '121314')
+        matriculas = self.filter(alumno__user__username = '1111')
         #retornamos el ultimo modulo
         return matriculas[0].modulo
 
@@ -77,12 +77,6 @@ class Turno(models.Model):
 
 
 class Matricula(models.Model):
-    TURNO_CHOICES = (
-        ('m1', '7:00 am - 11:30 am'),
-        ('m2', '8:30 am - 1:00 pm'),
-        ('t1', '1:00 pm - 5:30 pm'),
-        ('n1', '5:30 pm - 10:00 pm'),
-    )
 
     alumno = models.ForeignKey(Alumno)
     modulo = models.ForeignKey(Modulo)
@@ -96,6 +90,11 @@ class Matricula(models.Model):
         'pagos.Descuento', blank=True, null=True, default=1)
 
     objects = ManagerMatricula()
+
+    def save(self, *args, **kwargs):
+        if self.modulo:
+            self.saldo = self.modulo.costo
+        super(Matricula, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return str(self.alumno)

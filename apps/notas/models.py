@@ -26,7 +26,15 @@ class Asignatura(models.Model):
         #eturn self.filter(nambre='1', asignatura
 
 class Modulo(models.Model):
-    nombre = models.CharField('nombre', max_length=50)
+    MODULO_CHOICES = (
+        ('1', 'Modulo 1'),
+        ('2', 'Modulo 2'),
+        ('3', 'Modulo 3'),
+        ('4', 'Modulo 4'),
+        ('5', 'Modulo 5'),
+        ('6', 'Modulo 6'),
+    )
+    nombre = models.CharField('Nombre', max_length=2, choices=MODULO_CHOICES)
     carrera = models.ForeignKey('matricula.Carrera')
     asignatura = models.ManyToManyField(Asignatura)
     costo = models.DecimalField(max_digits=7, decimal_places=2)
@@ -42,13 +50,15 @@ class Modulo(models.Model):
 class ManagerNotas(models.Manager):
 
     def cursos_cargo(self):
-        return self.filter(
+        notas_desaprobadas = self.filter(
             #comprobamos si es menor o igual <= que lanota maxima desaprobatoria
             promedio__lte = 10,
             #filtramos la consulta por alumno
-            matricula__alumno__user__username = '121314'
+            matricula__alumno__user__username = '1111'
         )
+        #notas_desaprobadas.asignatura.all()
         #funcion para verificar si un alumno tiene modulo aprobado
+        return notas_desaprobadas
 
     def condicion_aprobado(self):
         #verificamos si desaprobo mas de un curso
@@ -61,7 +71,7 @@ class ManagerNotas(models.Manager):
     #funcion para devolver el promedio de un alumno en especifico
     def promedio_alumno(self):
         notas_alumno = self.filter(
-            matricula__alumno__user__username = '121314'
+            matricula__alumno__user__username = '1111'
             )
         #toamos el query notas alumno y lo recorremos para calcular el promedio
         i = 0

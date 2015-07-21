@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
             name='Modulo',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('nombre', models.CharField(max_length=50, verbose_name=b'nombre')),
+                ('nombre', models.CharField(max_length=2, verbose_name=b'Nombre', choices=[(b'1', b'Modulo 1'), (b'2', b'Modulo 2'), (b'3', b'Modulo 3'), (b'4', b'Modulo 4'), (b'5', b'Modulo 5'), (b'6', b'Modulo 6')])),
                 ('costo', models.DecimalField(max_digits=7, decimal_places=2)),
                 ('asignatura', models.ManyToManyField(to='notas.Asignatura')),
                 ('carrera', models.ForeignKey(to='matricula.Carrera')),
