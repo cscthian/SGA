@@ -1,6 +1,11 @@
-{% extends "users/panel/panel.html" %}
+{% extends "home/base_index.html" %}
 
-{% block contenido_panel %}
+{% load  staticfiles%}
+
+{% block title %}Instituto de Sistema Cusco ISC{% endblock title %}
+{% block content %}
+    {% include "home/header.html" %}
+
     <div class="container panel-container">
         <div class="row">
             <div class="col s5">
@@ -42,4 +47,5 @@
         </div><!-- fin de row -->
         
     </div><!-- fin de panel-container -->
-{% endblock contenido_panel %}
+    {% include "home/footer.html" %}
+{% endblock content %}
