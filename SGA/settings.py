@@ -65,10 +65,10 @@ WSGI_APPLICATION = 'SGA.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'DBSGA',
-        'USER': 'sga',
-        'PASSWORD': 'sga123',
-        'HOST': 'localhost',
+        'NAME': 'd7p3tigtkj9eq4',
+        'USER': 'ysjwekxuaeyexr',
+        'PASSWORD': '6kfZ3hfBANnkYdJQnjQlc1Fc9p',
+        'HOST': 'ec2-107-21-125-143.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
