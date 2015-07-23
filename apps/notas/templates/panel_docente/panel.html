@@ -23,3 +23,13 @@
         </ul>
     </li>
     {% endblock funciones %}
+
+    {% block mensajes %}
+        {% if messages %}
+            <div class="card-panel">
+                {% for mensaje in mensajes %}
+                    {{ mensaje }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endblock mensajes %}
