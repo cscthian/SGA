@@ -1,9 +1,12 @@
+# -*- encoding: utf-8 -*-
 from django.shortcuts import render
-from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, DeleteView
-from django.views.generic.edit import FormView, FormMixin
-from django.views.generic.detail import SingleObjectMixin
+from django.views.generic import TemplateView, CreateView, DeleteView
+from django.views.generic.edit import FormView, FormMixin, UpdateView
+from django.views.generic.detail import DetailView
 
 from .models import Horario, Aula, Docente, CargaAcademica, AsistenciaAlumno, AsistenciaDocente
+
+from django.contrib.messages.views import SuccessMessageMixin
 
 from apps.users.models import User
 from apps.notas.models import Asignatura
@@ -16,14 +19,13 @@ from .forms import DniForm, HorarioForm, AulaForm, DocenteForm, AsistenciaAlumno
 from datetime import datetime
 
 
-class AsistenciaDocente(FormView):
+class AsistenciaDocenteView(FormView):
     template_name = 'asistencia/asistencia_docente.html'
     form_class = DniForm
 
     def form_valid(self, form):
         # guardar asistencia
         dni = form.cleaned_data['dni']
-
         docente = Docente.objects.get(user__username=dni)
 
         return HttpResponseRedirect(
@@ -71,10 +73,11 @@ class AsistenciaDocenteDetalle(FormMixin, DetailView):
         return super(AsistenciaDocenteDetalle, self).form_valid(form)
 
 
-class AsistenciaAlumnoView(FormView):
+class AsistenciaAlumnoView(SuccessMessageMixin, FormView):
     form_class = AsistenciaAlumnoForm
     template_name = 'asistencia/asistencia_alumno.html'
     success_url = reverse_lazy('notas_app:panel_docente')
+    success_message = "Se guardo correctamente la asistencia de los alumnos...!!"
 
     def get_form_kwargs(self):
         kwargs = super(AsistenciaAlumnoView, self).get_form_kwargs()
@@ -88,8 +91,6 @@ class AsistenciaAlumnoView(FormView):
     def form_valid(self, form):
         user = self.request.user
         docente = Docente.objects.get(user=user)
-        print '==============dicente==========='
-        print docente
         matriculas = form.cleaned_data['alumnos']
         fecha = datetime.now()
         asignatura_pk = self.kwargs.get('pk', 0)
@@ -121,10 +122,11 @@ class DetalleAula(DetailView):
     model = Aula
 
 
-class AgregarAula(CreateView):
+class AgregarAula(SuccessMessageMixin, CreateView):
     form_class = AulaForm
     template_name = 'aula/agregar_aula.html'
     success_url = reverse_lazy('asistencia_app:panel_aula')
+    success_message = "se creo correctamente"
 
 
 class ModificarAula(UpdateView):

@@ -48,7 +48,7 @@ urlpatterns = [
 
     url(
         r'^asistencia/docente/$',
-        views.AsistenciaDocente.as_view(),
+        views.AsistenciaDocenteView.as_view(),
         name='asistencia_docente'
     ),
     url(
