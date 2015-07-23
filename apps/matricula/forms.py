@@ -54,6 +54,15 @@ class PreMatriculaForm(UserForm):
             'date_birth',
         )
 
+    def clean_username(self): 
+        username = self.cleaned_data['username'] 
+        print username 
+        num_palabras = username.split()
+        if num_palabras < 8: 
+           print num_palabras 
+           raise forms.ValidationError("¡Se requieren mínimo 8 letras o digitos!") 
+        return username
+
     def __init__(self, *args, **kwargs):
         # llamamos al metodo padre mediante el metodo super y sobreescribir
         super(PreMatriculaForm, self).__init__(*args, **kwargs)

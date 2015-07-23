@@ -31,9 +31,15 @@ class ComprobanteForm(forms.ModelForm):
 
 class PagoForm(forms.ModelForm):
     monto = forms.DecimalField(max_digits=10, decimal_places=5, required=True)
+    descuento = forms.ModelChoiceField(label='Descuento :', queryset=None)
     class Meta:
         model = Comprobante
         fields = ('tipo', 'serie', 'numero', 'monto')
+
+    def __init__(self,*args, **kwargs):
+        # llamamos al metodo padre mediante el metodo super y sobreescribir
+        super(PagoForm, self).__init__(*args, **kwargs)
+        self.fields['descuento'].queryset = Descuento.objects.all()
 
 
 class DescuentoForm(forms.Form):

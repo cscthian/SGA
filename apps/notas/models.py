@@ -73,18 +73,21 @@ class ManagerNotas(models.Manager):
         notas_alumno = self.filter(
             matricula__alumno__user__username=kwalumno
             )
-        #toamos el query notas alumno y lo recorremos para calcular el promedio
-        i = 0
-        #declaramos una variable que sumara los promedios
+        #declaramos variable que devolvera el resultado
+        promedio_total = 0
+        #declaramos variable para sumar promedio
         suma_promedio = 0
-        #recorremos el query de notas del alumno
-        while i<notas_alumno.count():
-            #acumulamos los promedio en 'suma_promedio
-            suma_promedio = suma_promedio + notas_alumno[i].promedio
-            i+=1
-
+        if notas_alumno.count()>0:
+            #toamos el query notas alumno y lo recorremos para calcular el promedio
+            i = 0
+            #recorremos el query de notas del alumno
+            while i<notas_alumno.count():
+                #acumulamos los promedio en 'suma_promedio
+                suma_promedio = suma_promedio + notas_alumno[i].promedio
+                i+=1
+            promedio_total = suma_promedio/notas_alumno.count()
         #devolvemos el promedio general del alumno     
-        return suma_promedio/notas_alumno.count()
+        return promedio_total
 
 class Nota(models.Model):
     matricula = models.ForeignKey('matricula.Matricula')

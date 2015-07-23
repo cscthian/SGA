@@ -1,22 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-    {{ matricula }}
-    {{ matricula.saldo }}
-    <a href="{% url 'pagos_app:pago_matricula_descuento' matricula.pk %}"> aplicar descuento</a>
-    <form action="" method="POST">{% csrf_token %}
-        {{ form }}
+{% extends "users/panel/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
         <div class="row">
-            <div class="input-field col s12">
-                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">guardar
-                    <i class="mdi-content-send right"></i>
-                </button>
+            <div class="col s5">
+                <a class="waves-effect waves-light btn btn-back" href="{% url 'asistencia_app:panel_docente' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
+            </div>
+            <div class="col s7">
+                <h5>Registrar Matricula</h5>    
             </div>
         </div>
-    </form>
-</body>
-</html>
+
+
+        <div class="divider"></div>
+        {% if form.errors %}
+            <div class="card-panel red lighten-1">
+                <span class="white-text"> {{ form.errors }} </span>
+            </div>
+            <div class="divider"></div>
+        {% endif %}
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="card-panel">
+                    <div class="row">
+                        <form class="col s12" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                            <div class="row">
+                                <div class="input-field col s12">
+                                   <p>Alumno:{{matricula.alumno}} </p>
+                                   Deuda:  
+                                  <p>{{matricula.saldo}}</p>
+                                </div>
+                            </div>
+                            <p>Registrar Pago Alumno:</p> 
+                            {{form}}
+                            <div class="row">
+                                <div class="input-field col s12">
+                                      <button class="btn cyan waves-effect waves-light right" type="submit" name="action">guardar
+                                        <i class="mdi-content-send right"></i>
+                                      </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- fin de card-panel -->
+
+            </div>
+        </div><!-- fin de row -->
+        
+    </div><!-- fin de panel-container -->
+{% endblock contenido_panel %}

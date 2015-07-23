@@ -177,8 +177,6 @@ class RegistrarPreMatricula(FormView):
         fecha_nacimineto = form.cleaned_data['date_birth']
         tipo_user = '1'
 
-        password = form.cleaned_data['username']
-
         user = User.objects.create_user(
             username=dni,
             first_name=nombres,
@@ -190,7 +188,7 @@ class RegistrarPreMatricula(FormView):
             address=direccion,
             date_birth=fecha_nacimineto,
             type_user=tipo_user,
-            password=password,
+            password=dni,
         )
         user.save()
 
@@ -251,11 +249,15 @@ class RegistrarMatricula(FormView):
         usuario = self.request.user
         if Nota.objects.condicion_aprobado(usuario):
             modulo = Matricula.objects.ultimo_modulo(usuario)
-        else:
+            print ' ======== modulo 1 ========='
+            print modulo
+        else: 
             #generamos el nuevo modulo
             nuevo_modulo = int(Matricula.objects.ultimo_modulo(usuario)) + 1
             # recuperamos el nuevo modulo
             modulo = Modulo.objects.get(nombre = nuevo_modulo)
+            print ' ======== modulo 1 ========='
+            print modulo
 
         turno = form.cleaned_data['turno']
         fecha = timezone.now() 

@@ -150,7 +150,6 @@ class RegistrarPago(FormMixin, DetailView):
         tipo = form.cleaned_data['tipo']
         serie = form.cleaned_data['serie']
         numero = form.cleaned_data['numero']
-
         descuento =form.cleaned_data['descuento']
         #convertimos el descuento en su porcntaje
         monto_descuento = monto*(descuento.porcentaje/100)
