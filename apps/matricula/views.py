@@ -35,7 +35,7 @@ class InicioView(TemplateView):
         mes = hoy.strftime('%m')
         anio = hoy.strftime('%Y')
         context = super(InicioView, self).get_context_data(**kwargs)
-        context['cursomes'] = Ciclo.objects.filter(mes=meses[int(mes)-1], anio=anio)[:3]
+        context['cursomes'] = Ciclo.objects.filter(mes=meses[int(mes)-1], anio=anio)[:5]
 
         return context
 
