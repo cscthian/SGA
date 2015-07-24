@@ -4,9 +4,10 @@ BASE_DIR = Path(__file__).ancestor(2)
 
 SECRET_KEY = '$96a-z!pd*tn!z8kodyuo1)yg#)xjq)xbe=g&87vqkqwdz4$0)'
 
-DEBUG = True
+DEBUG = False
+TEMPLATES_HOST = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -24,6 +25,7 @@ INSTALLED_APPS = (
     'apps.matricula',
     'apps.notas',
     'apps.cursolibre',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -65,10 +67,10 @@ WSGI_APPLICATION = 'SGA.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'DBSGA',
-        'USER': 'sga',
-        'PASSWORD': 'sga123',
-        'HOST': 'localhost',
+        'NAME': 'd7p3tigtkj9eq4',
+        'USER': 'ysjwekxuaeyexr',
+        'PASSWORD': '6kfZ3hfBANnkYdJQnjQlc1Fc9p',
+        'HOST': 'ec2-107-21-125-143.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -92,11 +94,16 @@ AUTH_USER_MODEL = 'users.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+AWS_STORAGE_BUCKET_NAME = 'iscunsaac'
+AWS_ACCESS_KEY_ID = 'AKIAIGDFC2UACFQUO52A'
+AWS_SECRET_ACCESS_KEY = '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'
 STATIC_URL = '/static/'
+
+STATIC_ROOT = 'staticfiles'
 
 STATICFILES_DIRS = [BASE_DIR.child('static')]
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'https://s3.amazonaws.com/iscunsaac/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 MEDIA_ROOT = BASE_DIR.child('media')
