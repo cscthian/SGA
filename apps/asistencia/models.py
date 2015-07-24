@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.conf import settings
 from django.template.defaultfilters import slugify
 from django.db import models
