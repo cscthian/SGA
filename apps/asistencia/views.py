@@ -17,10 +17,12 @@ from django.http import HttpResponseRedirect
 from .forms import DniForm, HorarioForm, AulaForm, DocenteForm, AsistenciaAlumnoForm
 
 from datetime import datetime
+from braces.views import LoginRequiredMixin
 
 
-class AsistenciaDocenteView(FormView):
+class AsistenciaDocenteView(LoginRequiredMixin, FormView):
     template_name = 'asistencia/asistencia_docente.html'
+    login_url = reverse_lazy('users_app:login')
     form_class = DniForm
 
     def form_valid(self, form):
@@ -36,10 +38,11 @@ class AsistenciaDocenteView(FormView):
         )
 
 
-class AsistenciaDocenteDetalle(FormMixin, DetailView):
+class AsistenciaDocenteDetalle(LoginRequiredMixin, FormMixin, DetailView):
     model = Docente
     form_class = DniForm
     template_name = 'asistencia/asistencia_docente_detalle.html'
+    login_url = reverse_lazy('users_app:login')
 
     def get_success_url(self):
         return reverse_lazy(
@@ -73,7 +76,7 @@ class AsistenciaDocenteDetalle(FormMixin, DetailView):
         return super(AsistenciaDocenteDetalle, self).form_valid(form)
 
 
-class AsistenciaAlumnoView(SuccessMessageMixin, FormView):
+class AsistenciaAlumnoView(LoginRequiredMixin, SuccessMessageMixin, FormView):
     form_class = AsistenciaAlumnoForm
     template_name = 'asistencia/asistencia_alumno.html'
     success_url = reverse_lazy('notas_app:panel_docente')
@@ -107,8 +110,9 @@ class AsistenciaAlumnoView(SuccessMessageMixin, FormView):
         return super(AsistenciaAlumnoView, self).form_valid(form)
 
 
-class PanelAulaView(TemplateView):
+class PanelAulaView(LoginRequiredMixin, TemplateView):
     template_name = 'aula/panel_aula.html'
+    login_url = reverse_lazy('users_app:login')
 
     def get_context_data(self, **kwargs):
         context = super(PanelAulaView, self).get_context_data(**kwargs)
@@ -117,33 +121,38 @@ class PanelAulaView(TemplateView):
         return context
 
 
-class DetalleAula(DetailView):
+class DetalleAula(LoginRequiredMixin, DetailView):
     template_name = 'aula/detalle_aula.html'
+    login_url = reverse_lazy('users_app:login')
     model = Aula
 
 
-class AgregarAula(SuccessMessageMixin, CreateView):
+class AgregarAula(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = AulaForm
     template_name = 'aula/agregar_aula.html'
     success_url = reverse_lazy('asistencia_app:panel_aula')
+    login_url = reverse_lazy('users_app:login')
     success_message = "se creo correctamente"
 
 
-class ModificarAula(UpdateView):
+class ModificarAula(LoginRequiredMixin, UpdateView):
     model = Aula
     template_name = 'aula/modificar_aula.html'
+    login_url = reverse_lazy('users_app:login')
     success_url = reverse_lazy('asistencia_app:panel_aula')
     form_class = AulaForm
 
 
-class EliminarAula(DeleteView):
+class EliminarAula(LoginRequiredMixin, DeleteView):
     template_name = 'aula/eliminar_aula.html'
     model = Aula
     success_url = reverse_lazy('asistencia_app:panel_aula')
+    login_url = reverse_lazy('users_app:login')
 
 
-class PanelHorarioView(TemplateView):
+class PanelHorarioView(LoginRequiredMixin, TemplateView):
     template_name = 'horario/panel_horario.html'
+    login_url = reverse_lazy('users_app:login')
 
     def get_context_data(self, **kwargs):
         context = super(PanelHorarioView, self).get_context_data(**kwargs)
@@ -152,32 +161,37 @@ class PanelHorarioView(TemplateView):
         return context
 
 
-class DetalleHorario(DetailView):
+class DetalleHorario(LoginRequiredMixin, DetailView):
     template_name = 'horario/detalle_horario.html'
+    login_url = reverse_lazy('users_app:login')
     model = Horario
 
 
-class AgregarHorario(CreateView):
+class AgregarHorario(LoginRequiredMixin, CreateView):
     form_class = HorarioForm
     template_name = 'horario/agregar_horario.html'
+    login_url = reverse_lazy('users_app:login')
     success_url = reverse_lazy('asistencia_app:panel_horario')
 
 
-class ModificarHorario(UpdateView):
+class ModificarHorario(LoginRequiredMixin, UpdateView):
     model = Horario
     template_name = 'horario/modificar_horario.html'
+    login_url = reverse_lazy('users_app:login')
     success_url = reverse_lazy('asistencia_app:panel_horario')
     form_class = HorarioForm
 
 
-class EliminarHorario(DeleteView):
+class EliminarHorario(LoginRequiredMixin, DeleteView):
     template_name = 'horario/eliminar_horario.html'
+    login_url = reverse_lazy('users_app:login')
     model = Horario
     success_url = reverse_lazy('asistencia_app:panel_horario')
 
 
-class PanelDocenteView(TemplateView):
+class PanelDocenteView(LoginRequiredMixin, TemplateView):
     template_name = 'docente/panel_docente.html'
+    login_url = reverse_lazy('users_app:login')
 
     def get_context_data(self, **kwargs):
         context = super(PanelDocenteView, self).get_context_data(**kwargs)
@@ -186,8 +200,9 @@ class PanelDocenteView(TemplateView):
         return context
 
 
-class AgregarDocente(FormView):
+class AgregarDocente(LoginRequiredMixin, FormView):
     template_name = 'docente/agregar_docente.html'
+    login_url = reverse_lazy('users_app:login')
     form_class = DocenteForm
     success_url = reverse_lazy('asistencia_app:panel_aula')
 

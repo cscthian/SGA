@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse_lazy
 
 from .models import User
 from .forms import LoginForm, RegistroUserForm
+from braces.views import LoginRequiredMixin
 
 
 class LogIn(FormView):
@@ -38,8 +39,9 @@ class DocenteView(TemplateView):
     template_name = 'users/docente/panel/docente_panel.html'
 
 
-class AgregarAdministrador(FormView):
+class AgregarAdministrador(LoginRequiredMixin, FormView):
     template_name = 'users/administrador/panel/agregar_administrador.html'
+    login_url = reverse_lazy('users_app:login')
     form_class = RegistroUserForm
     success_url = reverse_lazy('asistencia_app:panel_aula')
 

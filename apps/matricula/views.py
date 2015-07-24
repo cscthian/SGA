@@ -7,6 +7,7 @@ from apps.cursolibre.models import Ciclo
 from django.utils import timezone
 from datetime import datetime
 from .forms import *
+from braces.views import LoginRequiredMixin
 
 from .models import *
 from apps.users.models import User
@@ -42,9 +43,10 @@ class InicioView(TemplateView):
 
 """MANTENIMIENTOS DE LA TABLA CARRERA"""
 
-class HomeCarrera(TemplateView):
+class HomeCarrera(LoginRequiredMixin, TemplateView):
     '''clase que devolvera la lista de carreras profesionales'''
     template_name = 'carrera/index.html'
+    login_url = reverse_lazy('users_app:login')
 
     def get_context_data(self, **kwargs):
         context = super(HomeCarrera, self).get_context_data(**kwargs)
@@ -53,36 +55,41 @@ class HomeCarrera(TemplateView):
         return context
 
 
-class AgregarCarrera(CreateView):
+class AgregarCarrera(LoginRequiredMixin, CreateView):
     form_class = CarreraForm
     template_name = 'carrera/agregar.html'
     success_url = reverse_lazy('matricula_app:home_carrera')
+    login_url = reverse_lazy('users_app:login')
 
 
-class DetalleCarrera(DetailView):
+class DetalleCarrera(LoginRequiredMixin, DetailView):
     template_name = 'carrera/detalle.html'
+    login_url = reverse_lazy('users_app:login')
     model = Carrera
 
 
-class ModificarCarrera(UpdateView):
+class ModificarCarrera(LoginRequiredMixin, UpdateView):
     model = Carrera
     template_name = 'carrera/modificar.html'
     success_url = reverse_lazy('matricula_app:home_carrera')
+    login_url = reverse_lazy('users_app:login')
     form_class = CarreraForm
 
 
-class EliminarCarrera(DeleteView):
+class EliminarCarrera(LoginRequiredMixin, DeleteView):
     template_name = 'carrera/eliminar.html'
     model = Carrera
     success_url = reverse_lazy('matricula_app:home_carrera')
+    login_url = reverse_lazy('users_app:login')
 
 
 
 """MATENIMIENTOS DE LA TABLA ALUMNO"""
 
-class HomeAlumno(TemplateView):
+class HomeAlumno(LoginRequiredMixin, TemplateView):
     '''clase que devolvera la lista de alumnos'''
     template_name = 'alumno/index.html'
+    login_url = reverse_lazy('users_app:login')
 
     def get_context_data(self, **kwargs):
         context = super(HomeAlumno, self).get_context_data(**kwargs)
@@ -91,20 +98,23 @@ class HomeAlumno(TemplateView):
         return context
 
 
-class DetalleAlumno(DetailView):
+class DetalleAlumno(LoginRequiredMixin, DetailView):
     template_name = 'alumno/detalle.html'
+    login_url = reverse_lazy('users_app:login')
     model = Alumno
 
 
-class ModificarAlumno(UpdateView):
+class ModificarAlumno(LoginRequiredMixin, UpdateView):
     model = Alumno
     template_name = 'alumno/modificar.html'
+    login_url = reverse_lazy('users_app:login')
     success_url = reverse_lazy('inicio')
     form_class = AlumnoForm
 
 
-class EliminarAlumno(DeleteView):
+class EliminarAlumno(LoginRequiredMixin, DeleteView):
     template_name = 'alumno/eliminar.html'
+    login_url = reverse_lazy('users_app:login')
     model = Alumno
     success_url = reverse_lazy('inicio')
 
@@ -112,8 +122,9 @@ class EliminarAlumno(DeleteView):
 
 """MANTENIMEITOS Y PROCESOS DE LA TABLA PROGRAMACION"""
 
-class HomeProgramacion(TemplateView):
+class HomeProgramacion(LoginRequiredMixin, TemplateView):
     template_name = 'Programacion/index.html'
+    login_url = reverse_lazy('users_app:login')
 
     def get_context_data(self, **kwargs):
         context = super(HomeProgramacion, self).get_context_data(**kwargs)
@@ -122,26 +133,30 @@ class HomeProgramacion(TemplateView):
         return context
 
 
-class AgregarProgramacion(CreateView):
+class AgregarProgramacion(LoginRequiredMixin, CreateView):
     form_class = ProgramacionForm
     template_name = 'Programacion/agregar.html'
+    login_url = reverse_lazy('users_app:login')
     success_url = reverse_lazy('matricula_app:home_programacion')
 
 
-class DetalleProgramacion(DetailView):
+class DetalleProgramacion(LoginRequiredMixin, DetailView):
     template_name = 'Programacion/detalle.html'
+    login_url = reverse_lazy('users_app:login')
     model = Programacion
 
 
-class ModificarProgramacion(UpdateView):
+class ModificarProgramacion(LoginRequiredMixin, UpdateView):
     model = Programacion
     template_name = 'Programacion/modificar.html'
     success_url = reverse_lazy('matricula_app:home_programacion')
+    login_url = reverse_lazy('users_app:login')
     form_class = CarreraForm
 
 
-class EliminarProgramacion(DeleteView):
+class EliminarProgramacion(LoginRequiredMixin, DeleteView):
     template_name = 'Programacion/eliminar.html'
+    login_url = reverse_lazy('users_app:login')
     model = Carrera
     success_url = reverse_lazy('matricula_app:home_programacion')
 """ FIN DE TABLA PROGRAMACION"""
@@ -150,9 +165,10 @@ class EliminarProgramacion(DeleteView):
 ######################## VISTAS PARA MATRICULA ########################
 
 
-class HomeMatricula(TemplateView):
+class HomeMatricula(LoginRequiredMixin, TemplateView):
     '''clase que devolvera la lista de matriculados'''
     template_name = 'matricula/index.html'
+    login_url = reverse_lazy('users_app:login')
 
     def get_context_data(self, **kwargs):
         context = super(HomeMatricula, self).get_context_data(**kwargs)
@@ -222,8 +238,9 @@ class RegistrarPreMatricula(FormView):
         return super(RegistrarPreMatricula, self).form_valid(form)
 
 #clase para registrar la matricula de un alumno regular
-class RegistrarMatricula(FormView):
+class RegistrarMatricula(LoginRequiredMixin, FormView):
     template_name = 'matricula/registrar_matricula.html'
+    login_url = reverse_lazy('users_app:login')
     form_class = RegistrarMatriculaForm
     success_url = reverse_lazy('matricula_app:lista_matriculados')
 
@@ -307,9 +324,10 @@ class MatricularAlumno(TemplateView):
 
 """ ================ views para consultas ========================="""
 
-class MatriculaPorSemestre(TemplateView):
+class MatriculaPorSemestre(LoginRequiredMixin, TemplateView):
     '''clase que devolvera la lista de matriculados e un semestre'''
     template_name = 'consultas/index.html'
+    login_url = reverse_lazy('users_app:login')
 
     def get_context_data(self, **kwargs):
         context = super(MatriculaPorSemestre, self).get_context_data(**kwargs)

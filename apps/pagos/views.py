@@ -7,12 +7,14 @@ from .forms import DescuentoForm, EstructuraPagosForm, PagoForm, DescuentoForm
 from .models import Descuento, Estructura_Pago, Aportacion, Comprobante
 
 from apps.matricula.models import Matricula
+from braces.views import LoginRequiredMixin
 
 from django.utils import timezone
 
 
-class DescuentoView(TemplateView):
+class DescuentoView(LoginRequiredMixin, TemplateView):
     template_name = 'mantenimientos/descuento/panel_descuento.html'
+    login_url = reverse_lazy('users_app:login')
 
     def get_context_data(self, **kwargs):
         context = super(DescuentoView, self).get_context_data(**kwargs)
@@ -21,32 +23,37 @@ class DescuentoView(TemplateView):
         return context
 
 
-class DetalleDescuento(DetailView):
+class DetalleDescuento(LoginRequiredMixin, DetailView):
     template_name = 'mantenimientos/descuento/detalle_descuento.html'
+    login_url = reverse_lazy('users_app:login')
     model = Descuento
 
 
-class AgregarDescuento(CreateView):
+class AgregarDescuento(LoginRequiredMixin, CreateView):
     form_class = DescuentoForm
     template_name = 'mantenimientos/descuento/agregar_descuento.html'
+    login_url = reverse_lazy('users_app:login')
     success_url = reverse_lazy('pagos_app:panel_descuento')
 
 
-class ModificarDescuento(UpdateView):
+class ModificarDescuento(LoginRequiredMixin, UpdateView):
     model = Descuento
     template_name = 'mantenimientos/descuento/modificar_descuento.html'
+    login_url = reverse_lazy('users_app:login')
     success_url = reverse_lazy('pagos_app:panel_descuento')
     form_class = DescuentoForm
 
 
-class EliminarDescuento(DeleteView):
+class EliminarDescuento(LoginRequiredMixin, DeleteView):
     template_name = 'mantenimientos/descuento/eliminar_descuento.html'
+    login_url = reverse_lazy('users_app:login')
     model = Descuento
     success_url = reverse_lazy('pagos_app:panel_descuento')
 
 
-class EstructurapagoView(TemplateView):
+class EstructurapagoView(LoginRequiredMixin, TemplateView):
     template_name = 'mantenimientos/estructurapagos/panel_estructurapagos.html'
+    login_url = reverse_lazy('users_app:login')
 
     def get_context_data(self, **kwargs):
         context = super(EstructurapagoView, self).get_context_data(**kwargs)
@@ -55,37 +62,43 @@ class EstructurapagoView(TemplateView):
         return context
 
 
-class DetalleEstructuraPagos(DetailView):
+class DetalleEstructuraPagos(LoginRequiredMixin, DetailView):
     template_name = 'mantenimientos/estructurapagos/detalle_estructurapagos.html'
+    login_url = reverse_lazy('users_app:login')
     model = Estructura_Pago
 
 
-class AgregarEstructuraPagos(CreateView):
+class AgregarEstructuraPagos(LoginRequiredMixin, CreateView):
     form_class = EstructuraPagosForm
     template_name = 'mantenimientos/estructurapagos/agregar_estructurapagos.html'
+    login_url = reverse_lazy('users_app:login')
     success_url = reverse_lazy('pagos_app:panel_estructurapagos')
 
 
-class ModificarEstructuraPagos(UpdateView):
+class ModificarEstructuraPagos(LoginRequiredMixin, UpdateView):
     model = Estructura_Pago
     template_name = 'mantenimientos/estructurapagos/modificar_estructurapagos.html'
+    login_url = reverse_lazy('users_app:login')
     success_url = reverse_lazy('pagos_app:panel_estructurapagos')
     form_class = EstructuraPagosForm
 
 
-class EliminarEstructuraPagos(DeleteView):
+class EliminarEstructuraPagos(LoginRequiredMixin, DeleteView):
     template_name = 'mantenimientos/estructurapagos/eliminar_estructurapagos.html'
+    login_url = reverse_lazy('users_app:login')
     model = Estructura_Pago
     success_url = reverse_lazy('pagos_app:panel_estructurapagos')
 
 
-class PanelCajaView(TemplateView):
+class PanelCajaView(LoginRequiredMixin, TemplateView):
     template_name = 'panel_caja/panel.html'
+    login_url = reverse_lazy('users_app:login')
 
 
-class MatriculaPendiente(ListView):
+class MatriculaPendiente(LoginRequiredMixin, ListView):
 
     template_name = 'procesos/pagos/matricula/lista_matricula.html'
+    login_url = reverse_lazy('users_app:login')
     paginate_by = 2
 
     def get_queryset(self):
@@ -100,9 +113,10 @@ class MatriculaPendiente(ListView):
         return context
 
 
-class RegistrarPago(FormView):
+class RegistrarPago(LoginRequiredMixin, FormView):
     form_class = PagoForm
     template_name = 'procesos/pagos/matricula/pago_matricula.html'
+    login_url = reverse_lazy('users_app:login')
     success_url = reverse_lazy('pagos_app:panel_descuento')
 
     def get_form_kwargs(self):
@@ -166,10 +180,11 @@ class RegistrarPago(FormView):
         notas = matricula.modulo.asignatura
         return super(RegistrarPago, self).form_valid(form)
 
-class DescuentoMatriculaView(FormMixin, DetailView):
+class DescuentoMatriculaView(LoginRequiredMixin, FormMixin, DetailView):
     model = Matricula
     form_class = DescuentoForm
     template_name = 'procesos/pagos/matricula/descuento_alumno.html'
+    login_url = reverse_lazy('users_app:login')
 
 
     def get_success_url(self):
