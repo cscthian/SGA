@@ -36,7 +36,7 @@ class PagoForm(forms.ModelForm):
         model = Comprobante
         fields = ('tipo', 'serie', 'numero', 'monto')
 
-    def __init__(self,*args, **kwargs):
+    def __init__(self, pk, *args, **kwargs):
         # llamamos al metodo padre mediante el metodo super y sobreescribir
         super(PagoForm, self).__init__(*args, **kwargs)
         self.fields['descuento'].queryset = Descuento.objects.all()

@@ -5,9 +5,8 @@ BASE_DIR = Path(__file__).ancestor(2)
 SECRET_KEY = '$96a-z!pd*tn!z8kodyuo1)yg#)xjq)xbe=g&87vqkqwdz4$0)'
 
 DEBUG = True
-TEMPLATES_HOST = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -66,10 +65,10 @@ WSGI_APPLICATION = 'SGA.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd7p3tigtkj9eq4',
-        'USER': 'ysjwekxuaeyexr',
-        'PASSWORD': '6kfZ3hfBANnkYdJQnjQlc1Fc9p',
-        'HOST': 'ec2-107-21-125-143.compute-1.amazonaws.com',
+        'NAME': 'DBSGA',
+        'USER': 'sga',
+        'PASSWORD': 'sga123',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -95,8 +94,6 @@ AUTH_USER_MODEL = 'users.User'
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = 'staticfiles'
 
 STATICFILES_DIRS = [BASE_DIR.child('static')]
 

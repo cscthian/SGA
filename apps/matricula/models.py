@@ -90,7 +90,7 @@ class Matricula(models.Model):
     objects = ManagerMatricula()
 
     def save(self, *args, **kwargs):
-        if self.modulo:
+        if self.modulo and self.estado_matricula==False:
             self.saldo = self.modulo.costo
         super(Matricula, self).save(*args, **kwargs)
 

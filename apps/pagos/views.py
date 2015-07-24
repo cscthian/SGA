@@ -100,36 +100,35 @@ class MatriculaPendiente(ListView):
         return context
 
 
-class RegistrarPago(FormMixin, DetailView):
-    model = Matricula
+class RegistrarPago(FormView):
     form_class = PagoForm
     template_name = 'procesos/pagos/matricula/pago_matricula.html'
+    success_url = reverse_lazy('pagos_app:panel_descuento')
 
-    def get_success_url(self):
-        return reverse_lazy('pagos_apps:matricula_pendiente')
+    def get_form_kwargs(self):
+        kwargs = super(RegistrarPago, self).get_form_kwargs()
+        kwargs.update({
+            'pk': self.kwargs.get('pk', 0),
+        })
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super(RegistrarPago, self).get_context_data(**kwargs)
+        matricula_pk = self.kwargs.get('pk', 0)
         # self.get_form() es form_class enviamos el formulario {{ form }}
         context['form'] = self.get_form()
+        matricula = Matricula.objects.get(pk=matricula_pk)
+        context['matricula'] = matricula
         return context
-
-    def post(self, request, *args, **kwargs):
-        # get_object() es el parametro matricula q se psa por url
-        self.object = self.get_object()
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
 
     def form_valid(self, form):
         
+        matricula_pk = self.kwargs.get('pk', 0)
         #datos para la tabla aportacion
+        matricula = Matricula.objects.get(pk=matricula_pk)
         concepto = '1'
         monto = form.cleaned_data['monto']        
         fecha = timezone.now()
-        matricula = self.object
 
         aportacion = Aportacion(
             concepto=concepto,
@@ -138,14 +137,19 @@ class RegistrarPago(FormMixin, DetailView):
             matricula=matricula
         )
         aportacion.save()
-        print '=============================================='
+        print '================================'
         print aportacion
         #datos que se actualizaran en matricula
+        matricula.estado_matricula = True
         matricula.saldo = matricula.saldo - monto
         if matricula.saldo == 0:
             matricula.completado = True
+        print '================================'
+        print matricula.saldo
         #actualizamos la tabla matricula
         matricula.save()
+        print '================================'
+        print matricula.saldo
         #datos para la tabla comprombante
         tipo = form.cleaned_data['tipo']
         serie = form.cleaned_data['serie']
@@ -164,9 +168,9 @@ class RegistrarPago(FormMixin, DetailView):
             monto_total=sub_total,
         )
         comprabante.save()
-        print '=============================================='
+        print '================================'
         print comprabante
-
+        return super(RegistrarPago, self).form_valid(form)
 
 class DescuentoMatriculaView(FormMixin, DetailView):
     model = Matricula
