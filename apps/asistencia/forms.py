@@ -58,10 +58,12 @@ class DocenteForm(RegistroUserForm):
         ('nombrado', 'nombrado'),
     )
     ESPECIALIDAD_CHOICES = (
-        ('1', 'administracion de bases de datos'),
-        ('2', 'analista de sistemas'),
-        ('3', 'administracion de centros de computo'),
-        ('4', 'cursos generales'),
+        ('1', 'administrador'),
+        ('2', 'economista'),
+        ('3', 'ingeniero'),
+        ('4', 'matematico'),
+        ('5', 'contador'),
+        ('6', 'analista de sistemas'),
     )
     tipo_docente = forms.ChoiceField(
         label='tipo de docente',
