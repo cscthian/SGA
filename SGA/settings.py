@@ -4,8 +4,8 @@ BASE_DIR = Path(__file__).ancestor(2)
 
 SECRET_KEY = '$96a-z!pd*tn!z8kodyuo1)yg#)xjq)xbe=g&87vqkqwdz4$0)'
 
-DEBUG = False
-TEMPLATES_HOST = False
+DEBUG = True
+TEMPLATES_HOST = True
 
 ALLOWED_HOSTS = ['*']
 
