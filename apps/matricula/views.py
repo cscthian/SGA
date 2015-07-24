@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, DetailView, ListView
 from django.views.generic.edit import FormMixin, FormView
 from django.core.urlresolvers import reverse_lazy
 from apps.cursolibre.models import Ciclo
@@ -165,15 +165,20 @@ class EliminarProgramacion(LoginRequiredMixin, DeleteView):
 ######################## VISTAS PARA MATRICULA ########################
 
 
-class HomeMatricula(LoginRequiredMixin, TemplateView):
+class HomeMatricula(LoginRequiredMixin, ListView):
     '''clase que devolvera la lista de matriculados'''
     template_name = 'matricula/index.html'
     login_url = reverse_lazy('users_app:login')
+    paginate_by = 20
+
+    def get_queryset(self):
+        # se crea la variable objeto
+        self.matriculados = Matricula.objects.all().order_by('modulo')
+        return self.matriculados
 
     def get_context_data(self, **kwargs):
         context = super(HomeMatricula, self).get_context_data(**kwargs)
-        context['matriculas'] = Matricula.objects.all().order_by('modulo')
-        context['cantidad'] = context['matriculas'].count()
+        context['cantidad'] = self.matriculados.count()
         return context
 
 

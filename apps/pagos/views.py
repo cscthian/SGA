@@ -99,7 +99,7 @@ class MatriculaPendiente(LoginRequiredMixin, ListView):
 
     template_name = 'procesos/pagos/matricula/lista_matricula.html'
     login_url = reverse_lazy('users_app:login')
-    paginate_by = 2
+    paginate_by = 20
 
     def get_queryset(self):
         # se crea la variable objeto

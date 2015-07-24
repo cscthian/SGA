@@ -27,7 +27,7 @@
         </thead>
         <tbody>
 
-          {% for matricula in  matriculas %}
+          {% for matricula in  object_list %}
             <tr>
               <td>{{ matricula.pk }}</td>
               <td>{{ matricula.alumno }}</td>
@@ -39,6 +39,20 @@
               <td>{{ matricula.programacion }}</td>
             </tr>            
           {% endfor %}
+
+          <div class="pagination"> 
+            <span class="step­links"> 
+              {% if page_obj.has_previous %} 
+                <a href="?page={{ page_obj.previous_page_number }}">anterior</a> 
+              {% endif %} 
+              <span class="current"> 
+                  Pagina {{ page_obj.number }} de {{ paginator.num_pages }}. 
+              </span> 
+              {% if page_obj.has_next %} 
+                <a href="?page={{ page_obj.next_page_number }}">siguiente</a> 
+              {% endif %} 
+            </span> 
+          </div> 
 
         </tbody>
       </table>
