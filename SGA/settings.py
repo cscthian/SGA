@@ -103,7 +103,7 @@ STATIC_ROOT = 'staticfiles'
 
 STATICFILES_DIRS = [BASE_DIR.child('static')]
 
-MEDIA_URL = 'https://s3.amazonaws.com/iscunsaac'
+MEDIA_URL = 'https://s3.amazonaws.com/iscunsaac/'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 MEDIA_ROOT = BASE_DIR.child('media')
