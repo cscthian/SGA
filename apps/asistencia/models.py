@@ -22,10 +22,12 @@ class Docente(models.Model):
         ('nombrado', 'nombrado'),
     )
     ESPECIALIDAD_CHOICES = (
-        ('1', 'administracion de bases de datos'),
-        ('2', 'analista de sistemas'),
-        ('3', 'administracion de centros de computo'),
-        ('4', 'cursos generales'),
+        ('1', 'administrador'),
+        ('2', 'economista'),
+        ('3', 'ingeniero'),
+        ('4', 'matematico'),
+        ('5', 'contador'),
+        ('5', 'analista de sistemas'),
     )
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     tipo_docente = models.CharField(max_length=12, choices=TIPO_CHOICES)
