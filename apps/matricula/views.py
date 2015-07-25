@@ -37,8 +37,8 @@ class InicioView(TemplateView):
         anio = hoy.strftime('%Y')
         context = super(InicioView, self).get_context_data(**kwargs)
         #cantidad de imagenes en la portada
-        context['cursomes'] = Ciclo.objects.filter(mes=meses[int(mes)-1], anio=anio)[:5]
-
+        cursomes = Ciclo.objects.filter(mes=meses[int(mes)-1], anio=anio)[0]
+        context['cursomes'] = cursomes.asignatura.all()
         return context
 
 """MANTENIMIENTOS DE LA TABLA CARRERA"""

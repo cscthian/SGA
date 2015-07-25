@@ -37,23 +37,21 @@
     <div class="container">
         <div class="row">
     {% for curso in cursomes %}
-        {% for asignatura in curso.asignatura.all %}
             <div class="col s12 m4 l4">
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
-                       <img class="activator" src="{{ asignatura.imagen.url }}">
+                       <img class="activator" src="{{ curso.imagen.url }}">
                     </div>
                     <div class="card-content">
-                      <span class="card-title activator grey-text text-darken-4">{{ asignatura.nombre }}<i class="mdi-navigation-more-vert right"></i></span>
-                      <p><a href="{% url 'cursolibre_app:matricula_cursolibre' asignatura.pk %}">Inscribirse</a></p>
+                      <span class="card-title activator grey-text text-darken-4">{{ curso.nombre }}<i class="mdi-navigation-more-vert right"></i></span>
+                      <p><a href="{% url 'cursolibre_app:matricula_cursolibre' curso.pk %}">Inscribirse</a></p>
                     </div>
                     <div class="card-reveal">
-                      <span class="card-title grey-text text-darken-4">{{ asignatura.nombre }}<i class="mdi-navigation-close right"></i></span>
-                      <p>{{ asignatura.descripcion|truncatewords:25 }}</p>
+                      <span class="card-title grey-text text-darken-4">{{ curso.nombre }}<i class="mdi-navigation-close right"></i></span>
+                      <p>{{ curso.descripcion|truncatewords:25 }}</p>
                     </div>
                 </div>
             </div>                    
-        {% endfor %}
     {% endfor %}
         </div>
     </div>
