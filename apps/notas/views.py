@@ -100,3 +100,5 @@ class NotaView(TemplateView):
         ).first()
         context['asignatura'] = asignatura
         return context
+
+
