@@ -14,7 +14,7 @@ from django.core.urlresolvers import reverse_lazy
 # Create your views here.
 
 
-class MatriculaCurso(FormMixin, DetailView):
+class MatriculaCurso(FormView):
     model = AsignaturaLibre
     form_class = DniForm
     template_name = 'matricula_cursolibre.html'
@@ -25,37 +25,33 @@ class MatriculaCurso(FormMixin, DetailView):
     def get_context_data(self, **kwargs):
             context = super(MatriculaCurso, self).get_context_data(**kwargs)
             context['form'] = self.get_form()
-            return context
-
-    def post(self, request, *args, **kwargs):
-
-        self.object = self.get_object()
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+            return context     
 
     def form_valid(self, form):
         username = form.cleaned_data['username']
-        asignatura = self.object
+        usuario = User.objects.get(username=username)
+        asignatura_pk = self.kwargs.get('pk', 0)
+        #recuperamos la palara clave de url
+        asignatura = AsignaturaLibre.objects.get(pk=asignatura_pk)
         saldo = asignatura.costo
+        print saldo
         fecha = datetime.now()
+        print '======= 1 ======='
 
         ciclo = Ciclo.objects.all()[0]
+        print '======= 2 ======='
 
         matricula = MatriculaCursoLibre(
-            alumno=username,
+            alumno=usuario,
             asignatura=asignatura,
             fecha=fecha,
-            saldo=asignatura.costo,
+            saldo=saldo,
             ciclo=ciclo,
         )
         matricula.save()
 
 
-        print username
-        print fecha
+        print matricula
 
         return super(MatriculaCurso, self).form_valid(form)
 

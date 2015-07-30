@@ -13,89 +13,25 @@
       <div class="divider"></div>
       <div class="row">
         <table class="hoverable centered bordered responsive-table">
-        <thead>
+          <thead>
           <tr>
-              <th>Nombres</th>
+              <th>Nombre</th>
               <th>Apellidos</th>
-              <th>Fecha de nacimiento</th>
-              <th>Telefono</th>
-              <th>Email</th>              
-              <th>Tipo de docente</th>              
-              <th>Especialidad</th>              
-              <th>Acciones</th>              
+              <th>Especialidad</th>             
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>
-              <a href="#" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
-              <a href="#" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
-              <a href="#" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>
-              <a href="#" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
-              <a href="#" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
-              <a href="#" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>
-              <a href="#" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
-              <a href="#" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
-              <a href="#" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>
-              <a href="#" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
-              <a href="#" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
-              <a href="#" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>
-              <a href="#" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
-              <a href="#" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
-              <a href="#" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
-            </td>
-          </tr>
+          {% for docente in  docentes %}
+            <tr>
+              <td>{{ docente.user.first_name }}</td>
+              <td>{{ docente.user.last_name }}</td>
+              <td>{{ docente.especialidad }}</td>
+              <td>
+                <a href="#" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+                <a href="#" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
+                <a href="#" class="waves-effect waves-light btn panel-btn red"><i class="fa fa-trash-o"></i></a>
+              </td>
+            </tr>            
+          {% endfor %}
         </tbody>
       </table>
       </div>

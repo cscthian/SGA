@@ -24,6 +24,7 @@
               <td>{{ matricula.alumno.user.last_name }}</td>
               <td>
                 <a href="{% url 'notas_app:ingresar_notas' matricula.alumno.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+                <a href="#" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
               </td>
             </tr>            
           {% endfor %}
