@@ -64,4 +64,19 @@ urlpatterns = [
         views.NotaView.as_view(),
         name='notas_parciales'
     ),
+    url(
+        r'^panel/notas/(?P<pk>\d+)',
+        views.RegistrarNotas.as_view(),
+        name='ingresar_notas'
+    ),
+    url(
+        r'^notas/listar_cursos/$',
+        views.MostrarCursos.as_view(),
+        name='listar_cursos'
+    ),
+    url(
+        r'^notas/alumnos_curso/(?P<pk>\d+)$',
+        views.AlumnosCurso.as_view(),
+        name='alumnos_curso'
+    ),
 ]

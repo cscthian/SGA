@@ -1,5 +1,5 @@
-from django.shortcuts import redirect
-from django.views.generic import TemplateView
+from django.shortcuts import redirect, render
+from django.views.generic import TemplateView, View
 from django.views.generic.edit import FormView
 from django.contrib.auth import authenticate, login, logout
 
@@ -38,12 +38,15 @@ class AdminView(TemplateView):
 class DocenteView(TemplateView):
     template_name = 'users/docente/panel/docente_panel.html'
 
+class AlumnoView(FormView):
+    success_url = reverse_lazy('matricula_app:panel_alumno')
+
 
 class AgregarAdministrador(LoginRequiredMixin, FormView):
     template_name = 'users/administrador/panel/agregar_administrador.html'
     login_url = reverse_lazy('users_app:login')
     form_class = RegistroUserForm
-    success_url = reverse_lazy('asistencia_app:panel_aula')
+    success_url = reverse_lazy('users_app:panel_admin')
 
     def form_valid(self, form):
         user = form.save()
@@ -55,3 +58,52 @@ class AgregarAdministrador(LoginRequiredMixin, FormView):
     def form_invalid(self, form):
         print 'form eroors'
         return super(AgregarAdministrador, self).form_invalid(form)
+
+class AgregarCajero(LoginRequiredMixin, FormView):
+    template_name = 'users/administrador/panel/agregar-cajero.html'
+    login_url = reverse_lazy('users_app:login')
+    form_class = RegistroUserForm
+    success_url = reverse_lazy('users_app:panel_admin')
+
+    def form_valid(self, form):
+        user = form.save()
+        user.type_user = '3'
+        user.set_password(form.cleaned_data['password1'])
+        user.save()
+        return super(AgregarCajero, self).form_valid(form)
+
+    def form_invalid(self, form):
+        print 'form eroors'
+        return super(AgregarCajero, self).form_invalid(form)
+
+class AgregarDocente(LoginRequiredMixin, FormView):
+    template_name = 'users/administrador/panel/agregar-cajero.html'
+    login_url = reverse_lazy('users_app:login')
+    form_class = RegistroUserForm
+    success_url = reverse_lazy('users_app:panel_admin')
+
+    def form_valid(self, form):
+        user = form.save()
+        user.type_user = '2'
+        user.set_password(form.cleaned_data['password1'])
+        user.save()
+        return super(AgregarDocente, self).form_valid(form)
+
+    def form_invalid(self, form):
+        print 'form eroors'
+        return super(agregarDocente, self).form_invalid(form)
+
+class DistribuirPanel(View):
+    def get(self, request):
+        usuario = self.request.user
+        if usuario.type_user=='4':
+            return render(request, 'users/panel/panel.html')
+        else:
+            if usuario.type_user == '2':
+                return render(request, 'docente/panel.html')
+            else:
+                if usuario.type_user == '3':
+                    return render(request, 'cajero/panel.html')
+                else:
+                    return render(request, 'alumno/panel.html')
+

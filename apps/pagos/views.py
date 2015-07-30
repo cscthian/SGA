@@ -150,14 +150,14 @@ class RegistrarPago(LoginRequiredMixin, FormView):
             fecha_pago=fecha,
             matricula=matricula
         )
-        #aportacion.save()
+        aportacion.save()
         #datos que se actualizaran en matricula
         matricula.estado_matricula = True
         matricula.saldo = matricula.saldo - monto
         if matricula.saldo == 0:
             matricula.completado = True
         #actualizamos la tabla matricula
-        #matricula.save()
+        matricula.save()
         #datos para la tabla comprombante
         tipo = form.cleaned_data['tipo']
         serie = form.cleaned_data['serie']
@@ -175,7 +175,7 @@ class RegistrarPago(LoginRequiredMixin, FormView):
             monto_igv=0,
             monto_total=sub_total,
         )
-        #comprabante.save()
+        comprabante.save()
         #proceso de inicializacion de notas
         notas = matricula.modulo.asignatura
         return super(RegistrarPago, self).form_valid(form)

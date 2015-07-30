@@ -15,8 +15,8 @@ from apps.notas.models import *
 
 
 class InicioView(TemplateView):
-    template_name = 'home/index.html'
 
+    template_name = 'home/index.html'
     def get_context_data(self, **kwargs):
         hoy = datetime.now()
         meses = [
@@ -86,6 +86,8 @@ class EliminarCarrera(LoginRequiredMixin, DeleteView):
 
 """MATENIMIENTOS DE LA TABLA ALUMNO"""
 
+class AlumnoView(TemplateView):
+    template_name = 'alumno/panel.html'
 class HomeAlumno(LoginRequiredMixin, TemplateView):
     '''clase que devolvera la lista de alumnos'''
     template_name = 'alumno/index.html'
@@ -311,20 +313,7 @@ class RegistrarMatricula(LoginRequiredMixin, FormView):
 
 
 class MatricularAlumno(TemplateView):
-    template_name = 'matricula/matricular_alumno.html'
-
-    def post(self, request, *args, **kwargs):
-        dni = request.POST.get('username')
-        try:
-            user = User.objects.get(username=dni)
-        except User.DoesNotExist:
-            return render(request,'matricula_app:pre_matricula')
-        return render(request,'pagos_app:pago_matricula')
-
-    def get_context_data(self, **kwargs):
-        context = super(MatricularAlumno, self).get_context_data(**kwargs)
-        context['form'] = DniForm
-        return context
+    template_name = 'consultas/index.html'
 
 
 """ ================ views para consultas ========================="""

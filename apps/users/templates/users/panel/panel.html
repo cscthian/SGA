@@ -28,6 +28,9 @@
             <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Procesos</a>
                 <div class="collapsible-body">
                     <ul>
+                        <li><a href="{% url 'users_app:add_admin' %}">Agregar Administrador</a></li>
+                        <li><a href="{% url 'users_app:add_cajero' %}">Agregar Cajero</a></li>
+                        <li><a href="{% url 'users_app:add_docente' %}">Agregar Docente</a></li>
                         <li><a href="{% url 'matricula_app:registrar_matricula' %}">Matricula</a></li>
                         <li><a href="{% url 'matricula_app:pre_matricula' %}">Pre Matricula</a></li>
                         <li><a href="{% url 'pagos_app:matricula_pendiente' %}">Registrar Pago</a></li>
@@ -48,5 +51,8 @@
               </div>
             </li>
         </ul>
+        <div class="col s1">
+                <a class="waves-effect waves-light btn btn-back" href="http://isc.herokuapp.com/"><i class="fa fa-chevron-left left"></i>Home</a>    
+    </div>
     </li>
     {% endblock funciones %}

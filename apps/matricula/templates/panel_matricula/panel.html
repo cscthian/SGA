@@ -1,0 +1,22 @@
+{% extends "users/panel/base_panel.html" %}
+
+{% block title %}panel de pagos de servicios{% endblock title %}
+
+  {% block titulo_nav %} Panel de Matricula{% endblock titulo_nav %}
+
+    {% block funciones %}
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Matricula</a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{% url 'matricula_app:pre_matricula' %}">Pre Matricula</a></li>
+                        <li><a href="{% url 'matricula_app:registrar_matricula' %}">Matricula</a></li>
+                        <li><a href="#">Consultar Notas</a></li>
+                    </ul>
+                </div>
+            </li>
+            
+        </ul>
+    </li>
+    {% endblock funciones %}

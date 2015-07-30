@@ -1,0 +1,30 @@
+{% extends "panel_docente/pnel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+      <div class="row">
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <table class="hoverable centered bordered responsive-table">
+        <thead>
+          <tr>
+              <th>Nombre</th>                     
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for curso in  cursos %}
+            <tr>
+              <td>{{ curso.nombre }}</td>
+              <td>
+                <a href="{% url 'notas_app:alumnos_curso' curso.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+              </td>
+            </tr>            
+          {% endfor %}
+
+        </tbody>
+      </table>
+      </div>
+    </div>
+{% endblock contenido_panel %}

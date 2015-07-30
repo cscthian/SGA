@@ -26,6 +26,18 @@ class Asignatura(models.Model):
         #consulta los cursos del modulo 1
         #eturn self.filter(nambre='1', asignatura
 
+class ManagerModulo(models.Manager):
+
+    def recuperar_modulo(self,kwasignatura):
+        modulo = self.get(
+            #filtramos el modulo por el prametyro asignatura
+            asignatura=kwasignatura
+        )
+        print '================= hola 3 =================='
+        #notas_desaprobadas.asignatura.all()
+        #funcion para verificar si un alumno tiene modulo aprobado
+        return modulo
+
 class Modulo(models.Model):
     MODULO_CHOICES = (
         ('1', 'Modulo 1'),
@@ -39,6 +51,7 @@ class Modulo(models.Model):
     carrera = models.ForeignKey('matricula.Carrera')
     asignatura = models.ManyToManyField(Asignatura)
     costo = models.DecimalField(max_digits=7, decimal_places=2)
+    objects = ManagerModulo()
 
     class Meta:
         verbose_name_plural = 'Modulos'

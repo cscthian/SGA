@@ -6,23 +6,23 @@
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="{% url 'matricula_app:inicio' %}">Inicio</a></li>
-        <li><a href="#">Misión & Visión</a></li>
+        <li><a href="#">Misión - Visión</a></li>
         <li><a href="#">Contactenos</a></li>
         
         <li>
-          <ul id="matricula-dropdown" class="dropdown-content">
-            <li><a href="{% url 'matricula_app:pre_matricula' %}">carrera tecnica</a></li>
-            <li class="divider"></li>
-            <li><a href="{% url 'cursolibre_app:pre_cursolibre' %}">curso libre</a></li>
-          </ul>
-          <a class="dropdown-button valign-wrapper" data-activates="matricula-dropdown">pre-matricula<i class="mdi-navigation-arrow-drop-down"></i></a>
+          <a class="dropdown-button valign-wrapper" data-activates="matricula-dropdown">Pre-Matricula<i class="mdi-navigation-arrow-drop-down"></i></a>
+            <ul id="matricula-dropdown" class="dropdown-content">
+              <li><a href="{% url 'matricula_app:pre_matricula' %}">carrera tecnica</a></li>
+              <li class="divider"></li>
+              <li><a href="{% url 'cursolibre_app:pre_cursolibre' %}">curso libre</a></li>
+            </ul>
         </li>
         <li>
           {% if not user.is_authenticated %}
             <a href="{% url 'users_app:login' %}">Iniciar Sesión</a>
           {% else %}
             <ul id="profile-dropdown" class="dropdown-content">
-                <li><a href="{% url 'users_app:panel_admin' %}">Panel</a></li>
+                <li><a href="{% url 'users_app:verificar_panel' %}">Panel</a></li>
                 <li class="divider"></li>
                 <li><a href="{% url 'users_app:logout' %}">Salir</a></li>
             </ul>

@@ -1,0 +1,35 @@
+{% extends "panel_docente/pnel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+      <div class="row">
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <table class="hoverable centered bordered responsive-table">
+          <center>{{curso.nombre}}</center>
+        <thead>
+          <tr>
+              <th>DNI</th>  
+              <th>Nombre</th>
+              <th>Apellido</th>                   
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for matricula in  matriculas %}
+            <tr>
+              <td>{{ matricula.alumno.user.username }}</td>
+              <td>{{ matricula.alumno.user.first_name }}</td>
+              <td>{{ matricula.alumno.user.last_name }}</td>
+              <td>
+                <a href="{% url 'notas_app:ingresar_notas' matricula.alumno.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+              </td>
+            </tr>            
+          {% endfor %}
+
+        </tbody>
+      </table>
+      </div>
+    </div>
+{% endblock contenido_panel %}

@@ -20,6 +20,21 @@ urlpatterns = [
     url(
         r'^panel/admin/usuario/agregar/$',
         views.AgregarAdministrador.as_view(),
-        name='panel_admin'
+        name='add_admin'
+    ),
+    url(
+        r'^panel/admin/cajero/agregar/$',
+        views.AgregarCajero.as_view(),
+        name='add_cajero'
+    ),
+    url(
+        r'^panel/admin/docente/agregar/$',
+        views.AgregarDocente.as_view(),
+        name='add_docente'
+    ),
+    url(
+        r'^verificar_panel$',
+        views.DistribuirPanel.as_view(),
+        name='verificar_panel'
     ),
 ]

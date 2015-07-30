@@ -29,6 +29,11 @@ urlpatterns = [
         views.DetalleAlumno.as_view(),
         name='detalle_alumno'
     ),
+    url(
+        r'^panel_alumno/$',
+        views.AlumnoView.as_view(),
+        name='panel_alumno'
+    ),
     ############### FIN ALUMNO ######################
     
     ############### URL CARRERA #####################

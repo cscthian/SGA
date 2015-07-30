@@ -120,7 +120,15 @@ class ManagerCargaAcademica(models.Manager):
             return True
         else:
             return False
-
+    #manager que devuelve la lsita de asignatuas
+    #que dicata un docente
+    def cursos_docente(self, docente):
+        carga = self.filter(docente__user__username=docente)
+        lista = []
+        for asignatura in carga: 
+                lista.append(asignatura.asignatura)
+                print lista
+        return lista
 
 class CargaAcademica(models.Model):
     docente = models.ForeignKey(Docente)

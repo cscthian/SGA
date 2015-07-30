@@ -1,10 +1,6 @@
-{% extends "home/base_index.html" %}
+{% extends "panel_matricula/panel.html" %}
 
-{% load  staticfiles%}
-
-{% block title %}Instituto de Sistema Cusco ISC{% endblock title %}
-{% block content %}
-    {% include "home/header.html" %}
+{% block contenido_panel %}
 
     <div class="container panel-container">
         <div class="row">
@@ -47,5 +43,4 @@
         </div><!-- fin de row -->
         
     </div><!-- fin de panel-container -->
-    {% include "home/footer.html" %}
-{% endblock content %}
+{% endblock contenido_panel %}

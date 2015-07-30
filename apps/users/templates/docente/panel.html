@@ -2,7 +2,7 @@
 
 {% block title %}panel{% endblock title %}
 
-  {% block titulo_nav %} Panel de Cajero{% endblock titulo_nav %}
+  {% block titulo_nav %} Panel de Docente{% endblock titulo_nav %}
 
     {% block funciones %}
     <li class="no-padding">
@@ -10,18 +10,17 @@
             <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Procesos</a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a href="{% url 'pagos_app:matricula_pendiente' %}">Registrar Pago</a></li>
-                        <li><a href="{% url 'pagos_app:panel_descuento' %}">Descuentos</a></li>
-                        <li><a href="{% url 'pagos_app:panel_estructurapagos' %}">Estructura de pagos</a></li>
+                        <li><a href="{% url 'notas_app:listar_cursos' %}">Registrar Notas </a></li>
+                        <li><a href="{% url 'asistencia_app:asistencia_docente' %}">Asistencia</a></li>
+                        <li><a href="#">subir silabu</a></li>
                     </ul>
                 </div>
             </li>
             <li class="bold"><a class="collapsible-header waves-effect waves-teal">Consultas</a>
               <div class="collapsible-body">
                     <ul>
-                        <li><a href="{% url 'matricula_app:matricula_semestre' %}">Matricula Por Semestre</a></li>
-                        <li><a href="#">Deudores</a></li>
-                        <li><a href="#">Becados</a></li>
+                        <li><a href="#">Asistencias</a></li>
+                        <li><a href="#">Asistencia Alumnos</a></li>
                     </ul>
               </div>
             </li>
