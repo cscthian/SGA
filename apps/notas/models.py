@@ -102,6 +102,15 @@ class ManagerNotas(models.Manager):
             promedio_total = suma_promedio/notas_alumno.count()
         #devolvemos el promedio general del alumno     
         return promedio_total
+    def notas_alumno(self,kwalumno):
+        notas_alumno = self.filter(matricula__alumno__user__username=kwalumno)
+        #variable que almcena cursos aprobados
+        asignaturas=[]
+        for notas in notas_alumno:
+            if notas.promedio>10:
+                asignaturas.append(notas)
+
+        return asignaturas
 
 class Nota(models.Model):
     matricula = models.ForeignKey('matricula.Matricula')

@@ -118,5 +118,15 @@ urlpatterns = [
         views.MatriculaPorSemestre.as_view(),
         name='matricula_semestre'
     ),
+    url(
+        r'^consultas/notas_alumno/$',
+        views.ConsultarNotas.as_view(),
+        name='consultar_notas_alumno'
+    ),
+    url(
+        r'^mensaje/confirmacion/$',
+        views.MensjaeConfirmacion.as_view(),
+        name='mensaje_confirmacion'
+    ),
     ########### fin url Consultas #########################
 ]

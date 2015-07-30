@@ -59,7 +59,7 @@ class MatriculaCurso(FormView):
 class PreMatriculaCurso(FormView):
     form_class = UserForm
     template_name = 'matricula_cursolibre.html'
-    success_url = reverse_lazy('matricula_app:inicio')
+    success_url = reverse_lazy('mensaje_confirmacion')
 
     def form_valid(self, form):
         dni = form.cleaned_data['username']

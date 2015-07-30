@@ -1,0 +1,38 @@
+{% extends "users/base_users.html" %}
+{% load staticfiles %}
+
+{% block title %}login{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col s12 m5 offset-m3 l4 offset-l4 z-depth-4 card-panel">
+
+                <form method="POST" class="login-form"> {% csrf_token %}
+
+                    <div class="row">
+                        <div class="input-field col s12 center">
+                            <img src="{% static 'img/logo_nue.png' %}" alt="no se puedo cargar la imagen" class="circle responsive-img">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <center><b>El Proceso Se Ejecuto Satisfactoriamente :)</b></center>
+                    </div>
+                    
+                    <div class="row">
+                     <div class="col s5">
+                        <a class="waves-effect waves-light btn btn-back" href="{% url 'matricula_app:inicio' %}"><i class="fa fa-chevron-left left"></i>Aceptar</a>  
+                      </div>
+                    </div>
+                    <div class="row">
+                    </div>
+                </form>
+            </div>            
+        </div>
+    </div>
+
+{% endblock content %}

@@ -187,7 +187,7 @@ class HomeMatricula(LoginRequiredMixin, ListView):
 class RegistrarPreMatricula(FormView):
     template_name = 'matricula/pre_matricula.html'
     form_class = PreMatriculaForm
-    success_url = reverse_lazy('matricula_app:lista_matriculados')
+    success_url = reverse_lazy('matricula_app:mensaje_confirmacion')
 
     def form_valid(self, form):
         dni = form.cleaned_data['username']
@@ -249,7 +249,7 @@ class RegistrarMatricula(LoginRequiredMixin, FormView):
     template_name = 'matricula/registrar_matricula.html'
     login_url = reverse_lazy('users_app:login')
     form_class = RegistrarMatriculaForm
-    success_url = reverse_lazy('matricula_app:lista_matriculados')
+    success_url = reverse_lazy('matricula_app:mensaje_confirmacion')
 
     def get_context_data(self, **kwargs):
         context = super(RegistrarMatricula, self).get_context_data(**kwargs)
@@ -328,3 +328,18 @@ class MatriculaPorSemestre(LoginRequiredMixin, TemplateView):
         context['matriculas'] = Matricula.objects.all().order_by('modulo')
         context['cantidad'] = context['matriculas'].count()
         return context
+
+class ConsultarNotas(LoginRequiredMixin, TemplateView):
+    #recuperamos las notas de un alumno
+    template_name = 'consultas/consulta_notas.html'
+    login_url = reverse_lazy('users_app:login')
+
+    def get_context_data(self, **kwargs):
+        context = super(ConsultarNotas, self).get_context_data(**kwargs)
+        usuario = self.request.user
+        context['notas'] = Nota.objects.notas_alumno(usuario)
+        return context
+
+class MensjaeConfirmacion(LoginRequiredMixin, TemplateView):
+    template_name = 'confirmacion.html'
+    login_url = reverse_lazy('users_app:login')
