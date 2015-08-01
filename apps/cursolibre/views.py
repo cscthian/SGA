@@ -6,7 +6,7 @@ from apps.users.forms import UserForm
 from apps.users.models import User
 
 from .models import AsignaturaLibre, Ciclo, MatriculaCursoLibre
-from .forms import DniForm
+from .forms import *
 
 from datetime import datetime
 
@@ -20,7 +20,7 @@ class MatriculaCurso(FormView):
     template_name = 'matricula_cursolibre.html'
 
     def get_success_url(self):
-        return reverse_lazy('matricula_app:inicio')
+        return reverse_lazy('matricula_app:mensaje_confirmacion')
 
     def get_context_data(self, **kwargs):
             context = super(MatriculaCurso, self).get_context_data(**kwargs)
@@ -59,7 +59,7 @@ class MatriculaCurso(FormView):
 class PreMatriculaCurso(FormView):
     form_class = UserForm
     template_name = 'matricula_cursolibre.html'
-    success_url = reverse_lazy('mensaje_confirmacion')
+    success_url = reverse_lazy('matricula_app:mensaje_confirmacion')
 
     def form_valid(self, form):
         dni = form.cleaned_data['username']
@@ -89,3 +89,39 @@ class PreMatriculaCurso(FormView):
         )
         user.save()
         return super(PreMatriculaCurso, self).form_valid(form)
+
+# class RegistrarPagoCursoLibre(LoginRequiredMixin, FormView):
+#     form_class = PagoLibreForm
+#     template_name = 'modificar_libre.html'
+#     login_url = reverse_lazy('users_app:login')
+#     success_url = reverse_lazy('matricula_app:mensaje_confirmacion')
+
+#     def get_form_kwargs(self):
+#         kwargs = super(RegistrarPagoCursoLibre, self).get_form_kwargs()
+#         kwargs.update({
+#             'pk': self.kwargs.get('pk', 0),
+#         })
+#         return kwargs
+
+#     def get_context_data(self, **kwargs):
+#         context = super(RegistrarPagoCursoLibre, self).get_context_data(**kwargs)
+#         matricula_pk = self.kwargs.get('pk', 0)
+#         # self.get_form() es form_class enviamos el formulario {{ form }}
+#         context['form'] = self.get_form()
+#         matricula = Matricula.objects.get(pk=matricula_pk)
+#         context['matricula'] = matricula
+#         return context
+
+#     def form_valid(self, form):
+        
+#         matricula_pk = self.kwargs.get('pk', 0)
+#         #datos para la tabla aportacion
+#         matricula = MatriculaCursoLibre.objects.get(pk=matricula_pk)
+#         estado = form.cleaned_data['estado']        
+#         #datos que se actualizaran en matricula
+#         matricula.estado_matricula = True
+#         matricula.saldo = 0
+#         #actualizamos la tabla matricula
+#         #matricula.save()
+#         #proceso de inicializacion de notas
+#         return super(RegistrarPagoCursoLibre, self).form_valid(form)

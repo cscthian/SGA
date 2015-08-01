@@ -74,13 +74,13 @@ class ManagerNotas(models.Manager):
         #funcion para verificar si un alumno tiene modulo aprobado
         return notas_desaprobadas
 
-    def condicion_aprobado(self, kwalumno):
+    def no_aprobado(self, kwalumno):
         #verificamos si desaprobo mas de un curso
         if self.cursos_cargo(kwalumno).count() > 1:
-            return False
+            return True
         else:
             #el modulo es modulo aprobado
-            return True
+            return False
 
     #funcion para devolver el promedio de un alumno en especifico
     def promedio_alumno(self, kwalumno):
@@ -116,12 +116,17 @@ class Nota(models.Model):
     matricula = models.ForeignKey('matricula.Matricula')
     docente = models.ForeignKey(Docente)
     asignatura = models.ForeignKey(Asignatura)
-    nota1 = models.CharField('PP1', max_length=20, default='--')
-    nota2 = models.CharField('PP2', max_length=20, default='--')
-    nota3 = models.CharField('PP3', max_length=20, default='--')
-    nota4 = models.CharField('PP4', max_length=20, default='--')
+    nota1 = models.CharField('PP1', max_length=20, default='0')
+    nota2 = models.CharField('PP2', max_length=20, default='0')
+    nota3 = models.CharField('PP3', max_length=20, default='0')
+    nota4 = models.CharField('PP4', max_length=20, default='0')
     promedio = models.DecimalField(max_digits=5, decimal_places=2)
     objects = ManagerNotas()
+
+    def save(self, *args, **kwargs):
+        if self.nota1>=0 and self.nota2>=0 and self.nota3>=0 and self.nota4>=0:
+            self.promedio = (float(self.nota1)+float(self.nota2)+float(self.nota3)+float(self.nota4))/4
+        super(Nota, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.asignatura.nombre

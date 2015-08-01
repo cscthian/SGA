@@ -153,13 +153,13 @@ class ModificarProgramacion(LoginRequiredMixin, UpdateView):
     template_name = 'Programacion/modificar.html'
     success_url = reverse_lazy('matricula_app:home_programacion')
     login_url = reverse_lazy('users_app:login')
-    form_class = CarreraForm
+    form_class = ProgramacionForm
 
 
 class EliminarProgramacion(LoginRequiredMixin, DeleteView):
     template_name = 'Programacion/eliminar.html'
     login_url = reverse_lazy('users_app:login')
-    model = Carrera
+    model = Programacion
     success_url = reverse_lazy('matricula_app:home_programacion')
 """ FIN DE TABLA PROGRAMACION"""
 
@@ -254,7 +254,7 @@ class RegistrarMatricula(LoginRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super(RegistrarMatricula, self).get_context_data(**kwargs)
         user = self.request.user
-        matricula = Matricula.objects.get(alumno__user__username=user)
+        matricula = Matricula.objects.filter(alumno__user__username=user)[0]
         context['matricula'] = matricula
         modulo = Matricula.objects.ultimo_modulo(user)
         context['modulo'] = modulo
@@ -272,43 +272,50 @@ class RegistrarMatricula(LoginRequiredMixin, FormView):
     def form_valid(self, form):
        # recuperas el modulo que le corresponde
         usuario = self.request.user
-        if Nota.objects.condicion_aprobado(usuario):
-            modulo = Matricula.objects.ultimo_modulo(usuario)
-            print ' ======== modulo 1 ========='
-            print modulo
-        else: 
-            #generamos el nuevo modulo
-            nuevo_modulo = int(Matricula.objects.ultimo_modulo(usuario)) + 1
-            # recuperamos el nuevo modulo
-            modulo = Modulo.objects.get(nombre = nuevo_modulo)
-            print ' ======== modulo 1 ========='
-            print modulo
+        #recuperamos el semestre
+        sem = Programacion.objects.get(finalizado = False)
+        if Matricula.objects.filter(alumno__user__username=usuario, programacion=sem):
+            print 'ya matriculado'
+        else:
+            if Nota.objects.no_aprobado(usuario):
+                mod = Matricula.objects.ultimo_modulo(usuario)
+                modulo = Modulo.objects.get(nombre = mod)
+                print ' ======== modulo 1 ========='
+                print modulo
+            else: 
+                #generamos el nuevo modulo
+                print '***************** modulo actual **********'
+                print Matricula.objects.ultimo_modulo(usuario)
+                nuevo_modulo = int(Matricula.objects.ultimo_modulo(usuario)) + 1
+                # recuperamos el nuevo modulo
+                modulo = Modulo.objects.get(nombre = nuevo_modulo)
+                print modulo
 
-        turno = form.cleaned_data['turno']
-        fecha = timezone.now() 
+            turno = form.cleaned_data['turno']
+            fecha = timezone.now() 
 
-        # recuperamos el semstre actual
-        programacion = Programacion.objects.all()[0]
-        alumno = Alumno.objects.get(user__username=usuario)
+            # recuperamos el semstre actual
+            programacion = Programacion.objects.get(finalizado = False)
+            alumno = Alumno.objects.get(user__username=usuario)
 
-        matricula = Matricula(
-            alumno=alumno,
-            modulo=modulo,
-            turno=turno,
-            fecha_matricula=fecha,
-            programacion=programacion,
-        )
-        matricula.save()
+            matricula = Matricula(
+                alumno=alumno,
+                modulo=modulo,
+                turno=turno,
+                fecha_matricula=fecha,
+                programacion=programacion,
+            )
+            matricula.save()
 
-        asignaturas = form.cleaned_data['asignatura']
+            asignaturas = form.cleaned_data['asignatura']
 
-        if asignaturas.count()>0: 
-            for asignatura in asignaturas: 
-                cursocargo = CursosCargo(
-                    matricula = matricula,
-                    aisgnatura = asignatura.asignatura,
-                    )
-                cursocargo.save()
+            if asignaturas.count()>0: 
+                for asignatura in asignaturas: 
+                    cursocargo = CursosCargo(
+                        matricula = matricula,
+                        aisgnatura = asignatura.asignatura,
+                        )
+                    cursocargo.save()
         return super(RegistrarMatricula, self).form_valid(form)
 
 
@@ -338,6 +345,25 @@ class ConsultarNotas(LoginRequiredMixin, TemplateView):
         context = super(ConsultarNotas, self).get_context_data(**kwargs)
         usuario = self.request.user
         context['notas'] = Nota.objects.notas_alumno(usuario)
+        return context
+
+class ConstanciaMatricula(LoginRequiredMixin, TemplateView):
+    template_name = 'consultas/constancia_matricula.html'
+    login_url = reverse_lazy('users_app:login')
+
+    def get_context_data(self, **kwargs):
+        context = super(ConstanciaMatricula, self).get_context_data(**kwargs)
+        #recuperamos el usuario actual
+        user = self.request.user
+        #recuperamos el semestre actual
+        sem = Programacion.objects.filter(finalizado=False)[0]
+        print '********* semestre********'
+        print sem
+        matricula = Matricula.objects.get(alumno__user__username=user, programacion__semestre=sem)
+        print '********matricula******'
+        print matricula
+        context['matricula'] = matricula
+        context['cursoscargo'] = CursosCargo.objects.get(matricula=matricula)
         return context
 
 class MensjaeConfirmacion(LoginRequiredMixin, TemplateView):

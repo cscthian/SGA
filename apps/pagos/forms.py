@@ -1,6 +1,8 @@
 from django import forms
 from models import Descuento, Estructura_Pago, Comprobante
 
+from apps.cursolibre.models import *
+
 #creamos formulario descuento
 
 
@@ -44,3 +46,8 @@ class PagoForm(forms.ModelForm):
 
 class DescuentoForm(forms.Form):
     descuento = forms.ModelChoiceField(queryset=Descuento.objects.all())
+
+class MatriculaCursoLibreForm(forms.ModelForm):
+    class Meta:
+        model = MatriculaCursoLibre
+        fields = ('__all__')

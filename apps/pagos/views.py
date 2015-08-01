@@ -11,6 +11,8 @@ from braces.views import LoginRequiredMixin
 
 from django.utils import timezone
 
+from apps.cursolibre.models import * 
+
 
 class DescuentoView(LoginRequiredMixin, TemplateView):
     template_name = 'mantenimientos/descuento/panel_descuento.html'
@@ -117,7 +119,7 @@ class RegistrarPago(LoginRequiredMixin, FormView):
     form_class = PagoForm
     template_name = 'procesos/pagos/matricula/pago_matricula.html'
     login_url = reverse_lazy('users_app:login')
-    success_url = reverse_lazy('pagos_app:panel_descuento')
+    success_url = reverse_lazy('matricula_app:mensaje_confirmacion')
 
     def get_form_kwargs(self):
         kwargs = super(RegistrarPago, self).get_form_kwargs()
@@ -217,3 +219,18 @@ class DescuentoMatriculaView(LoginRequiredMixin, FormMixin, DetailView):
         print descuento
         print nuevo_saldo
         return super (DescuentoMatriculaView,self).form_valid(form)
+
+"""viws para registrar pago curso libre """
+
+class Matricula_libre_view(LoginRequiredMixin, TemplateView):
+    template_name = 'procesos/pagos/matricula/matricula_libre.html'
+    login_url = reverse_lazy('users_app:login')
+
+    def get_context_data(self, **kwargs):
+        context = super(Matricula_libre_view, self).get_context_data(**kwargs)
+        matricula = MatriculaCursoLibre.objects.filter(estado=False)
+        print '********matricula*******'
+        print matricula
+        context['matricula_l'] = matricula
+        return context
+

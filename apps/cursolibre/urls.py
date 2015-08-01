@@ -12,4 +12,9 @@ urlpatterns = [
         views.PreMatriculaCurso.as_view(),
         name='pre_cursolibre'
     ),
+    # url(
+    #     r'^curso/libre/matricula/pago/(?P<pk>\d+)$',
+    #     views.RegistrarPagoCursoLibre.as_view(),
+    #     name='pago_cursolibre'
+    # ),
 ]

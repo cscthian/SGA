@@ -4,8 +4,6 @@
     <div class="container panel-container">
       <div class="row">
         <div class="col s6 m8">
-          <h6>Hay <span class="panel-count">{{ cantidad }}</span> Pagos</h6>
-        </div>
         <div class="col s6 m4">
           <!-- <a class="waves-effect waves-light btn" href="{% url 'asistencia_app:agregar_aula' %}"><i class="fa fa-plus left"></i>agregar aula</a> -->
         </div>
@@ -15,22 +13,26 @@
         <table class="hoverable centered bordered responsive-table">
         <thead>
           <tr>
-              <th>Nombres</th>
-              <th>Saldo</th>
-              <th>Modulo</th>
+              <th>Alumno</th>
+              <th>Curso</th>
               <th>Fecha</th>
+              <th>Saldo</th>
+              <th>Cilco</th>
+              <th>Estado</th>
           </tr>
         </thead>
         <tbody>
 
-          {% for matricula in  object_list %}
+          {% for matricula in  matricula_l %}
             <tr>
               <td>{{matricula.alumno }}</td>
+              <td>{{matricula.asignatura}}</td>
+              <td>{{matricula.fecha}}</td>
               <td>{{matricula.saldo}}</td>
-              <td>{{matricula.modulo}}</td>
-              <td>{{matricula.fecha_matricula}}</td>
+              <td>{{matricula.ciclo}}</td>
+              <td>{{matricula.estado}}</td>
               <td>
-                <a href="{% url 'pagos_app:pago_matricula' matricula.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>                
+                <a href="#" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>                
               </td>
             </tr>            
           {% endfor %}

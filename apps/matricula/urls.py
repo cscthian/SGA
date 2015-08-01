@@ -124,6 +124,11 @@ urlpatterns = [
         name='consultar_notas_alumno'
     ),
     url(
+        r'^consultas/constancia_matricula/$',
+        views.ConstanciaMatricula.as_view(),
+        name='constancia_matricula'
+    ),
+    url(
         r'^mensaje/confirmacion/$',
         views.MensjaeConfirmacion.as_view(),
         name='mensaje_confirmacion'

@@ -16,4 +16,4 @@ class ModuloForm(forms.ModelForm):
 class NotaForm(forms.ModelForm):
 	class Meta:
 		model = Nota
-		fields = ('asignatura','nota1','nota2','nota3','nota4','promedio')
+		fields = ('nota1','nota2','nota3','nota4')

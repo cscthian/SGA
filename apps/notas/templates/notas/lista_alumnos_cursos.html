@@ -1,4 +1,4 @@
-{% extends "panel_docente/pnel.html" %}
+{% extends "panel_docente/panel.html" %}
 
 {% block contenido_panel %}
     <div class="container panel-container">
@@ -23,8 +23,8 @@
               <td>{{ matricula.alumno.user.first_name }}</td>
               <td>{{ matricula.alumno.user.last_name }}</td>
               <td>
-                <a href="{% url 'notas_app:ingresar_notas' matricula.alumno.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
-                <a href="#" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
+                <a href="{% url 'notas_app:ingresar_notas' curso.pk matricula.alumno.pk %}" class="waves-effect waves-light btn panel-btn green"><i class="fa fa-eye"></i></a>
+                <a href="{% url 'notas_app:verificar_nota' curso.pk matricula.alumno.pk %}" class="waves-effect waves-light btn panel-btn yellow"><i class="fa fa-edit"></i></a>
               </td>
             </tr>            
           {% endfor %}

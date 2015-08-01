@@ -63,7 +63,7 @@ class ManagerMatricula(models.Manager):
         #listamos todas las matriculas del alumno 121314
         matriculas = self.filter(alumno__user__username=user)
         #retornamos el ultimo modulo
-        return matriculas[0].modulo
+        return matriculas[0].modulo.nombre
 
     def alumnos_por_curso(self, kwasignatura):
         mod = Modulo.objects.recuperar_modulo(kwasignatura)

@@ -12,8 +12,10 @@
                 <li class="bold"><a class="collapsible-header  waves-effect waves-teal">{{ carga.asignatura }} grupo {{ carga.grupo.grupo }}</a>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a href="{% url 'notas_app:notas_parciales' carga.asignatura.pk carga.grupo.pk %}">notas</a></li>
-                            <li><a href="{% url 'asistencia_app:asistencia_alumno' carga.asignatura.pk carga.grupo.pk %}">asistencia</a></li>
+                            <li><a href="{% url 'notas_app:listar_cursos'%}">Alumnos</a></li>
+
+                            <li><a href="{% url 'notas_app:notas_parciales' carga.asignatura.pk carga.grupo.pk %}">Notas</a></li>
+                            <li><a href="{% url 'asistencia_app:asistencia_alumno' carga.asignatura.pk carga.grupo.pk %}">Asistencia</a></li>
                             <li class="divider"></li>
                         </ul>
                     </div>

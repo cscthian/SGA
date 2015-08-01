@@ -1,0 +1,33 @@
+{% extends "panel_caja/panel.html" %}
+
+{% block contenido_panel %}
+    <div class="container panel-container">
+      <div class="row">
+        <div class="col s6 m8">
+        <div class="col s6 m4">
+          <!-- <a class="waves-effect waves-light btn" href="{% url 'asistencia_app:agregar_aula' %}"><i class="fa fa-plus left"></i>agregar aula</a> -->
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <table class="hoverable centered bordered responsive-table">
+        <tbody>
+          <p><center>{{matricula_l.alumno}}</center></p>
+          <p><center>{{matricula_l.asignatura}}</center> </p>
+          <p><center>{{matricula_l.fecha}}</center> </p>
+          <p><center>{{matricula_l.saldo}}</center> </p>
+          <p><center>{{matricula_l.ciclo}}</center> </p>
+          <p><center>{{matricula_l.estado}}</center> </p>
+          <p><center>{{form}}</center> </p>
+        </tbody>
+      </table>
+      <div class="row">
+                                <div class="input-field col s12">
+                                      <button class="btn cyan waves-effect waves-light right" type="submit" name="action">actualizar
+                                        <i class="mdi-content-send right"></i>
+                                      </button>
+                                </div>
+                            </div>
+      </div>
+    </div>
+{% endblock contenido_panel %}

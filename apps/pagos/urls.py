@@ -77,4 +77,9 @@ urlpatterns = [
         views.DescuentoMatriculaView.as_view(),
         name='pago_matricula_descuento'
     ),
+    url(
+        r'^panel/caja/pago/matricula_libre/lista/$',
+        views.Matricula_libre_view.as_view(),
+        name='pago_matricula_libre_view'
+    ),
 ]

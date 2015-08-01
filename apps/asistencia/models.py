@@ -123,7 +123,10 @@ class ManagerCargaAcademica(models.Manager):
     #manager que devuelve la lsita de asignatuas
     #que dicata un docente
     def cursos_docente(self, docente):
-        carga = self.filter(docente__user__username=docente)
+        semestre = self.filter(programacion__finalizado=False)[0].programacion.semestre
+        print semestre
+        carga = self.filter(docente__user__username=docente, programacion__semestre=semestre)
+        print carga
         lista = []
         for asignatura in carga: 
                 lista.append(asignatura.asignatura)

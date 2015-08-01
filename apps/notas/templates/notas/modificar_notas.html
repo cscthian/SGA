@@ -4,7 +4,7 @@
     <div class="container panel-container">
         <div class="row">
             <div class="col s5">
-                <a class="waves-effect waves-light btn btn-back" href="{% url 'users_app:verificar_panel' %}"><i class="fa fa-chevron-left left"></i>Regresar</a>    
+                <a class="waves-effect waves-light btn btn-back" href="#"><i class="fa fa-chevron-left left"></i>Regresar</a>    
             </div>
             <div class="col s7">
                 <h5>Registrar Nota</h5>    
@@ -26,17 +26,20 @@
                         <form class="col s12" method="POST" enctype="multipart/form-data">{% csrf_token %}
                             <div class="row">
                                 <div class="input-field col s12">
-                                   <p>Alumno:{{matricula.alumno}} </p>
-                                   <p>Asignatura:{{asignatura.nombre}} </p>
                                 </div>
                             </div>
-                            <p>Ingresar Nota Alumno:</p> 
-                            {{form}}
+                            <p>Alumno: {{matricula.alumno}}</p>
+                            <p>Asignatura: {{asignatura.nombre}}</p>
+                            <p>Nota 1:{{ notas.nota1 }}</p>
+                            <p>Nota 2:{{ notas.nota2 }}</p>
+                            <p>Nota 3:{{ notas.nota3 }}</p>
+                            <p>Nota 4:{{ notas.nota4 }}</p>
+                            <p>Promedio: {{notas.promedio}}</p>
                             <div class="row">
                                 <div class="input-field col s12">
-                                      <button class="btn cyan waves-effect waves-light right" type="submit" name="action">guardar
-                                        <i class="mdi-content-send right"></i>
-                                      </button>
+                                      <div class="col s5">
+                <a class="waves-effect waves-light btn btn-back" href="{% url 'notas_app:actualizar_notas' notas.pk %}"><i class="fa fa-chevron-left left"></i>Confirmar Edicion</a>    
+            </div>
                                 </div>
                             </div>
                         </form>
